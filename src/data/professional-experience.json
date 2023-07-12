@@ -1,0 +1,35 @@
+{
+  "professional-experience": {
+    "title": "Professional Experience",
+    "companyList": [
+      {
+        "employer": "ABC COMPANY",
+        "job-title": "Senior Associate Engineer",
+        "start-date": "Jan, 2018",
+        "end-date": "May, 2019",
+        "city": "Mumbai",
+        "descriptionList": [
+          "A 15% reduction in transportation costs, resulting in $1.2M annual savings",
+          "Improved demand forecasting that reduced backorders to retail partners by 17%.",
+          "Completed focus group and BI research that helped boost NW region sales by 15%.",
+          "Improved demand forecasting that reduced backorders to retail partners by 17%.",
+          "Completed focus group and BI research that helped boost NW region sales by 15%."
+        ]
+      },
+      {
+        "name": "ABC COMPANY 2",
+        "job-title": "Senior Associate",
+        "start-date": "Jan, 2020",
+        "end-date": "May, 2021",
+        "city": "Mumbai",
+        "descriptionList": [
+          "A 15% reduction in transportation costs, resulting in $1.2M annual savings",
+          "Improved demand forecasting that reduced backorders to retail partners by 17%.",
+          "Completed focus group and BI research that helped boost NW region sales by 15%.",
+          "Improved demand forecasting that reduced backorders to retail partners by 17%.",
+          "Completed focus group and BI research that helped boost NW region sales by 15%."
+        ]
+      }
+    ]
+  }
+}
