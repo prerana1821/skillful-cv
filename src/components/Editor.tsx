@@ -1,20 +1,15 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { SetStateAction, Dispatch } from "react";
 import { validJSON } from "@/utils/validJSON";
 
-// const AceEditor = dynamic(() => import("react-ace"), {
-//   ssr: false,
-//   loading: () => <div>Loading...</div>,
-// });
-
 const AceEditor = dynamic(
   async () => {
     const ace = await import("react-ace");
-    import("ace-builds/src-noconflict/theme-solarized_dark");
-    import("ace-builds/src-noconflict/ext-language_tools");
-    import("ace-builds/src-noconflict/mode-json");
+    await import("ace-builds/src-noconflict/theme-solarized_dark");
+    await import("ace-builds/src-noconflict/mode-json");
+    await import("ace-builds/src-noconflict/ext-language_tools");
     return ace;
   },
   {
