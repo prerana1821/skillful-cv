@@ -15,7 +15,7 @@ import ProfessionalExperience from "./ResumePreview/ProfessionalExperience";
 import ExtraCurricularActivities from "./ResumePreview/ExtraCurricularActivities";
 
 const Preview = forwardRef((props, ref) => {
-  const { value } = props;
+  const { sections, value } = props;
 
   return (
     <Box
@@ -34,26 +34,70 @@ const Preview = forwardRef((props, ref) => {
         className='resume-preview'
         ref={ref}
       >
-        <Header value={value} />
-        {value?.["profile-summary"] && <ProfileSummary value={value} />}
-        {value?.["professional-experience"] && (
-          <ProfessionalExperience data={value?.["professional-experience"]} />
-        )}
-        {value?.["education"] && <Education data={value?.["education"]} />}
-        {value?.["internships"] && (
-          <Internships data={value?.["internships"]} />
-        )}
-        {value?.["links"] && <Links data={value?.["links"]} />}
-        {value?.["hobbies"] && <Hobbies data={value?.["hobbies"]} />}
-        {value?.["courses"] && <Courses data={value?.["courses"]} />}
-        {value?.["extra-curricular-activities"] && (
-          <ExtraCurricularActivities
-            data={value?.["extra-curricular-activities"]}
-          />
-        )}
-        {value?.["references"] && <References data={value?.["references"]} />}
-        {value?.["skills"] && <Skills data={value?.["skills"]} />}
-        {value?.["languages"] && <Languages data={value?.["languages"]} />}
+        {sections.default.map((section: string) => {
+          switch (section) {
+            case "personal-details":
+              return <Header value={value} />;
+            case "profile-summary":
+              return (
+                value?.["profile-summary"] && <ProfileSummary value={value} />
+              );
+            case "professional-experience":
+              return (
+                value?.["professional-experience"] && (
+                  <ProfessionalExperience
+                    data={value?.["professional-experience"]}
+                  />
+                )
+              );
+            case "education":
+              return (
+                value?.["education"] && (
+                  <Education data={value?.["education"]} />
+                )
+              );
+            case "internships":
+              return (
+                value?.["internships"] && (
+                  <Internships data={value?.["internships"]} />
+                )
+              );
+            case "links":
+              return value?.["links"] && <Links data={value?.["links"]} />;
+            case "hobbies":
+              return (
+                value?.["hobbies"] && <Hobbies data={value?.["hobbies"]} />
+              );
+            case "courses":
+              return (
+                value?.["courses"] && <Courses data={value?.["courses"]} />
+              );
+            case "extra-curricular-activities":
+              return (
+                value?.["extra-curricular-activities"] && (
+                  <ExtraCurricularActivities
+                    data={value?.["extra-curricular-activities"]}
+                  />
+                )
+              );
+            case "references":
+              return (
+                value?.["references"] && (
+                  <References data={value?.["references"]} />
+                )
+              );
+            case "skills":
+              return value?.["skills"] && <Skills data={value?.["skills"]} />;
+            case "languages":
+              return (
+                value?.["languages"] && (
+                  <Languages data={value?.["languages"]} />
+                )
+              );
+            default:
+              return null;
+          }
+        })}
       </Box>
     </Box>
   );

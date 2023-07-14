@@ -23,10 +23,8 @@ import { IoMdAdd } from "react-icons/io";
 import { GrPowerReset } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
 import { RiDraggable } from "react-icons/ri";
-import { DEFAULT_SECTIONS } from "@/app/editor/page";
 import INITIAL_DEFAULT_RESUME from "@/data/default-resume.json";
 import AlertResetSectionsModal from "./AlertResetSectionsModal";
-import { IconContext } from "react-icons/lib";
 import AlertResetSectionValueModal from "./AlertResetSectionValueModal";
 import {
   dashCaseToTitleCase,
@@ -34,11 +32,14 @@ import {
   titleCaseToDashCase,
   titleCaseToSnakeCase,
 } from "@/app/utils/caseManipulation";
+import { DEFAULT_SECTIONS } from "@/app/defaults";
+import SectionCard from "./SectionCard";
 
 const Sections = ({
   sections,
   setSections,
   setValue,
+  moveCard,
 }: {
   sections: {
     default: string[];
@@ -51,6 +52,7 @@ const Sections = ({
     }>
   >;
   setValue: Dispatch<SetStateAction<string>>;
+  moveCard: (dragIndex: number, hoverIndex: number) => void;
 }) => {
   const sectionsJSON = {
     personal_details,
@@ -200,51 +202,18 @@ const Sections = ({
         <Text>Click on a section below to edit the content.</Text>
         {sections.default.map((section, index) => {
           return (
-            <Flex
+            <SectionCard
               key={index}
-              boxShadow={"md"}
-              p={"0.5rem 1rem"}
-              fontSize={"lg"}
-              cursor={"pointer"}
-              m={"1rem"}
-              onClick={showSection}
-              borderRadius={"0.3rem"}
-              display={"flex"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
-              <AlertResetSectionValueModal
-                isOpen={isOpen}
-                onClose={onClose}
-                section={section}
-                resetDefaultSection={resetDefaultSection}
-              />
-              <Flex alignItems={"center"} gap={"0.4rem"} width='71%'>
-                <RiDraggable fontSize={"1.5rem"} />
-                <Text isTruncated width={"80%"}>
-                  {dashCaseToTitleCase(section)}
-                </Text>
-              </Flex>
-              <Flex width='29%'>
-                <Button
-                  variant={"unstyled"}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    onOpen();
-                  }}
-                >
-                  <IconContext.Provider value={{ style: { margin: "auto" } }}>
-                    <GrPowerReset fontSize={"1.3rem"} />
-                  </IconContext.Provider>
-                </Button>
-                <Button
-                  variant={"unstyled"}
-                  onClick={(event) => removeAddedSection(event, section)}
-                >
-                  <MdDelete fontSize={"1.5rem"} />
-                </Button>
-              </Flex>
-            </Flex>
+              section={section}
+              showSection={showSection}
+              isOpen={isOpen}
+              onClose={onClose}
+              resetDefaultSection={resetDefaultSection}
+              onOpen={onOpen}
+              removeAddedSection={removeAddedSection}
+              index={index}
+              moveCard={moveCard}
+            />
           );
         })}
       </Box>
