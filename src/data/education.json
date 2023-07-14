@@ -1,7 +1,7 @@
 {
   "education": {
     "title": "Education",
-    "degreeList": [
+    "list": [
       {
         "institution": "XYZ University",
         "degree": "Computer Science",

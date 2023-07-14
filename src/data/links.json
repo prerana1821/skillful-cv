@@ -1,0 +1,12 @@
+{
+  "links": {
+    "title": "Links",
+    "list": [
+      { "label": "Instagram", "link": "https://instagram.com/user" },
+      { "label": "Twitter", "link": "https://twitter.com/user" },
+      { "label": "Website", "link": "https://pre.codes" },
+      { "label": "Linkedin", "link": "https://www.linkedin.com/in/user" },
+      { "label": "Medium", "link": "https://medium.com/user" }
+    ]
+  }
+}

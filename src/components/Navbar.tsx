@@ -12,11 +12,11 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Navbar() {
+export default function Navbar({ styles }: { styles?: any }) {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box px={4}>
+      <Box px={4} style={styles}>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Box p={"1rem"}>
             <Link href='/'>
