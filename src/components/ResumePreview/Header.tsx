@@ -2,7 +2,7 @@ import { Box, Center, Heading, Text } from "@chakra-ui/react";
 
 const Header = ({ value }: any) => {
   return (
-    <Box borderBottom={"2px solid #ccc"} my='2'>
+    <Box my='2'>
       <Center>
         <Heading as='h1' size='xl'>
           {value?.["personal-details"]?.["first-name"]}{" "}

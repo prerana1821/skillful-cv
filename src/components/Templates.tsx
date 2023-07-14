@@ -39,7 +39,7 @@ const Templates = () => {
         <TabIndicator
           mt='-1.5px'
           height='2px'
-          bg='blue.500'
+          bg='#F50057'
           borderRadius='1px'
         />
         <TabPanels>

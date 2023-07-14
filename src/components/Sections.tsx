@@ -163,8 +163,8 @@ const Sections = ({
       return JSON.stringify(mergedData, null, 2);
     });
 
-    // setCustomSectionTitle("");
-    // onClose();
+    setCustomSectionTitle("");
+    onClose();
   };
 
   return (
@@ -206,7 +206,7 @@ const Sections = ({
 
           <ModalFooter display={"flex"} gap='1rem'>
             <Button onClick={onClose}>Cancel</Button>
-            <Button colorScheme='blue' mr={3} onClick={addCustomSection}>
+            <Button colorScheme='#F50057' mr={3} onClick={addCustomSection}>
               Add Section
             </Button>
           </ModalFooter>

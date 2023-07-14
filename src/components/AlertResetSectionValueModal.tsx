@@ -31,7 +31,15 @@ const AlertResetSectionValueModal = ({
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme='blue' mr={3} onClick={onClose}>
+          <Button
+            backgroundColor='#F50057'
+            color='#fff'
+            mr={3}
+            onClick={onClose}
+            _hover={{
+              opacity: 0.7,
+            }}
+          >
             Close
           </Button>
 

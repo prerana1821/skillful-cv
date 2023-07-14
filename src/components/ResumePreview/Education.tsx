@@ -11,7 +11,7 @@ import {
 
 const Education = ({ data }: { data: any }) => {
   return (
-    <Box py='4' borderBottom={"2px solid #ccc"}>
+    <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' size='md' textTransform='uppercase'>
         {data?.title}
       </Heading>

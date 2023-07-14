@@ -14,17 +14,17 @@ import skills from "@/data/skills.json";
 export const DEFAULT_SECTIONS = {
   default: ["personal-details"],
   extra: [
-    "education",
     "profile-summary",
+    "education",
     "professional-experience",
     "courses",
-    "extra-curricular-activities",
-    "hobbies",
     "internships",
-    "languages",
     "links",
-    "references",
     "skills",
+    "hobbies",
+    "languages",
+    "references",
+    "extra-curricular-activities",
   ],
 };
 

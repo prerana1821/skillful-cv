@@ -2,8 +2,8 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
 const ProfileSummary = ({ value }: any) => {
   return (
-    <Box py='4' borderBottom={"2px solid #ccc"}>
-      <Flex flexDir={"row"} justifyContent={"space-between"} gap='8rem'>
+    <Box py='4' borderTop={"2px solid #ccc"}>
+      <Flex flexDir={"row"} justifyContent={"flex-start"} gap='8rem'>
         <Heading as='h4' size='md' textTransform={"uppercase"}>
           {value?.["profile-summary"]?.title}
         </Heading>
