@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import { Box, Button, Flex } from "@chakra-ui/react";
-import Editor from "@/components/Editor";
+// import Editor from "@/components/Editor";
 import Preview from "@/components/Preview";
 import Sections from "@/components/Sections";
 import INITIAL_DEFAULT_RESUME from "@/data/default-resume.json";
@@ -11,6 +11,11 @@ import { PiDownloadSimple } from "react-icons/pi";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DEFAULT_SECTIONS } from "../defaults";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("@/components/Editor"), {
+  ssr: false,
+});
 
 export default function Page() {
   const [value, setValue] = useState(
@@ -73,7 +78,7 @@ export default function Page() {
 
           <ReactToPrint
             content={reactToPrintContent}
-            documentTitle='AwesomeFileName'
+            documentTitle='Skillful-CV'
             trigger={reactToPrintTrigger}
           />
 

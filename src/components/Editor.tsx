@@ -1,15 +1,26 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/theme-solarized_dark";
-import "ace-builds/src-noconflict/ext-language_tools";
-import "ace-builds/src-noconflict/mode-json";
-import ace from "ace-builds/src-noconflict/ace";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { SetStateAction, Dispatch } from "react";
 import { validJSON } from "@/utils/validJSON";
 
-ace.config.setModuleUrl(
-  "ace/mode/json_worker",
-  "https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/worker-json.js"
+// const AceEditor = dynamic(() => import("react-ace"), {
+//   ssr: false,
+//   loading: () => <div>Loading...</div>,
+// });
+
+const AceEditor = dynamic(
+  async () => {
+    const ace = await import("react-ace");
+    import("ace-builds/src-noconflict/theme-solarized_dark");
+    import("ace-builds/src-noconflict/ext-language_tools");
+    import("ace-builds/src-noconflict/mode-json");
+    return ace;
+  },
+  {
+    loading: () => <div>Loading...</div>,
+    ssr: false,
+  }
 );
 
 const Editor = ({
@@ -19,11 +30,21 @@ const Editor = ({
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
 }) => {
+  const [editorLoaded, setEditorLoaded] = useState(false);
+
+  useEffect(() => {
+    setEditorLoaded(true);
+  }, []);
+
   function onChange(newValue: string) {
     if (validJSON(newValue)) {
       console.log("change", newValue);
       setValue(newValue);
     }
+  }
+
+  if (typeof window === "undefined" || !editorLoaded) {
+    return null; // Render nothing during server-side rendering or if editor is not loaded yet
   }
 
   return (

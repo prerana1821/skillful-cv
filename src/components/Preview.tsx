@@ -26,8 +26,6 @@ interface PreviewProps {
 const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
   const { sections, value, customSectionTitle } = props;
 
-  console.log(value);
-
   return (
     <Box
       flex={{ base: "none", sm: "45%" }}
