@@ -13,9 +13,11 @@ import Education from "./ResumePreview/Education";
 import Internships from "./ResumePreview/Internships";
 import ProfessionalExperience from "./ResumePreview/ProfessionalExperience";
 import ExtraCurricularActivities from "./ResumePreview/ExtraCurricularActivities";
+import CustomSection from "./ResumePreview/CustomSection";
+import { titleCaseToDashCase } from "@/app/utils/caseManipulation";
 
 const Preview = forwardRef((props, ref) => {
-  const { sections, value } = props;
+  const { sections, value, customSectionTitle } = props;
 
   return (
     <Box
@@ -92,6 +94,14 @@ const Preview = forwardRef((props, ref) => {
               return (
                 value?.["languages"] && (
                   <Languages data={value?.["languages"]} />
+                )
+              );
+            case titleCaseToDashCase(customSectionTitle):
+              return (
+                value?.[titleCaseToDashCase(customSectionTitle)] && (
+                  <CustomSection
+                    data={value?.[titleCaseToDashCase(customSectionTitle)]}
+                  />
                 )
               );
             default:

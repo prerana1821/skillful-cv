@@ -2,44 +2,45 @@ import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   Heading,
+  Input,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { SetStateAction, Dispatch } from "react";
-import profile_summary from "@/data/profile-summary.json";
-import education from "@/data/education.json";
-import professional_experience from "@/data/professional-experience.json";
-import personal_details from "@/data/default-resume.json";
-import courses from "@/data/courses.json";
-import extra_curricular_activities from "@/data/extra-curricular-activities.json";
-import hobbies from "@/data/hobbies.json";
-import internships from "@/data/internships.json";
-import languages from "@/data/languages.json";
-import links from "@/data/links.json";
-import references from "@/data/references.json";
-import skills from "@/data/skills.json";
 import { IoMdAdd } from "react-icons/io";
 import { GrPowerReset } from "react-icons/gr";
-import { MdDelete } from "react-icons/md";
-import { RiDraggable } from "react-icons/ri";
 import INITIAL_DEFAULT_RESUME from "@/data/default-resume.json";
 import AlertResetSectionsModal from "./AlertResetSectionsModal";
-import AlertResetSectionValueModal from "./AlertResetSectionValueModal";
 import {
   dashCaseToTitleCase,
   dashToSnakeCase,
   titleCaseToDashCase,
   titleCaseToSnakeCase,
 } from "@/app/utils/caseManipulation";
-import { DEFAULT_SECTIONS } from "@/app/defaults";
+import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "@/app/defaults";
 import SectionCard from "./SectionCard";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
+import { useRef, useState } from "react";
+import custom_section from "@/data/custom-section.json";
 
 const Sections = ({
   sections,
   setSections,
   setValue,
   moveCard,
+  customSectionTitle,
+  setCustomSectionTitle,
 }: {
   sections: {
     default: string[];
@@ -53,67 +54,29 @@ const Sections = ({
   >;
   setValue: Dispatch<SetStateAction<string>>;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
+  customSectionTitle: string;
+  setCustomSectionTitle: Dispatch<SetStateAction<string>>;
 }) => {
-  const sectionsJSON = {
-    personal_details,
-    profile_summary,
-    education,
-    professional_experience,
-    courses,
-    extra_curricular_activities,
-    hobbies,
-    internships,
-    languages,
-    links,
-    references,
-    skills,
-  };
-
   const {
     isOpen: resetSectionsIsOpen,
     onOpen: resetSectionsOnOpen,
     onClose: resetSectionsOnClose,
   } = useDisclosure();
 
+  const {
+    isOpen: resetSectionValueIsOpen,
+    onOpen: resetSectionValueOnOpen,
+    onClose: resetSectionValueOnClose,
+  } = useDisclosure();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  //   const addSection = (event: any) => {
-  //     setSections((sections) => ({
-  //       default: [
-  //         ...sections.default,
-  //         titleCaseToDashCase(event.target.innerText),
-  //       ],
-  //       extra: sections.extra.filter(
-  //         (section) => section !== titleCaseToDashCase(event.target.innerText)
-  //       ),
-  //     }));
-
-  //     // const mergedJSON = {
-  //     //   ...JSON.parse(value),
-  //     //   ...(sectionsJSON[titleCaseToSnakeCase(event.target.innerText)] || {}),
-  //     // };
-
-  //     // console.log(mergedJSON);
-
-  //     // setValue((value) => {
-  //     //   const mergedJSON = {
-  //     //     ...JSON.parse(value),
-  //     //     ...(sectionsJSON[titleCaseToSnakeCase(event.target.innerText)] || {}),
-  //     //   };
-  //     //   return JSON.stringify(mergedJSON, null, 2);
-  //     // });
-  //     setValue((value) => {
-  //       return JSON.stringify(
-  //         sectionsJSON[titleCaseToSnakeCase(event.target.innerText)] || {},
-  //         null,
-  //         2
-  //       );
-  //     });
-  //   };
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
 
   const addSection = (event: any) => {
     const sectionKey = titleCaseToSnakeCase(event.target.innerText);
-    const sectionData = sectionsJSON[sectionKey] || {};
+    const sectionData = DEFAULT_SECTIONS_JSON[sectionKey] || {};
 
     setSections((sections) => ({
       default: [
@@ -134,7 +97,8 @@ const Sections = ({
   const showSection = (event: any) => {
     setValue((value) => {
       return JSON.stringify(
-        sectionsJSON[titleCaseToSnakeCase(event.target.innerText)] || {},
+        DEFAULT_SECTIONS_JSON[titleCaseToSnakeCase(event.target.innerText)] ||
+          {},
         null,
         2
       );
@@ -157,7 +121,7 @@ const Sections = ({
   };
 
   const resetDefaultSection = (section: string) => {
-    const sectionData = sectionsJSON[dashToSnakeCase(section)] || {};
+    const sectionData = DEFAULT_SECTIONS_JSON[dashToSnakeCase(section)] || {};
 
     setValue((value) => {
       const JSONValue = JSON.parse(value);
@@ -172,6 +136,37 @@ const Sections = ({
     setValue(JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2));
   };
 
+  const addCustomSection = () => {
+    setSections((sections) => ({
+      ...sections,
+      default: [...sections.default, titleCaseToDashCase(customSectionTitle)],
+    }));
+
+    setValue((value) => {
+      console.log(custom_section);
+
+      const updatedCustomSection = Object.defineProperty(
+        custom_section,
+        titleCaseToDashCase(customSectionTitle),
+        Object.getOwnPropertyDescriptor(custom_section, "untitled")
+      );
+      delete custom_section["untitled"];
+
+      updatedCustomSection[titleCaseToDashCase(customSectionTitle)].title =
+        customSectionTitle;
+
+      console.log(updatedCustomSection);
+
+      const mergedData = { ...JSON.parse(value), ...updatedCustomSection };
+      console.log(mergedData);
+
+      return JSON.stringify(mergedData, null, 2);
+    });
+
+    // setCustomSectionTitle("");
+    // onClose();
+  };
+
   return (
     <Box
       flex={{ base: "none", sm: "20%" }}
@@ -184,6 +179,39 @@ const Sections = ({
         onClose={resetSectionsOnClose}
         resetSections={resetSections}
       />
+
+      <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered
+        motionPreset='scale'
+        size='lg'
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>New Custom Section</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>Section name</FormLabel>
+              <Input
+                ref={initialRef}
+                value={customSectionTitle}
+                onChange={(e) => setCustomSectionTitle(e.target.value)}
+              />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter display={"flex"} gap='1rem'>
+            <Button onClick={onClose}>Cancel</Button>
+            <Button colorScheme='blue' mr={3} onClick={addCustomSection}>
+              Add Section
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
 
       <Flex justifyContent={"space-between"} alignItems={"center"}>
         <Heading as='h3' size='md'>
@@ -206,10 +234,10 @@ const Sections = ({
               key={index}
               section={section}
               showSection={showSection}
-              isOpen={isOpen}
-              onClose={onClose}
+              isOpen={resetSectionValueIsOpen}
+              onClose={resetSectionValueOnClose}
+              onOpen={resetSectionValueOnOpen}
               resetDefaultSection={resetDefaultSection}
-              onOpen={onOpen}
               removeAddedSection={removeAddedSection}
               index={index}
               moveCard={moveCard}
@@ -232,6 +260,7 @@ const Sections = ({
           alignItems='center'
           gap='1rem'
           justifyContent='center'
+          onClick={onOpen}
         >
           <IoMdAdd /> Custom Section
         </Box>

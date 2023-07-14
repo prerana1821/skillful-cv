@@ -3,10 +3,8 @@ import {
   Flex,
   Heading,
   ListItem,
-  OrderedList,
+  UnorderedList,
   Stack,
-  Text,
-  border,
 } from "@chakra-ui/react";
 
 const ExtraCurricularActivities = ({ data }: { data: any }) => {
@@ -31,11 +29,11 @@ const ExtraCurricularActivities = ({ data }: { data: any }) => {
                   {item["city"]}
                 </Heading>
               </Flex>
-              <OrderedList p='0.5rem'>
+              <UnorderedList p='0.5rem'>
                 {item?.descriptionList?.map((value: any, index: number) => (
                   <ListItem key={index}>{value}</ListItem>
                 ))}
-              </OrderedList>
+              </UnorderedList>
             </Flex>
           </Flex>
         </Stack>

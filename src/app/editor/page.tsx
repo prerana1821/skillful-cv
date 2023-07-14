@@ -18,6 +18,7 @@ export default function Page() {
     JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2)
   );
   const [sections, setSections] = useState(DEFAULT_SECTIONS);
+  const [customSectionTitle, setCustomSectionTitle] = useState("");
 
   const componentRef = useRef(null);
 
@@ -63,6 +64,8 @@ export default function Page() {
           <Sections
             sections={sections}
             setSections={setSections}
+            customSectionTitle={customSectionTitle}
+            setCustomSectionTitle={setCustomSectionTitle}
             setValue={setValue}
             moveCard={moveCard}
           />
@@ -78,6 +81,7 @@ export default function Page() {
           <Preview
             sections={sections}
             value={JSON.parse(value)}
+            customSectionTitle={customSectionTitle}
             ref={componentRef}
           />
         </Flex>

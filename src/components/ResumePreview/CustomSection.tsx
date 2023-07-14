@@ -3,13 +3,11 @@ import {
   Flex,
   Heading,
   ListItem,
-  UnorderedList,
   Stack,
-  Text,
-  border,
+  UnorderedList,
 } from "@chakra-ui/react";
 
-const Education = ({ data }: { data: any }) => {
+const CustomSection = ({ data }: { data: any }) => {
   return (
     <Box py='4' borderBottom={"2px solid #ccc"}>
       <Heading as='h4' size='md' textTransform='uppercase'>
@@ -18,19 +16,24 @@ const Education = ({ data }: { data: any }) => {
       {data?.list?.map((item: any, index: number) => (
         <Stack key={index} my='2'>
           <Flex gap='3rem'>
-            <Heading as='h5' size='sm' textTransform='uppercase' width={"50%"}>
+            <Heading as='h5' size='sm' textTransform='uppercase'>
               {item["start-date"]} - {item["end-date"]}
             </Heading>
             <Flex flexDir='column'>
               <Flex justifyContent='space-between'>
-                <Heading as='h5' size='sm' textTransform={"uppercase"}>
-                  {item["degree"]}, {item["institution"]}
+                <Heading as='h5' size='sm' textTransform='uppercase'>
+                  {item["activity-name"]}
                 </Heading>
+
                 <Heading as='h5' size='sm' textTransform='uppercase'>
                   {item["city"]}
                 </Heading>
               </Flex>
-              <Text p='0.5rem'>{item.description}</Text>
+              <UnorderedList p='0.5rem'>
+                {item?.descriptionList?.map((value: any, index: number) => (
+                  <ListItem key={index}>{value}</ListItem>
+                ))}
+              </UnorderedList>
             </Flex>
           </Flex>
         </Stack>
@@ -39,4 +42,4 @@ const Education = ({ data }: { data: any }) => {
   );
 };
 
-export default Education;
+export default CustomSection;
