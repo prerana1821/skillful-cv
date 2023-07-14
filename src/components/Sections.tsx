@@ -99,17 +99,6 @@ const Sections = ({
     });
   };
 
-  const showSection = (event: MouseEvent<HTMLDivElement>) => {
-    setValue((value) => {
-      return JSON.stringify(
-        DEFAULT_SECTIONS_JSON[titleCaseToSnakeCase(event.target.innerText)] ||
-          {},
-        null,
-        2
-      );
-    });
-  };
-
   const removeAddedSection = (
     event: MouseEvent<HTMLButtonElement>,
     section: string
@@ -240,7 +229,6 @@ const Sections = ({
             <SectionCard
               key={index}
               section={section}
-              showSection={showSection}
               isOpen={resetSectionValueIsOpen}
               onClose={resetSectionValueOnClose}
               onOpen={resetSectionValueOnOpen}

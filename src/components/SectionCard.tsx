@@ -14,7 +14,6 @@ interface DragItem {
 }
 
 const SectionCard = ({
-  showSection,
   isOpen,
   onClose,
   section,
@@ -24,7 +23,6 @@ const SectionCard = ({
   index,
   moveCard,
 }: {
-  showSection: (event: MouseEvent<HTMLDivElement>) => void;
   isOpen: boolean;
   onClose: () => void;
   section: string;
@@ -74,7 +72,6 @@ const SectionCard = ({
       fontSize={"lg"}
       cursor={"pointer"}
       m={"1rem"}
-      //   onClick={showSection}
       borderRadius={"0.3rem"}
       display={"flex"}
       justifyContent={"space-between"}

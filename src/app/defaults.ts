@@ -28,7 +28,7 @@ export const DEFAULT_SECTIONS = {
   ],
 };
 
-export const DEFAULT_SECTIONS_JSON = {
+export const DEFAULT_SECTIONS_JSON: { [key: string]: any } = {
   personal_details,
   profile_summary,
   education,
