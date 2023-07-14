@@ -1,12 +1,17 @@
-import { dashCaseToTitleCase } from "@/app/utils/caseManipulation";
+import { dashCaseToTitleCase } from "@/utils/caseManipulation";
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { GrPowerReset } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
 import { RiDraggable } from "react-icons/ri";
 import AlertResetSectionValueModal from "./AlertResetSectionValueModal";
 import { IconContext } from "react-icons/lib";
-import { useRef } from "react";
+import { useRef, MouseEvent } from "react";
 import { useDrag, useDrop } from "react-dnd";
+
+interface DragItem {
+  section: string;
+  index: number;
+}
 
 const SectionCard = ({
   showSection,
@@ -19,13 +24,16 @@ const SectionCard = ({
   index,
   moveCard,
 }: {
-  showSection: (event: any) => void;
+  showSection: (event: MouseEvent<HTMLDivElement>) => void;
   isOpen: boolean;
   onClose: () => void;
   section: string;
   resetDefaultSection: (section: string) => void;
   onOpen: () => void;
-  removeAddedSection: (event: any, section: string) => void;
+  removeAddedSection: (
+    event: MouseEvent<HTMLButtonElement>,
+    section: string
+  ) => void;
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
 }) => {
@@ -33,7 +41,7 @@ const SectionCard = ({
 
   const [, drop] = useDrop({
     accept: "card",
-    hover(item) {
+    hover(item: DragItem) {
       if (!ref.current) {
         return;
       }

@@ -1,6 +1,7 @@
+import { ListI, SectionWithListI } from "@/types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
-const References = ({ data }: { data: any }) => {
+const References = ({ data }: { data: SectionWithListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Flex flexDir={"row"} justifyContent={"flex-start"} gap='5rem'>
@@ -8,7 +9,7 @@ const References = ({ data }: { data: any }) => {
           {data?.title}
         </Heading>
         <Flex gap='1rem' flexDir={"column"}>
-          {data?.list.map((item: any, index: number) => {
+          {data?.list?.map((item: ListI, index: number) => {
             return (
               <Box key={index}>
                 <Heading

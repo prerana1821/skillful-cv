@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { Box, Heading } from "@chakra-ui/react";
 import Header from "./ResumePreview/Header";
-import { forwardRef } from "react";
+import { forwardRef, MutableRefObject } from "react";
 import ProfileSummary from "./ResumePreview/ProfileSummary";
 import Hobbies from "./ResumePreview/Hobbies";
 import Courses from "./ResumePreview/Courses";
@@ -14,10 +14,19 @@ import Internships from "./ResumePreview/Internships";
 import ProfessionalExperience from "./ResumePreview/ProfessionalExperience";
 import ExtraCurricularActivities from "./ResumePreview/ExtraCurricularActivities";
 import CustomSection from "./ResumePreview/CustomSection";
-import { titleCaseToDashCase } from "@/app/utils/caseManipulation";
+import { titleCaseToDashCase } from "@/utils/caseManipulation";
 
-const Preview = forwardRef((props, ref) => {
+interface PreviewProps {
+  sections: { default: string[]; extra: string[] };
+  value: any;
+  customSectionTitle: string;
+  ref: MutableRefObject<any>;
+}
+
+const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
   const { sections, value, customSectionTitle } = props;
+
+  console.log(value);
 
   return (
     <Box
@@ -39,10 +48,16 @@ const Preview = forwardRef((props, ref) => {
         {sections.default.map((section: string) => {
           switch (section) {
             case "personal-details":
-              return <Header value={value} />;
+              return (
+                value?.["personal-details"] && (
+                  <Header data={value?.["personal-details"]} />
+                )
+              );
             case "profile-summary":
               return (
-                value?.["profile-summary"] && <ProfileSummary value={value} />
+                value?.["profile-summary"] && (
+                  <ProfileSummary data={value?.["profile-summary"]} />
+                )
               );
             case "professional-experience":
               return (

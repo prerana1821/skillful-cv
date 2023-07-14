@@ -1,6 +1,7 @@
+import { TextListI, TitleListI } from "@/types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
-const Skills = ({ data }: { data: any }) => {
+const Skills = ({ data }: { data: TitleListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Flex flexDir={"row"} justifyContent={"flex-start"} gap='8.5rem'>
@@ -8,7 +9,7 @@ const Skills = ({ data }: { data: any }) => {
           {data?.title}
         </Heading>
         <Flex gap='1rem'>
-          {data?.list?.map((item: any, index: number) => {
+          {data?.list?.map((item: TextListI, index: number) => {
             return <Text key={index}>{item.name}</Text>;
           })}
         </Flex>

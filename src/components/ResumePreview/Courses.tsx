@@ -1,14 +1,15 @@
+import { ListI, SectionWithListI } from "@/types/interfaces";
 import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
 import Link from "next/link";
 import { TbExternalLink } from "react-icons/tb";
 
-const Courses = ({ data }: { data: any }) => {
+const Courses = ({ data }: { data: SectionWithListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' size='md' textTransform={"uppercase"}>
         {data?.title}
       </Heading>
-      {data?.list?.map((company: any, index: number) => {
+      {data?.list?.map((company: ListI, index: number) => {
         return (
           <Stack key={index} my='2'>
             <Flex gap='2rem' my='1rem'>
@@ -24,7 +25,10 @@ const Courses = ({ data }: { data: any }) => {
                   <Heading as='h5' size='sm' textTransform={"uppercase"}>
                     {company["course"]}, {company["institution"]}
                   </Heading>
-                  <Link href={company["certificate-link"]} target='_blank'>
+                  <Link
+                    href={company?.["certificate-link"] || ""}
+                    target='_blank'
+                  >
                     <TbExternalLink fontSize={"lg"} />
                   </Link>
                 </Flex>

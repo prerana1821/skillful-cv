@@ -2,7 +2,6 @@
 
 import { useState, useRef, useCallback } from "react";
 import { Box, Button, Flex } from "@chakra-ui/react";
-import Navbar from "@/components/Navbar";
 import Editor from "@/components/Editor";
 import Preview from "@/components/Preview";
 import Sections from "@/components/Sections";

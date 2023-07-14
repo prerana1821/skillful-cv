@@ -1,3 +1,4 @@
+import { ListI, SectionWithListI } from "@/types/interfaces";
 import {
   Box,
   Flex,
@@ -9,13 +10,13 @@ import {
   border,
 } from "@chakra-ui/react";
 
-const Internships = ({ data }: { data: any }) => {
+const Internships = ({ data }: { data: SectionWithListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' size='md' textTransform='uppercase'>
         {data?.title}
       </Heading>
-      {data?.list?.map((item: any, index: number) => (
+      {data?.list?.map((item: ListI, index: number) => (
         <Stack key={index} my='2'>
           <Flex gap='3rem'>
             <Heading as='h5' size='sm' textTransform='uppercase'>
@@ -32,7 +33,7 @@ const Internships = ({ data }: { data: any }) => {
                 </Heading>
               </Flex>
               <UnorderedList p='0.5rem'>
-                {item?.descriptionList?.map((value: any, index: number) => (
+                {item?.descriptionList?.map((value: string, index: number) => (
                   <ListItem key={index}>{value}</ListItem>
                 ))}
               </UnorderedList>

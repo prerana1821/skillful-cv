@@ -19,7 +19,7 @@ import {
   dashToSnakeCase,
   titleCaseToDashCase,
   titleCaseToSnakeCase,
-} from "@/app/utils/caseManipulation";
+} from "@/utils/caseManipulation";
 import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "@/app/defaults";
 import SectionCard from "./SectionCard";
 import {
@@ -31,8 +31,9 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useRef, MouseEvent } from "react";
 import custom_section from "@/data/custom-section.json";
+import { CustomSectionI } from "@/types/interfaces";
 
 const Sections = ({
   sections,
@@ -74,17 +75,21 @@ const Sections = ({
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
-  const addSection = (event: any) => {
-    const sectionKey = titleCaseToSnakeCase(event.target.innerText);
+  const addSection = (event: MouseEvent<HTMLDivElement>) => {
+    const sectionKey = titleCaseToSnakeCase(
+      (event.target as HTMLDivElement).innerText
+    );
     const sectionData = DEFAULT_SECTIONS_JSON[sectionKey] || {};
 
     setSections((sections) => ({
       default: [
         ...sections.default,
-        titleCaseToDashCase(event.target.innerText),
+        titleCaseToDashCase((event.target as HTMLDivElement).innerText),
       ],
       extra: sections.extra.filter(
-        (section) => section !== titleCaseToDashCase(event.target.innerText)
+        (section) =>
+          section !==
+          titleCaseToDashCase((event.target as HTMLDivElement).innerText)
       ),
     }));
 
@@ -94,7 +99,7 @@ const Sections = ({
     });
   };
 
-  const showSection = (event: any) => {
+  const showSection = (event: MouseEvent<HTMLDivElement>) => {
     setValue((value) => {
       return JSON.stringify(
         DEFAULT_SECTIONS_JSON[titleCaseToSnakeCase(event.target.innerText)] ||
@@ -105,7 +110,10 @@ const Sections = ({
     });
   };
 
-  const removeAddedSection = (event: any, section: string) => {
+  const removeAddedSection = (
+    event: MouseEvent<HTMLButtonElement>,
+    section: string
+  ) => {
     event.stopPropagation();
 
     setSections((sections) => ({
@@ -142,23 +150,22 @@ const Sections = ({
       default: [...sections.default, titleCaseToDashCase(customSectionTitle)],
     }));
 
-    setValue((value) => {
-      console.log(custom_section);
+    const customSection: CustomSectionI = custom_section;
 
-      const updatedCustomSection = Object.defineProperty(
-        custom_section,
+    setValue((value) => {
+      const updatedCustomSection: CustomSectionI = Object.defineProperty(
+        customSection,
         titleCaseToDashCase(customSectionTitle),
-        Object.getOwnPropertyDescriptor(custom_section, "untitled")
+        Object.getOwnPropertyDescriptor(customSection, "untitled")!
       );
-      delete custom_section["untitled"];
+      if (customSection.hasOwnProperty("untitled")) {
+        delete customSection["untitled"];
+      }
 
       updatedCustomSection[titleCaseToDashCase(customSectionTitle)].title =
         customSectionTitle;
 
-      console.log(updatedCustomSection);
-
       const mergedData = { ...JSON.parse(value), ...updatedCustomSection };
-      console.log(mergedData);
 
       return JSON.stringify(mergedData, null, 2);
     });

@@ -1,21 +1,17 @@
+import { PersonalDetailsI } from "@/types/interfaces";
 import { Box, Center, Heading, Text } from "@chakra-ui/react";
 
-const Header = ({ value }: any) => {
+const Header = ({ data }: { data: PersonalDetailsI }) => {
   return (
     <Box my='2'>
       <Center>
         <Heading as='h1' size='xl'>
-          {value?.["personal-details"]?.["first-name"]}{" "}
-          {value?.["personal-details"]?.["last-name"]},{" "}
-          {value?.["personal-details"]?.["job-title"]}
+          {data?.["first-name"]} {data?.["last-name"]}, {data?.["job-title"]}
         </Heading>
       </Center>
       <Center>
         <Text fontSize={"md"} my='2'>
-          {value?.["personal-details"]?.city},{" "}
-          {value?.["personal-details"]?.country},{" "}
-          {value?.["personal-details"]?.["phone-number"]},{" "}
-          {value?.["personal-details"]?.email}
+          {data?.city}, {data?.country}, {data?.["phone-number"]}, {data?.email}
         </Text>
       </Center>
     </Box>

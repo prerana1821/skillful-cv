@@ -5,7 +5,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json";
 import ace from "ace-builds/src-noconflict/ace";
 import { SetStateAction, Dispatch } from "react";
-import { validJSON } from "@/app/utils/validJSON";
+import { validJSON } from "@/utils/validJSON";
 
 ace.config.setModuleUrl(
   "ace/mode/json_worker",

@@ -1,21 +1,13 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  ListItem,
-  UnorderedList,
-  Stack,
-  Text,
-  border,
-} from "@chakra-ui/react";
+import { ListI, SectionWithListI } from "@/types/interfaces";
+import { Box, Flex, Heading, Stack, Text, border } from "@chakra-ui/react";
 
-const Education = ({ data }: { data: any }) => {
+const Education = ({ data }: { data: SectionWithListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' size='md' textTransform='uppercase'>
         {data?.title}
       </Heading>
-      {data?.list?.map((item: any, index: number) => (
+      {data?.list?.map((item: ListI, index: number) => (
         <Stack key={index} my='2'>
           <Flex gap='3rem'>
             <Heading as='h5' size='sm' textTransform='uppercase' width={"50%"}>

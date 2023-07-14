@@ -1,7 +1,7 @@
+import { SectionWithListTextI } from "@/types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import Link from "next/link";
 
-const Hobbies = ({ data }: { data: any }) => {
+const Hobbies = ({ data }: { data: SectionWithListTextI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Flex flexDir={"row"} justifyContent={"flex-start"} gap={"7rem"}>
@@ -9,7 +9,7 @@ const Hobbies = ({ data }: { data: any }) => {
           {data?.title}
         </Heading>
         <Flex gap='1rem'>
-          {data?.list?.map((item: any, index: number) => {
+          {data?.list?.map((item: string, index: number) => {
             return <Text key={index}>{item}</Text>;
           })}
         </Flex>

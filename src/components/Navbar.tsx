@@ -1,18 +1,12 @@
 "use client";
 
-import {
-  Box,
-  Flex,
-  Button,
-  useColorModeValue,
-  Stack,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Box, Flex, Button, Stack, useColorMode } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import Image from "next/image";
 import Link from "next/link";
+import { CSSProperties } from "react";
 
-export default function Navbar({ styles }: { styles?: any }) {
+export default function Navbar({ styles }: { styles?: CSSProperties }) {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
