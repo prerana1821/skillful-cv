@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import { Box, Button, Flex } from "@chakra-ui/react";
-// import Editor from "@/components/Editor";
+import Editor from "@/components/Editor";
 import Preview from "@/components/Preview";
 import Sections from "@/components/Sections";
 import INITIAL_DEFAULT_RESUME from "@/data/default-resume.json";
@@ -13,9 +13,9 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { DEFAULT_SECTIONS } from "../defaults";
 import dynamic from "next/dynamic";
 
-const Editor = dynamic(() => import("@/components/Editor"), {
-  ssr: false,
-});
+// const Editor = dynamic(() => import("@/components/Editor"), {
+//   ssr: false,
+// });
 
 export default function Page() {
   const [value, setValue] = useState(
@@ -23,8 +23,10 @@ export default function Page() {
   );
   const [sections, setSections] = useState(DEFAULT_SECTIONS);
   const [customSectionTitle, setCustomSectionTitle] = useState("");
+  const [shareableLink, setShareableLink] = useState("");
 
   const componentRef = useRef(null);
+  const aceEditor = useRef();
 
   const reactToPrintContent = useCallback(() => {
     return componentRef.current;
@@ -76,7 +78,7 @@ export default function Page() {
             moveCard={moveCard}
           />
 
-          <Editor value={value} setValue={setValue} />
+          <Editor value={value} setValue={setValue} ref={aceEditor} />
 
           <ReactToPrint
             content={reactToPrintContent}
@@ -85,6 +87,8 @@ export default function Page() {
           />
 
           <Preview
+            shareableLink={shareableLink}
+            setShareableLink={setShareableLink}
             sections={sections}
             value={JSON.parse(value)}
             customSectionTitle={customSectionTitle}

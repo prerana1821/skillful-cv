@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import Header from "./ResumePreview/Header";
 import { forwardRef, MutableRefObject } from "react";
 import ProfileSummary from "./ResumePreview/ProfileSummary";
@@ -15,16 +15,47 @@ import ProfessionalExperience from "./ResumePreview/ProfessionalExperience";
 import ExtraCurricularActivities from "./ResumePreview/ExtraCurricularActivities";
 import CustomSection from "./ResumePreview/CustomSection";
 import { titleCaseToDashCase } from "@/utils/caseManipulation";
+import { SetStateAction, Dispatch } from "react";
 
 interface PreviewProps {
   sections: { default: string[]; extra: string[] };
   value: any;
   customSectionTitle: string;
   ref: MutableRefObject<any>;
+  shareableLink: string;
+  setShareableLink: Dispatch<SetStateAction<string>>;
 }
 
+const encodeResumeData = (data: any) => {
+  const encodedData = encodeURIComponent(JSON.stringify(data));
+  return encodedData;
+};
+
 const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
-  const { sections, value, customSectionTitle } = props;
+  const {
+    sections,
+    value,
+    customSectionTitle,
+    setShareableLink,
+    shareableLink,
+  } = props;
+
+  const generateShareableURL = () => {
+    console.log({ value });
+
+    const encodedData = encodeResumeData(value);
+    console.log({ encodedData });
+    const baseURL = window.location.origin; // Get the base URL of your app
+    const shareURL = `${baseURL}/share?resume=${encodedData}`;
+    return shareURL;
+  };
+
+  const handleShareClick = () => {
+    const shareURL = generateShareableURL();
+    console.log({ shareURL });
+
+    setShareableLink(shareURL);
+  };
 
   return (
     <Box
@@ -32,9 +63,19 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
       height={{ base: "100vh", sm: "auto" }}
       overflowY={"auto"}
     >
-      <Heading as='h3' size='xs' mb='0.5rem'>
-        Preview
-      </Heading>
+      <Flex justifyContent={"flex-start"} alignItems={"center"} gap='1rem'>
+        <Heading as='h3' size='xs' mb='0.5rem'>
+          Preview
+        </Heading>
+        <Text
+          cursor={"pointer"}
+          fontSize={"sm"}
+          mb='0.3rem'
+          onClick={handleShareClick}
+        >
+          Share
+        </Text>
+      </Flex>
       <Box
         border={"1px solid black"}
         m='0.5rem'
