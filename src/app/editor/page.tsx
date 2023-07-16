@@ -45,13 +45,15 @@ export default function Page() {
       <Button
         position='absolute'
         right='1rem'
-        top='0.5rem'
+        top='-1'
         variant='ghost'
         display={"flex"}
         gap={"0.3rem"}
         alignItems={"center"}
+        fontSize={"sm"}
+        _hover={{ backgroundColor: "none" }}
       >
-        <PiDownloadSimple fontSize='lg' />
+        <PiDownloadSimple fontSize='md' />
         Download
       </Button>
     );
@@ -59,7 +61,7 @@ export default function Page() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <Box overflowY='hidden' my='1rem'>
+      <Box overflowY='hidden' my='0.5rem'>
         <Flex
           direction={{ base: "column", sm: "row" }}
           gap='0.5rem'

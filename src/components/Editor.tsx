@@ -47,7 +47,7 @@ const Editor = ({
       flex={{ base: "none", sm: "35%" }}
       height={{ base: "100vh", sm: "auto" }}
     >
-      <Heading as='h3' size='md' mb='0.5rem'>
+      <Heading as='h3' size='xs' mb='0.5rem'>
         Editor
       </Heading>
       <AceEditor
@@ -59,7 +59,7 @@ const Editor = ({
         name='editor'
         wrapEnabled={true}
         onChange={onChange}
-        fontSize={18}
+        fontSize={14}
         showPrintMargin={true}
         showGutter={true}
         highlightActiveLine={true}

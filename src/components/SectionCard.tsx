@@ -68,10 +68,9 @@ const SectionCard = ({
   return (
     <Flex
       boxShadow={"md"}
-      p={"0.5rem 1rem"}
-      fontSize={"lg"}
+      p={"0.5rem 0.8rem"}
+      m={"0.7rem 0.4rem"}
       cursor={"pointer"}
-      m={"1rem"}
       borderRadius={"0.3rem"}
       display={"flex"}
       justifyContent={"space-between"}
@@ -89,28 +88,32 @@ const SectionCard = ({
         resetDefaultSection={resetDefaultSection}
       />
       <Flex alignItems={"center"} gap={"0.4rem"} width='71%'>
-        <RiDraggable fontSize={"1.5rem"} />
-        <Text isTruncated width={"80%"}>
+        <RiDraggable fontSize={"1rem"} />
+        <Text fontSize={"sm"} isTruncated width={"80%"}>
           {dashCaseToTitleCase(section)}
         </Text>
       </Flex>
-      <Flex width='29%'>
+      <Flex width='29%' gap='0.3rem' justifyContent={"end"}>
         <Button
           variant={"unstyled"}
+          minW={5}
+          height={6}
           onClick={(event) => {
             event.stopPropagation();
             onOpen();
           }}
         >
           <IconContext.Provider value={{ style: { margin: "auto" } }}>
-            <GrPowerReset fontSize={"1.3rem"} />
+            <GrPowerReset fontSize={"0.9rem"} />
           </IconContext.Provider>
         </Button>
         <Button
           variant={"unstyled"}
+          minW={5}
+          height={6}
           onClick={(event) => removeAddedSection(event, section)}
         >
-          <MdDelete fontSize={"1.5rem"} />
+          <MdDelete fontSize={"1rem"} />
         </Button>
       </Flex>
     </Flex>

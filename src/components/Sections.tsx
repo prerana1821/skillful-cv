@@ -168,7 +168,7 @@ const Sections = ({
       flex={{ base: "none", sm: "20%" }}
       height={{ base: "100vh", sm: "auto" }}
       overflowY={"auto"}
-      pl='1rem'
+      pl='0.8rem'
     >
       <AlertResetSectionsModal
         isOpen={resetSectionsIsOpen}
@@ -210,20 +210,24 @@ const Sections = ({
       </Modal>
 
       <Flex justifyContent={"space-between"} alignItems={"center"}>
-        <Heading as='h3' size='md'>
+        <Heading as='h3' size='xs'>
           Sections
         </Heading>
         <Button
           variant={"ghost"}
           display={"flex"}
+          fontSize={"xs"}
           gap='0.5rem'
+          height={8}
           onClick={resetSectionsOnOpen}
         >
           <GrPowerReset /> Reset
         </Button>
       </Flex>
-      <Box my='1rem'>
-        <Text>Click on a section below to edit the content.</Text>
+      <Box>
+        <Text fontSize={"0.7rem"}>
+          Click on a section below to edit the content.
+        </Text>
         {sections.default.map((section, index) => {
           return (
             <SectionCard
@@ -242,18 +246,20 @@ const Sections = ({
       </Box>
       <Box>
         {sections.extra.length !== 0 && (
-          <Text>Click on a section to add it to your resume.</Text>
+          <Text fontSize={"0.7rem"}>
+            Click on a section to add it to your resume.
+          </Text>
         )}
         <Box
           boxShadow={"md"}
-          p={"0.5rem 1rem"}
-          fontSize={"xl"}
+          p={"0.5rem 0.8rem"}
+          m={"0.8rem 0.5rem"}
+          fontSize={"sm"}
           cursor={"pointer"}
-          m={"1rem"}
           borderRadius={"0.3rem"}
           display='flex'
           alignItems='center'
-          gap='1rem'
+          gap='0.5rem'
           justifyContent='center'
           onClick={onOpen}
         >
@@ -265,10 +271,10 @@ const Sections = ({
               <Box
                 key={index}
                 boxShadow={"md"}
-                p={"0.5rem 1rem"}
-                fontSize={"lg"}
+                p={"0.5rem 0.8rem"}
+                m={"0.5rem"}
                 cursor={"pointer"}
-                m={"1rem"}
+                fontSize={"sm"}
                 borderRadius={"0.3rem"}
                 onClick={addSection}
               >

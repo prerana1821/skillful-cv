@@ -32,14 +32,14 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
       height={{ base: "100vh", sm: "auto" }}
       overflowY={"auto"}
     >
-      <Heading as='h3' size='md' mb='0.5rem'>
+      <Heading as='h3' size='xs' mb='0.5rem'>
         Preview
       </Heading>
       <Box
         border={"1px solid black"}
-        m='1rem'
+        m='0.5rem'
         borderRadius={"md"}
-        p='1rem'
+        p='0.5rem'
         className='resume-preview'
         ref={ref}
       >

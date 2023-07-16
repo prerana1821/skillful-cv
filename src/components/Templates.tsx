@@ -8,7 +8,7 @@ const Templates = () => {
   return (
     <Box>
       <Center>
-        <Heading as='h3' size='3xl' my='2rem'>
+        <Heading as='h3' size='xl' my='2rem'>
           Templates
         </Heading>
       </Center>
@@ -19,21 +19,21 @@ const Templates = () => {
         variant='unstyled'
       >
         <TabList>
-          <Tab p='1rem 2rem' display={"flex"} gap='1rem' m='1rem'>
+          <Tab p='0.5rem 1rem' display={"flex"} gap='1rem' m='0.4rem'>
             <PiShootingStarLight fontSize={"2rem"} />
-            <Text fontSize={"xl"}> Creative</Text>
+            <Text fontSize={"lg"}> Creative</Text>
           </Tab>
-          <Tab p='1rem 2rem' display={"flex"} gap='1rem' m='1rem'>
+          <Tab p='0.5rem 1rem' display={"flex"} gap='1rem' m='0.4rem'>
             <PiRainbowCloud fontSize={"2rem"} />
-            <Text fontSize={"xl"}>Simple</Text>
+            <Text fontSize={"lg"}>Simple</Text>
           </Tab>
-          <Tab p='1rem 2rem' display={"flex"} gap='1rem' m='1rem'>
+          <Tab p='0.5rem 1rem' display={"flex"} gap='1rem' m='0.4rem'>
             <LiaHandPeace fontSize={"2rem"} />
-            <Text fontSize={"xl"}>Modern</Text>
+            <Text fontSize={"lg"}>Modern</Text>
           </Tab>
-          <Tab p='1rem 2rem' display={"flex"} gap='1rem' m='1rem'>
+          <Tab p='0.5rem 1rem' display={"flex"} gap='1rem' m='0.4rem'>
             <MdLaptopMac fontSize={"2rem"} />
-            <Text fontSize={"xl"}>Professional</Text>
+            <Text fontSize={"lg"}>Professional</Text>
           </Tab>
         </TabList>
         <TabIndicator

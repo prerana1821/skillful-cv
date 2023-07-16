@@ -74,7 +74,7 @@ export default function Footer() {
         align={{ base: "center", md: "center" }}
       >
         {/* <Logo /> */}
-        <Text>© 2023 | precodes. All rights reserved</Text>
+        <Text fontSize={"sm"}>© 2023 | precodes. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton label={"Twitter"} href={"#"}>
             <FaTwitter />

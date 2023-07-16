@@ -17,16 +17,25 @@ export default function Navbar({ styles }: { styles?: CSSProperties }) {
               <Image
                 src='/image/logo.png'
                 alt='skillful-cv logo'
-                width={"60"}
-                height={"60"}
+                width={"40"}
+                height={"40"}
               />
             </Link>
           </Box>
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-              <Button onClick={toggleColorMode}>
-                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+              <Button
+                onClick={toggleColorMode}
+                px={"0 0.7rem"}
+                height={8}
+                minW={8}
+              >
+                {colorMode === "light" ? (
+                  <MoonIcon width={"0.8em"} height={"0.8em"} />
+                ) : (
+                  <SunIcon width={"0.8em"} height={"0.8em"} />
+                )}
               </Button>
             </Stack>
           </Flex>
