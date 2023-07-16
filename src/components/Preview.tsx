@@ -39,7 +39,7 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
         border={"1px solid black"}
         m='0.5rem'
         borderRadius={"md"}
-        p='0.5rem'
+        p='1rem'
         className='resume-preview'
         ref={ref}
       >

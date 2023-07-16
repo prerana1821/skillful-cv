@@ -253,7 +253,7 @@ const Sections = ({
         <Box
           boxShadow={"md"}
           p={"0.5rem 0.8rem"}
-          m={"0.8rem 0.5rem"}
+          m={"0.8rem"}
           fontSize={"sm"}
           cursor={"pointer"}
           borderRadius={"0.3rem"}
@@ -272,7 +272,7 @@ const Sections = ({
                 key={index}
                 boxShadow={"md"}
                 p={"0.5rem 0.8rem"}
-                m={"0.5rem"}
+                m={"0.8rem"}
                 cursor={"pointer"}
                 fontSize={"sm"}
                 borderRadius={"0.3rem"}

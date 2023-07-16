@@ -69,7 +69,7 @@ const SectionCard = ({
     <Flex
       boxShadow={"md"}
       p={"0.5rem 0.8rem"}
-      m={"0.7rem 0.4rem"}
+      m={"0.8rem"}
       cursor={"pointer"}
       borderRadius={"0.3rem"}
       display={"flex"}
