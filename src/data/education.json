@@ -1,0 +1,23 @@
+{
+  "education": {
+    "title": "Education",
+    "list": [
+      {
+        "institution": "XYZ University",
+        "degree": "Computer Science",
+        "city": "Mumbai",
+        "start-date": "Jan, 2020",
+        "end-date": "May, 2021",
+        "description": "Experienced Software Developer adept in bringing forth expertise in design, installation, testing and maintenance of software systems. Proficient in various platforms, languages, and embedded systems."
+      },
+      {
+        "institution": "ABCD University",
+        "degree": "Computer Science",
+        "city": "Mumbai",
+        "start-date": "Jan, 2020",
+        "end-date": "May, 2021",
+        "description": "Experienced Software Developer adept in bringing forth expertise in design, installation, testing and maintenance of software systems. Proficient in various platforms, languages, and embedded systems."
+      }
+    ]
+  }
+}

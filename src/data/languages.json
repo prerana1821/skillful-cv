@@ -1,0 +1,19 @@
+{
+  "languages": {
+    "title": "Languages",
+    "list": [
+      {
+        "name": "Hindi",
+        "level": "Native speaker"
+      },
+      {
+        "name": "Marathi",
+        "level": "Highly proficient"
+      },
+      {
+        "name": "English",
+        "level": "Very good command"
+      }
+    ]
+  }
+}

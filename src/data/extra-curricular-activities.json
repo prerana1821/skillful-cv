@@ -1,0 +1,30 @@
+{
+  "extra-curricular-activities": {
+    "title": "Extra-curricular Activities",
+    "list": [
+      {
+        "employer": "ABC COMPANY",
+        "title": "Party 1",
+        "start-date": "Jan, 2018",
+        "end-date": "May, 2019",
+        "city": "Mumbai",
+        "descriptionList": [
+          "A 15% reduction in transportation costs, resulting in $1.2M annual savings",
+          "Improved demand forecasting that reduced backorders to retail partners by 17%."
+        ]
+      },
+      {
+        "employer": "ABC COMPANY 2",
+        "title": "Party 2",
+        "start-date": "Jan, 2020",
+        "end-date": "May, 2021",
+        "city": "Mumbai",
+        "descriptionList": [
+          "Completed focus group and BI research that helped boost NW region sales by 15%.",
+          "Improved demand forecasting that reduced backorders to retail partners by 17%.",
+          "Completed focus group and BI research that helped boost NW region sales by 15%."
+        ]
+      }
+    ]
+  }
+}
