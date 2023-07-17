@@ -1,4 +1,4 @@
-import { PersonalDetailsI } from "@/types/interfaces";
+import { PersonalDetailsI } from "../../types/interfaces";
 import { Box, Center, Heading, Text } from "@chakra-ui/react";
 
 const Header = ({ data }: { data: PersonalDetailsI }) => {

@@ -1,4 +1,4 @@
-import { SectionWithListTextI } from "@/types/interfaces";
+import { SectionWithListTextI } from "../../types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
 const Hobbies = ({ data }: { data: SectionWithListTextI }) => {

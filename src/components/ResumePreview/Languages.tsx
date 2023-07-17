@@ -1,4 +1,4 @@
-import { TextListI, TitleListI } from "@/types/interfaces";
+import { TextListI, TitleListI } from "../../types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
 const Languages = ({ data }: { data: TitleListI }) => {

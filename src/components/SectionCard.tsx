@@ -1,4 +1,3 @@
-import { dashCaseToTitleCase } from "@/utils/caseManipulation";
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { GrPowerReset } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
@@ -7,6 +6,7 @@ import AlertResetSectionValueModal from "./AlertResetSectionValueModal";
 import { IconContext } from "react-icons/lib";
 import { useRef, MouseEvent } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import { dashCaseToTitleCase } from "../utils/caseManipulation";
 
 interface DragItem {
   section: string;

@@ -1,5 +1,5 @@
-import { ListI, SectionWithListI } from "@/types/interfaces";
-import { Box, Flex, Heading, Stack, Text, border } from "@chakra-ui/react";
+import { ListI, SectionWithListI } from "../../types/interfaces";
+import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 
 const Education = ({ data }: { data: SectionWithListI }) => {
   return (

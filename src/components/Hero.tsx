@@ -1,7 +1,4 @@
-"use client";
-
 import { Box, Heading, Container, Text, Button, Stack } from "@chakra-ui/react";
-import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -39,19 +36,19 @@ export default function Hero() {
             alignSelf={"center"}
             position={"relative"}
           >
-            <Link href={"/editor"}>
-              <Button
-                bg={"#F50057"}
-                fontSize='md'
-                p='1rem 3rem'
-                color='white'
-                _hover={{
-                  bg: "#F50057",
-                }}
-              >
-                Get Started
-              </Button>
-            </Link>
+            {/* <Link href={"/editor"}> */}
+            <Button
+              bg={"#F50057"}
+              fontSize='md'
+              p='1rem 3rem'
+              color='white'
+              _hover={{
+                bg: "#F50057",
+              }}
+            >
+              Get Started
+            </Button>
+            {/* </Link> */}
           </Stack>
         </Stack>
       </Container>

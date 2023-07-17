@@ -1,7 +1,6 @@
-import { ListI, SectionWithListI } from "@/types/interfaces";
 import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
-import Link from "next/link";
 import { TbExternalLink } from "react-icons/tb";
+import { SectionWithListI, ListI } from "../../types/interfaces";
 
 const Courses = ({ data }: { data: SectionWithListI }) => {
   return (
@@ -31,12 +30,13 @@ const Courses = ({ data }: { data: SectionWithListI }) => {
                   <Heading as='h5' fontSize='xs' textTransform={"uppercase"}>
                     {company["course"]}, {company["institution"]}
                   </Heading>
-                  <Link
+                  <a
                     href={company?.["certificate-link"] || ""}
                     target='_blank'
+                    rel='noreferrer'
                   >
                     <TbExternalLink fontSize={"lg"} />
-                  </Link>
+                  </a>
                 </Flex>
               </Flex>
             </Flex>

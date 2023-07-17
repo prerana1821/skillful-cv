@@ -1,9 +1,5 @@
-"use client";
-
 import { Box, Flex, Button, Stack, useColorMode } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import Image from "next/image";
-import Link from "next/link";
 import { CSSProperties } from "react";
 
 export default function Navbar({ styles }: { styles?: CSSProperties }) {
@@ -13,14 +9,14 @@ export default function Navbar({ styles }: { styles?: CSSProperties }) {
       <Box px={4} style={styles}>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Box p={"1rem"}>
-            <Link href='/'>
-              <Image
-                src='/image/logo.png'
-                alt='skillful-cv logo'
-                width={"40"}
-                height={"40"}
-              />
-            </Link>
+            {/* <Link href='/'> */}
+            <img
+              src='/image/logo.png'
+              alt='skillful-cv logo'
+              width={"40"}
+              height={"40"}
+            />
+            {/* </Link> */}
           </Box>
 
           <Flex alignItems={"center"}>

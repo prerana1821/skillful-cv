@@ -1,4 +1,4 @@
-import { ListI, SectionWithListI } from "@/types/interfaces";
+import { ListI, SectionWithListI } from "../../types/interfaces";
 import {
   Box,
   Flex,
@@ -6,8 +6,6 @@ import {
   ListItem,
   UnorderedList,
   Stack,
-  Text,
-  border,
 } from "@chakra-ui/react";
 
 const Internships = ({ data }: { data: SectionWithListI }) => {

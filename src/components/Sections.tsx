@@ -12,6 +12,7 @@ import {
 import { SetStateAction, Dispatch } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { GrPowerReset } from "react-icons/gr";
+import custom_section from "../data/custom-section.json";
 
 import SectionCard from "./SectionCard";
 import {
@@ -32,6 +33,7 @@ import {
 } from "../utils/caseManipulation";
 import { CustomSectionI } from "../types/interfaces";
 import AlertResetSectionsModal from "./AlertResetSectionsModal";
+import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "../defaults";
 
 const Sections = ({
   sections,
@@ -128,7 +130,7 @@ const Sections = ({
 
   const resetSections = () => {
     setSections(DEFAULT_SECTIONS);
-    setValue(JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2));
+    // setValue(JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2));
   };
 
   const addCustomSection = () => {

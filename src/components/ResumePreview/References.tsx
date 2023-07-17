@@ -1,4 +1,4 @@
-import { ListI, SectionWithListI } from "@/types/interfaces";
+import { ListI, SectionWithListI } from "../../types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
 const References = ({ data }: { data: SectionWithListI }) => {

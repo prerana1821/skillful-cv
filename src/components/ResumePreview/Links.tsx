@@ -1,6 +1,5 @@
-import { TextListI, TitleListI } from "@/types/interfaces";
+import { TextListI, TitleListI } from "../../types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import Link from "next/link";
 
 const Links = ({ data }: { data: TitleListI }) => {
   return (
@@ -17,13 +16,13 @@ const Links = ({ data }: { data: TitleListI }) => {
         <Flex gap='1rem' width={{ base: "80%" }}>
           {data?.list?.map((item: TextListI, index: number) => {
             return (
-              <Link
+              <a
                 href={item?.link || ""}
                 key={index}
                 style={{ textDecoration: "underline" }}
               >
                 <Text fontSize='xs'>{item?.label}</Text>
-              </Link>
+              </a>
             );
           })}
         </Flex>

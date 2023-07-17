@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Box,
   chakra,
@@ -11,21 +9,19 @@ import {
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { ReactNode } from "react";
-import Link from "next/link";
-import Image from "next/image";
 
-const Logo = () => {
-  return (
-    <Link href='/'>
-      <Image
-        src='/image/logo.png'
-        alt='skillful-cv logo'
-        width={"60"}
-        height={"60"}
-      />
-    </Link>
-  );
-};
+// const Logo = () => {
+//   return (
+//     <Link href='/'>
+//       <Image
+//         src='/image/logo.png'
+//         alt='skillful-cv logo'
+//         width={"60"}
+//         height={"60"}
+//       />
+//     </Link>
+//   );
+// };
 
 const SocialButton = ({
   children,

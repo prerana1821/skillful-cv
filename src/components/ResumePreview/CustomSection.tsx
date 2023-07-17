@@ -1,4 +1,4 @@
-import { ListI, SectionWithListI } from "@/types/interfaces";
+import { ListI, SectionWithListI } from "../../types/interfaces";
 import {
   Box,
   Flex,

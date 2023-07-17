@@ -1,4 +1,4 @@
-import { TitleDescI } from "@/types/interfaces";
+import { TitleDescI } from "../../types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
 const ProfileSummary = ({ data }: { data: TitleDescI }) => {

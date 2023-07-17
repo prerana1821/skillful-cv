@@ -1,22 +1,25 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { SetStateAction, Dispatch } from "react";
-import { validJSON } from "@/utils/validJSON";
+import { validJSON } from "../utils/validJSON";
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/ext-language_tools";
 
-const AceEditor = dynamic(
-  async () => {
-    const ace = await import("react-ace");
-    await import("ace-builds/src-noconflict/theme-solarized_dark");
-    await import("ace-builds/src-noconflict/mode-json");
-    await import("ace-builds/src-noconflict/ext-language_tools");
-    return ace;
-  },
-  {
-    loading: () => <div>Loading...</div>,
-    ssr: false,
-  }
-);
+// const AceEditor = dynamic(
+//   async () => {
+//     const ace = await import("react-ace");
+//     await import("ace-builds/src-noconflict/theme-solarized_dark");
+//     await import("ace-builds/src-noconflict/mode-json");
+//     await import("ace-builds/src-noconflict/ext-language_tools");
+//     return ace;
+//   },
+//   {
+//     loading: () => <div>Loading...</div>,
+//     ssr: false,
+//   }
+// );
 
 const Editor = ({
   value,
