@@ -15,6 +15,7 @@ import ProfessionalExperience from "./ResumePreview/ProfessionalExperience";
 import ExtraCurricularActivities from "./ResumePreview/ExtraCurricularActivities";
 import CustomSection from "./ResumePreview/CustomSection";
 import { titleCaseToDashCase } from "../utils/caseManipulation";
+import { ValueI } from "../types/interfaces";
 
 interface PreviewProps {
   sections: { default: string[]; extra: string[] };

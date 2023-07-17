@@ -1,14 +1,21 @@
 import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
 import { TbExternalLink } from "react-icons/tb";
-import { SectionWithListI, ListI } from "../../types/interfaces";
+import { Course } from "../../types/interfaces";
 
-const Courses = ({ data }: { data: SectionWithListI }) => {
+interface CoursesProps {
+  data?: {
+    title?: string;
+    list?: Course[];
+  };
+}
+
+const Courses = ({ data }: CoursesProps) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' fontSize='md' textTransform={"uppercase"}>
         {data?.title}
       </Heading>
-      {data?.list?.map((company: ListI, index: number) => {
+      {data?.list?.map((company: Course, index: number) => {
         return (
           <Stack key={index} my='2'>
             <Flex my='0.3rem'>
