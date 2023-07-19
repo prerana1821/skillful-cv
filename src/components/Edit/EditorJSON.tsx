@@ -8,13 +8,13 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import { SetStateAction, Dispatch, useRef } from "react";
-import { validJSON } from "../utils/validJSON";
+import { validJSON } from "../../utils/validJSON";
 import AceEditor from "react-ace";
 import ace from "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/ext-language_tools";
-import { isTextInDescription } from "../utils/hasValidCharacters";
+import { isTextInDescription } from "../../utils/hasValidCharacters";
 import {
   Popover,
   PopoverTrigger,
@@ -25,13 +25,9 @@ import {
   PopoverCloseButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { HiLightBulb } from "react-icons/hi";
-import { RiQuillPenFill } from "react-icons/ri";
-import { PiSparkleFill } from "react-icons/pi";
-import { IoMdColorWand } from "react-icons/io";
-import { FaPencilAlt } from "react-icons/fa";
-import { BiSolidBriefcase } from "react-icons/bi";
+
 import axios from "axios";
+import { AI_SUGGESTIONS_OPTIONS } from "../../utils/defaults";
 
 ace.config.setModuleUrl(
   "ace/mode/json_worker",
@@ -50,35 +46,6 @@ const EditorJSON = ({
   setSelectedText: Dispatch<SetStateAction<string>>;
 }) => {
   const aceEditor = useRef<AceEditor | null>(null);
-
-  const options = [
-    {
-      value: "keyword-suggestions",
-      label: "Keyword suggestions",
-      icon: IoMdColorWand,
-    },
-    {
-      value: "continue-writing",
-      label: "Continue writing ...",
-      icon: RiQuillPenFill,
-    },
-    {
-      value: "change-tone",
-      label: "Change tone to formal",
-      icon: BiSolidBriefcase,
-    },
-    { value: "rephrase", label: "Rephrase", icon: FaPencilAlt },
-    {
-      value: "content-generation",
-      label: "Content generation",
-      icon: HiLightBulb,
-    },
-    {
-      value: "language-enhancement",
-      label: "Language enhancement",
-      icon: PiSparkleFill,
-    },
-  ];
 
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -132,7 +99,7 @@ const EditorJSON = ({
             <PopoverHeader>Let AI help you ...</PopoverHeader>
             <PopoverBody>
               <List spacing={3}>
-                {options.map((option) => {
+                {AI_SUGGESTIONS_OPTIONS.map((option) => {
                   return (
                     <ListItem
                       key={option.value}

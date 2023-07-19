@@ -1,21 +1,21 @@
 /* eslint-disable react/display-name */
 import { Box, Heading } from "@chakra-ui/react";
-import Header from "./ResumePreview/Header";
+import Header from "../ResumePreview/Header";
 import { forwardRef, MutableRefObject } from "react";
-import ProfileSummary from "./ResumePreview/ProfileSummary";
-import Hobbies from "./ResumePreview/Hobbies";
-import Courses from "./ResumePreview/Courses";
-import References from "./ResumePreview/References";
-import Skills from "./ResumePreview/Skills";
-import Languages from "./ResumePreview/Languages";
-import Links from "./ResumePreview/Links";
-import Education from "./ResumePreview/Education";
-import Internships from "./ResumePreview/Internships";
-import ProfessionalExperience from "./ResumePreview/ProfessionalExperience";
-import ExtraCurricularActivities from "./ResumePreview/ExtraCurricularActivities";
-import CustomSection from "./ResumePreview/CustomSection";
-import { titleCaseToDashCase } from "../utils/caseManipulation";
-import { DEFAULT_SECTIONS } from "../utils/defaults";
+import ProfileSummary from "../ResumePreview/ProfileSummary";
+import Hobbies from "../ResumePreview/Hobbies";
+import Courses from "../ResumePreview/Courses";
+import References from "../ResumePreview/References";
+import Skills from "../ResumePreview/Skills";
+import Languages from "../ResumePreview/Languages";
+import Links from "../ResumePreview/Links";
+import Education from "../ResumePreview/Education";
+import Internships from "../ResumePreview/Internships";
+import ProfessionalExperience from "../ResumePreview/ProfessionalExperience";
+import ExtraCurricularActivities from "../ResumePreview/ExtraCurricularActivities";
+import CustomSection from "../ResumePreview/CustomSection";
+import { titleCaseToDashCase } from "../../utils/caseManipulation";
+import { DEFAULT_SECTIONS } from "../../utils/defaults";
 
 export const getMissingSections = (keys: string[], allSections: string[]) => {
   return keys.filter((key) => !allSections.includes(key));
@@ -36,21 +36,7 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
   const keys = Object.keys(value);
   const allSections = Object.values(DEFAULT_SECTIONS).flat();
 
-  // console.log(keys);
   const missingSections = getMissingSections(keys, allSections);
-
-  // keys.map((key: string) => {
-  //   if (sections.default.includes(key) && customSectionTitle !== key) {
-  //     console.log("NICE1");
-  //   }
-  //   // if (!sections.default.includes(key) && customSectionTitle !== key) {
-  //   //   console.log("NICE");
-  //   // }
-  // });
-
-  // {keys.map((key: string) => {
-  //         if (!sections.default.includes(key) && customSectionTitle !== key) {
-  //           return
 
   return (
     <Box

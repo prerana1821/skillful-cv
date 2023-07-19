@@ -2,7 +2,7 @@ import { Box, Center, Heading } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import Preview from "./Preview";
+import Preview from "./Edit/Preview";
 import { useState } from "react";
 
 export const Share = () => {
@@ -29,8 +29,6 @@ export const Share = () => {
             data: JSON.parse(data.data.resumeValue),
             sections: Object.keys(JSON.parse(data.data.resumeValue)),
           });
-          console.log(JSON.parse(data.data.resumeValue));
-          console.log(Object.keys(JSON.parse(data.data.resumeValue)));
         }
 
         // dispatch({ type: "PRODUCT_DETAIL", payload: data });
@@ -48,8 +46,6 @@ export const Share = () => {
       }
     })();
   }, [resumeId]);
-
-  console.log({ resumeData });
 
   return (
     <Box>

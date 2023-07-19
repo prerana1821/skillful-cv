@@ -10,19 +10,6 @@ import {
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { ReactNode } from "react";
 
-// const Logo = () => {
-//   return (
-//     <Link href='/'>
-//       <Image
-//         src='/image/logo.png'
-//         alt='skillful-cv logo'
-//         width={"60"}
-//         height={"60"}
-//       />
-//     </Link>
-//   );
-// };
-
 const SocialButton = ({
   children,
   label,
@@ -62,14 +49,11 @@ export default function Footer() {
         as={Stack}
         maxW={"8xl"}
         py={4}
-        // position='fixed'
-        // bottom='0'
         direction={{ base: "column", md: "row" }}
         spacing={4}
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        {/* <Logo /> */}
         <Text fontSize={"sm"}>© 2023 | precodes. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton label={"Twitter"} href={"#"}>

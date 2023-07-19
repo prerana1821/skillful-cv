@@ -2,48 +2,30 @@ import {
   Box,
   Button,
   Flex,
-  FormControl,
-  FormLabel,
   Heading,
-  Input,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { SetStateAction, Dispatch } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { GrPowerReset } from "react-icons/gr";
-import custom_section from "../data/custom-section.json";
-import INITIAL_DEFAULT_RESUME from "../data/default-resume.json";
+import custom_section from "../../data/custom-section.json";
+import INITIAL_DEFAULT_RESUME from "../../data/default-resume.json";
+import SectionCard from "../Sections/SectionCard";
 
-import SectionCard from "./SectionCard";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
 import { useRef, MouseEvent } from "react";
 import {
   titleCaseToSnakeCase,
   titleCaseToDashCase,
   dashCaseToTitleCase,
   dashToSnakeCase,
-} from "../utils/caseManipulation";
-import { CustomSectionI } from "../types/interfaces";
-import AlertResetSectionsModal from "./AlertResetSectionsModal";
-import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "../utils/defaults";
+} from "../../utils/caseManipulation";
+import { CustomSectionI } from "../../types/interfaces";
+import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "../../utils/defaults";
+import { AddCustomSectionModal } from "../Sections/AddCustomSectionModal";
+import AlertResetSectionsModal from "../Sections/AlertResetSectionsModal";
 
-const Sections = ({
-  sections,
-  setSections,
-  setValue,
-  moveCard,
-  customSectionTitle,
-  setCustomSectionTitle,
-}: {
+type SectionsProps = {
   sections: {
     default: string[];
     extra: string[];
@@ -58,7 +40,16 @@ const Sections = ({
   moveCard: (dragIndex: number, hoverIndex: number) => void;
   customSectionTitle: string;
   setCustomSectionTitle: Dispatch<SetStateAction<string>>;
-}) => {
+};
+
+const Sections = ({
+  sections,
+  setSections,
+  setValue,
+  moveCard,
+  customSectionTitle,
+  setCustomSectionTitle,
+}: SectionsProps) => {
   const {
     isOpen: resetSectionsIsOpen,
     onOpen: resetSectionsOnOpen,
@@ -71,10 +62,13 @@ const Sections = ({
     onClose: resetSectionValueOnClose,
   } = useDisclosure();
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: addCustomSectionIsOpen,
+    onOpen: addCustomSectionOnOpen,
+    onClose: addCustomSectionOnClose,
+  } = useDisclosure();
 
-  const initialRef = useRef(null);
-  const finalRef = useRef(null);
+  const initialAddCustomSectionModalRef = useRef(null);
 
   const addSection = (event: MouseEvent<HTMLDivElement>) => {
     const sectionKey = titleCaseToSnakeCase(
@@ -151,15 +145,6 @@ const Sections = ({
       const customSection: CustomSectionI = custom_section;
 
       setValue((value) => {
-        // const updatedCustomSection: CustomSectionI = Object.defineProperty(
-        //   customSection,
-        //   titleCaseToDashCase(customSectionTitle),
-        //   Object.getOwnPropertyDescriptor(customSection, "untitled")!
-        // );
-        // if (customSection.hasOwnProperty("untitled")) {
-        //   delete customSection["untitled"];
-        // }
-
         const updatedCustomSection: CustomSectionI = {
           ...customSection,
           [titleCaseToDashCase(customSectionTitle) as string]: {
@@ -170,24 +155,16 @@ const Sections = ({
 
         delete updatedCustomSection["untitled"];
 
-        console.log({ customSection });
-
-        // console.log({ updatedCustomSection });
-
         updatedCustomSection[
           titleCaseToDashCase(customSectionTitle) as string
         ].title = customSectionTitle;
 
         const mergedData = { ...JSON.parse(value), ...updatedCustomSection };
-
-        console.log(mergedData);
-
-        // return value;
         return JSON.stringify(mergedData, null, 2);
       });
 
       setCustomSectionTitle("");
-      onClose();
+      addCustomSectionOnClose();
     }
   };
 
@@ -204,44 +181,14 @@ const Sections = ({
         resetSections={resetSections}
       />
 
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-        isCentered
-        motionPreset='scale'
-        size='lg'
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>New Custom Section</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Section name</FormLabel>
-              <Input
-                ref={initialRef}
-                value={customSectionTitle}
-                onChange={(e) => setCustomSectionTitle(e.target.value)}
-              />
-            </FormControl>
-          </ModalBody>
-
-          <ModalFooter display={"flex"} gap='1rem'>
-            <Button onClick={onClose}>Cancel</Button>
-            {/* TODO: Add error is input value is empty.  */}
-            <Button
-              backgroundColor='#F50057'
-              color='#fff'
-              mr={3}
-              onClick={addCustomSection}
-            >
-              Add Section
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <AddCustomSectionModal
+        initialRef={initialAddCustomSectionModalRef}
+        isOpen={addCustomSectionIsOpen}
+        onClose={addCustomSectionOnClose}
+        customSectionTitle={customSectionTitle}
+        setCustomSectionTitle={setCustomSectionTitle}
+        addCustomSection={addCustomSection}
+      />
 
       <Flex justifyContent={"space-between"} alignItems={"center"}>
         <Heading as='h3' size='xs'>
@@ -295,7 +242,7 @@ const Sections = ({
           alignItems='center'
           gap='0.5rem'
           justifyContent='center'
-          onClick={onOpen}
+          onClick={addCustomSectionOnOpen}
         >
           <IoMdAdd /> Custom Section
         </Box>

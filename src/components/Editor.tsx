@@ -1,27 +1,17 @@
-import { useState, useRef, useCallback, useEffect } from "react";
-import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
-import Preview from "./Preview";
-import Sections from "./Sections";
+import { useState, useRef, useCallback } from "react";
+import { Box, Button, Flex } from "@chakra-ui/react";
+import Preview from "./Edit/Preview";
+import Sections from "./Edit/Sections";
 import INITIAL_DEFAULT_RESUME from "../data/default-resume.json";
 import ReactToPrint from "react-to-print";
 import { PiDownloadSimple } from "react-icons/pi";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DEFAULT_SECTIONS } from "../utils/defaults";
-import EditorJSON from "./EditorJSON";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
-import Navbar from "./Navbar";
+import EditorJSON from "./Edit/EditorJSON";
+import Navbar from "./Layout/Navbar";
 import ShortUniqueId from "short-unique-id";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export const Editor = () => {
   const [value, setValue] = useState(
@@ -31,19 +21,11 @@ export const Editor = () => {
   const [customSectionTitle, setCustomSectionTitle] = useState("");
   const [selectedText, setSelectedText] = useState<string>("");
 
-  const navigate = useNavigate();
-
   const componentRef = useRef(null);
 
   const reactToPrintContent = useCallback(() => {
     return componentRef.current;
   }, [componentRef.current]);
-
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // useEffect(() => {
-  //   onOpen(); // Open the modal when the component mounts
-  // }, []);
 
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     const draggedCard = sections.default[dragIndex];
@@ -76,11 +58,7 @@ export const Editor = () => {
   const shareResume = async () => {
     const uid = new ShortUniqueId({ length: 10 });
     const uniqueId = uid();
-    console.log({ uniqueId });
-
     const resumeJSON = JSON.parse(value);
-
-    console.log(resumeJSON["personal-details"].email);
 
     try {
       const response = await axios.post("http://localhost:4000/resumes", {
@@ -115,21 +93,6 @@ export const Editor = () => {
           gap='0.5rem'
           height='88vh'
         >
-          {/* <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>Modal Title</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>Hello world</ModalBody>
-
-              <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={onClose}>
-                  Close
-                </Button>
-                <Button variant='ghost'>Secondary Action</Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal> */}
           <Sections
             sections={sections}
             setSections={setSections}
