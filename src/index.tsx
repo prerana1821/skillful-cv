@@ -4,9 +4,9 @@ import "./index.css";
 import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./components/NotFound";
-import { Editor } from "./components/Editor";
-import { Share } from "./components/Share";
+import ErrorPage from "./components/Layout/NotFound";
+import { Editor } from "./components/Edit/Editor";
+import { Share } from "./components/Share/Share";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

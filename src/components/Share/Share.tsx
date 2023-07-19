@@ -2,8 +2,8 @@ import { Box, Center, Heading } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import Preview from "./Edit/Preview";
 import { useState } from "react";
+import Preview from "../Edit/Preview";
 
 export const Share = () => {
   const { resumeId } = useParams();

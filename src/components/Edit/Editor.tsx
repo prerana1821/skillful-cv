@@ -1,17 +1,18 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { Box, Button, Flex } from "@chakra-ui/react";
-import Preview from "./Edit/Preview";
-import Sections from "./Edit/Sections";
-import INITIAL_DEFAULT_RESUME from "../data/default-resume.json";
+import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
+import Preview from "./Preview";
+import Sections from "./Sections";
+import INITIAL_DEFAULT_RESUME from "../../data/default-resume.json";
 import ReactToPrint from "react-to-print";
 import { PiDownloadSimple } from "react-icons/pi";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { DEFAULT_SECTIONS } from "../utils/defaults";
-import EditorJSON from "./Edit/EditorJSON";
-import Navbar from "./Layout/Navbar";
+import { DEFAULT_SECTIONS } from "../../utils/defaults";
+import EditorJSON from "./EditorJSON";
+import Navbar from "../Layout/Navbar";
 import ShortUniqueId from "short-unique-id";
 import axios from "axios";
+import { ShareLinkModal } from "../Share/ShareLinkModal";
 
 export const Editor = () => {
   const [value, setValue] = useState(
@@ -21,7 +22,15 @@ export const Editor = () => {
   const [customSectionTitle, setCustomSectionTitle] = useState("");
   const [selectedText, setSelectedText] = useState<string>("");
 
+  const [resumeId, setResumeId] = useState("");
+  const [isResumeLinkCopied, setIsResumeLinkCopied] = useState(false);
+
   const componentRef = useRef(null);
+  const {
+    isOpen: shareLinkIsOpen,
+    onOpen: shareLinkOnOpen,
+    onClose: shareLinkOnClose,
+  } = useDisclosure();
 
   const reactToPrintContent = useCallback(() => {
     return componentRef.current;
@@ -75,6 +84,18 @@ export const Editor = () => {
     );
   }, []);
 
+  const copyLink = () => {
+    navigator.clipboard
+      .writeText(`https:localhost:3000/share/${resumeId}`)
+      .then(() => {
+        console.log("Link copied to clipboard:");
+        setIsResumeLinkCopied(true);
+      })
+      .catch((error) => {
+        console.error("Error copying link to clipboard:", error);
+      });
+  };
+
   const shareResume = async () => {
     const uid = new ShortUniqueId({ length: 10 });
     const uniqueId = uid();
@@ -88,7 +109,9 @@ export const Editor = () => {
       });
       if (response.status === 200) {
         const resumeId = response.data.resumeId;
-        window.open(`/share/${resumeId}`);
+        setResumeId(resumeId);
+        shareLinkOnOpen();
+        // window.open(`/share/${resumeId}`);
       }
     } catch (error) {
       console.log(error);
@@ -108,6 +131,16 @@ export const Editor = () => {
           />
         }
       />
+
+      <ShareLinkModal
+        isOpen={shareLinkIsOpen}
+        onClose={shareLinkOnClose}
+        isResumeLinkCopied={isResumeLinkCopied}
+        setIsResumeLinkCopied={setIsResumeLinkCopied}
+        resumeId={resumeId}
+        copyLink={copyLink}
+      />
+
       <Box overflowY='hidden' mt='1rem' mb='0.5rem'>
         <Flex
           direction={{ base: "column", sm: "row" }}
