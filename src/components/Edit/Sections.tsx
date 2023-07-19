@@ -76,24 +76,29 @@ const Sections = ({
     );
     const sectionData = DEFAULT_SECTIONS_JSON[sectionKey] || {};
 
-    setSections((sections) => ({
-      default: [
-        ...sections.default,
-        titleCaseToDashCase(
-          (event.target as HTMLDivElement).innerText
-        ) as string,
-      ],
-      extra: sections.extra.filter(
-        (section) =>
-          section !==
-          (titleCaseToDashCase(
+    setSections((sections) => {
+      const updatedSections = {
+        default: [
+          ...sections.default,
+          titleCaseToDashCase(
             (event.target as HTMLDivElement).innerText
-          ) as string)
-      ),
-    }));
+          ) as string,
+        ],
+        extra: sections.extra.filter(
+          (section) =>
+            section !==
+            (titleCaseToDashCase(
+              (event.target as HTMLDivElement).innerText
+            ) as string)
+        ),
+      };
+      localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
+      return updatedSections;
+    });
 
     setValue((value) => {
       const mergedData = { ...JSON.parse(value), ...sectionData };
+      localStorage?.setItem("resumeData", JSON.stringify(mergedData, null, 2));
       return JSON.stringify(mergedData, null, 2);
     });
   };
@@ -104,14 +109,19 @@ const Sections = ({
   ) => {
     event.stopPropagation();
 
-    setSections((sections) => ({
-      default: sections.default.filter((sec) => sec !== section),
-      extra: [section, ...sections.extra],
-    }));
+    setSections((sections) => {
+      const updatedSections = {
+        default: sections.default.filter((sec) => sec !== section),
+        extra: [section, ...sections.extra],
+      };
+      localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
+      return updatedSections;
+    });
 
     setValue((value) => {
       const JSONValue = JSON.parse(value);
       const { [section]: _, ...rest } = JSONValue;
+      localStorage?.setItem("resumeData", JSON.stringify(rest, null, 2));
       return JSON.stringify(rest, null, 2);
     });
   };
@@ -123,24 +133,38 @@ const Sections = ({
       const JSONValue = JSON.parse(value);
       const { [section]: _, ...rest } = JSONValue;
       const mergedData = { ...rest, ...sectionData };
+      localStorage?.setItem("resumeData", JSON.stringify(mergedData, null, 2));
       return JSON.stringify(mergedData, null, 2);
     });
   };
 
   const resetSections = () => {
     setSections(DEFAULT_SECTIONS);
+    localStorage?.setItem("resumeSections", JSON.stringify(DEFAULT_SECTIONS));
     setValue(JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2));
+    localStorage?.setItem(
+      "resumeData",
+      JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2)
+    );
   };
 
   const addCustomSection = () => {
     if (customSectionTitle && customSectionTitle.length > 0) {
-      setSections((sections) => ({
-        ...sections,
-        default: [
-          ...sections.default,
-          titleCaseToDashCase(customSectionTitle) as string,
-        ],
-      }));
+      setSections((sections) => {
+        const updatedSections = {
+          ...sections,
+          default: [
+            ...sections.default,
+            titleCaseToDashCase(customSectionTitle) as string,
+          ],
+        };
+
+        localStorage?.setItem(
+          "resumeSections",
+          JSON.stringify(updatedSections)
+        );
+        return updatedSections;
+      });
 
       const customSection: CustomSectionI = custom_section;
 
@@ -160,6 +184,10 @@ const Sections = ({
         ].title = customSectionTitle;
 
         const mergedData = { ...JSON.parse(value), ...updatedCustomSection };
+        localStorage?.setItem(
+          "resumeData",
+          JSON.stringify(mergedData, null, 2)
+        );
         return JSON.stringify(mergedData, null, 2);
       });
 

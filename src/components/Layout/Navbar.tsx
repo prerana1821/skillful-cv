@@ -10,19 +10,22 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
 
+type NavbarProps = {
+  styles?: CSSProperties;
+  downloadComp?: any;
+  shareResume?: () => void;
+  showColorMode?: boolean;
+};
 export default function Navbar({
   styles,
   downloadComp,
   shareResume,
-}: {
-  styles?: CSSProperties;
-  downloadComp?: any;
-  shareResume?: () => void;
-}) {
+  showColorMode,
+}: NavbarProps) {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box px={4} boxShadow={"md"}>
+      <Box px={4} boxShadow={styles?.boxShadow}>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Box p={"0.8rem"}>
             <Link to='/'>
@@ -37,11 +40,13 @@ export default function Navbar({
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={5} alignItems={"center"}>
-              <Button onClick={shareResume}>Share</Button>
+              {downloadComp && <Button onClick={shareResume}>Share</Button>}
               {downloadComp}
-              <Button onClick={toggleColorMode}>
-                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-              </Button>
+              {showColorMode && (
+                <Button onClick={toggleColorMode}>
+                  {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+                </Button>
+              )}
             </Stack>
           </Flex>
         </Flex>

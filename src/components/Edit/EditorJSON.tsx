@@ -25,7 +25,6 @@ import {
   PopoverCloseButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
-
 import axios from "axios";
 import { AI_SUGGESTIONS_OPTIONS } from "../../utils/defaults";
 
@@ -34,17 +33,19 @@ ace.config.setModuleUrl(
   "https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/worker-json.js"
 );
 
+type EditorJSONProps = {
+  value: string;
+  selectedText: string;
+  setValue: Dispatch<SetStateAction<string>>;
+  setSelectedText: Dispatch<SetStateAction<string>>;
+};
+
 const EditorJSON = ({
   value,
   setValue,
   selectedText,
   setSelectedText,
-}: {
-  value: string;
-  selectedText: string;
-  setValue: Dispatch<SetStateAction<string>>;
-  setSelectedText: Dispatch<SetStateAction<string>>;
-}) => {
+}: EditorJSONProps) => {
   const aceEditor = useRef<AceEditor | null>(null);
 
   const [selectedOption, setSelectedOption] = useState("");
@@ -52,6 +53,7 @@ const EditorJSON = ({
   function onChange(newValue: string) {
     if (validJSON(newValue)) {
       setValue(newValue);
+      localStorage?.setItem("resumeData", newValue);
     }
   }
 

@@ -7,8 +7,12 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import {
+  FaLinkedinIn,
+  FaTwitter,
+} from "react-icons/fa";
 import { ReactNode } from "react";
+import { IoIosGlobe } from "react-icons/io";
 
 const SocialButton = ({
   children,
@@ -56,14 +60,20 @@ export default function Footer() {
       >
         <Text fontSize={"sm"}>© 2023 | precodes. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"#"}>
+          <SocialButton
+            label={"Twitter"}
+            href={"https://twitter.com/precodes18"}
+          >
             <FaTwitter />
           </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
-            <FaYoutube />
+          <SocialButton
+            label={"LinkedIn"}
+            href={"https://linkedin.com/in/prerana-nawar"}
+          >
+            <FaLinkedinIn />
           </SocialButton>
-          <SocialButton label={"Instagram"} href={"#"}>
-            <FaInstagram />
+          <SocialButton label={"Website"} href={"https://precodes.netlify.app"}>
+            <IoIosGlobe />
           </SocialButton>
         </Stack>
       </Container>

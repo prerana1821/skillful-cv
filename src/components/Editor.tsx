@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import Preview from "./Edit/Preview";
 import Sections from "./Edit/Sections";
@@ -33,9 +33,29 @@ export const Editor = () => {
     updatedComps.splice(dragIndex, 1);
     updatedComps.splice(hoverIndex, 0, draggedCard);
     setSections((sections) => {
-      return { ...sections, default: updatedComps };
+      const updatedSections = { ...sections, default: updatedComps };
+      localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
+      return updatedSections;
     });
   };
+
+  useEffect(() => {
+    try {
+      const resumeData = localStorage?.getItem("resumeData");
+      const resumeSections = localStorage?.getItem("resumeSections");
+      if (resumeData) {
+        setValue(resumeData);
+      }
+      if (resumeSections) {
+        setSections(JSON.parse(resumeSections));
+      }
+    } catch (error) {
+      console.error(
+        "Error while retrieving resume data from localStorage:",
+        error
+      );
+    }
+  }, []);
 
   const reactToPrintTrigger = useCallback(() => {
     return (
@@ -78,6 +98,7 @@ export const Editor = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <Navbar
+        styles={{ boxShadow: "md" }}
         shareResume={shareResume}
         downloadComp={
           <ReactToPrint
@@ -91,7 +112,7 @@ export const Editor = () => {
         <Flex
           direction={{ base: "column", sm: "row" }}
           gap='0.5rem'
-          height='88vh'
+          height={{ sm: "88vh" }}
         >
           <Sections
             sections={sections}

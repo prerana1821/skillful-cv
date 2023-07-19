@@ -7,7 +7,7 @@ import Footer from "./components/Layout/Footer";
 function App() {
   return (
     <Box m={"0 10%"}>
-      <Navbar />
+      <Navbar showColorMode />
       <Hero />
       <Templates />
       <Footer />
