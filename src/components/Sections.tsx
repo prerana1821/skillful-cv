@@ -34,7 +34,7 @@ import {
 } from "../utils/caseManipulation";
 import { CustomSectionI } from "../types/interfaces";
 import AlertResetSectionsModal from "./AlertResetSectionsModal";
-import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "../defaults";
+import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "../utils/defaults";
 
 const Sections = ({
   sections,

@@ -7,7 +7,7 @@ import ReactToPrint from "react-to-print";
 import { PiDownloadSimple } from "react-icons/pi";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { DEFAULT_SECTIONS } from "../defaults";
+import { DEFAULT_SECTIONS } from "../utils/defaults";
 import EditorJSON from "./EditorJSON";
 import {
   Modal,
