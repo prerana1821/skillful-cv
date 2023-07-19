@@ -31,6 +31,7 @@ import { PiSparkleFill } from "react-icons/pi";
 import { IoMdColorWand } from "react-icons/io";
 import { FaPencilAlt } from "react-icons/fa";
 import { BiSolidBriefcase } from "react-icons/bi";
+import axios from "axios";
 
 ace.config.setModuleUrl(
   "ace/mode/json_worker",
@@ -87,9 +88,18 @@ const EditorJSON = ({
     }
   }
 
-  const handleClick = (value: string) => {
+  const handleClick = async (value: string) => {
     console.log("Hello", { selectedText, value });
     setSelectedOption(value);
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/ai-suggestions/continue-writing"
+      );
+      const generatedText = response.data;
+      console.log(generatedText);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -110,8 +120,7 @@ const EditorJSON = ({
                 <Image
                   src='/ai-suggest.gif'
                   alt='AI Suggestion'
-                  width='20px'
-                  mb='0.2rem'
+                  width='25px'
                   cursor='pointer'
                 />
               ) : null}
@@ -120,7 +129,7 @@ const EditorJSON = ({
           <PopoverContent>
             <PopoverArrow />
             <PopoverCloseButton />
-            <PopoverHeader>Select any one of the following:</PopoverHeader>
+            <PopoverHeader>Let AI help you ...</PopoverHeader>
             <PopoverBody>
               <List spacing={3}>
                 {options.map((option) => {
@@ -150,13 +159,14 @@ const EditorJSON = ({
         width='100%'
         height='96.5%'
         name='editor'
+        style={{ overflowX: "hidden" }}
         wrapEnabled={true}
         onChange={onChange}
         fontSize={14}
+        className='ace-editor'
         showPrintMargin={true}
         showGutter={true}
         onSelectionChange={(v, e) => {
-          // console.log(aceEditor.current);
           if (aceEditor && aceEditor.current) {
             setSelectedText(aceEditor?.current?.editor.getSelectedText());
           }

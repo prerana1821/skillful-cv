@@ -7,6 +7,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./NotFound";
 import { Editor } from "./components/Editor";
+import { Share } from "./components/Share";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
     path: "/editor",
     element: <Editor />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/share/:resumeId",
+    element: <Share />,
   },
 ]);
 

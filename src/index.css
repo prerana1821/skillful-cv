@@ -8,7 +8,7 @@
 } */
 
 :root {
-  --primary-color: "#F50057";
+  --primary-color: #f50057;
 }
 
 * {
@@ -26,6 +26,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.ace-editor {
+  overflow-x: hidden !important;
 }
 
 @media print {

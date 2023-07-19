@@ -10,36 +10,37 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
 
-export default function Navbar({ styles }: { styles?: CSSProperties }) {
+export default function Navbar({
+  styles,
+  downloadComp,
+  shareResume,
+}: {
+  styles?: CSSProperties;
+  downloadComp?: any;
+  shareResume?: () => void;
+}) {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box px={4} style={styles}>
+      <Box px={4} boxShadow={"md"}>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
-          <Box p={"1rem"}>
+          <Box p={"0.8rem"}>
             <Link to='/'>
               <Image
                 src='/logo.png'
                 alt='skillful-cv logo'
-                width={"40"}
-                height={"40"}
+                width={"40px"}
+                height={"40px"}
               />
             </Link>
           </Box>
 
           <Flex alignItems={"center"}>
-            <Stack direction={"row"} spacing={7}>
-              <Button
-                onClick={toggleColorMode}
-                px={"0 0.7rem"}
-                height={8}
-                minW={8}
-              >
-                {colorMode === "light" ? (
-                  <MoonIcon width={"0.8em"} height={"0.8em"} />
-                ) : (
-                  <SunIcon width={"0.8em"} height={"0.8em"} />
-                )}
+            <Stack direction={"row"} spacing={5} alignItems={"center"}>
+              <Button onClick={shareResume}>Share</Button>
+              {downloadComp}
+              <Button onClick={toggleColorMode}>
+                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
             </Stack>
           </Flex>

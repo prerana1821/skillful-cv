@@ -6,8 +6,8 @@ export const dashCaseToTitleCase = (str: string) => {
   return capitalizedWords.join(" ");
 };
 
-export const titleCaseToDashCase = (str: string) => {
-  return str.replace(/\s+/g, "-").toLowerCase();
+export const titleCaseToDashCase = (str: string | undefined) => {
+  return str?.replace(/\s+/g, "-").toLowerCase();
 };
 
 export const titleCaseToSnakeCase = (str: string) => {

@@ -42,7 +42,7 @@ const Education = ({ data }: { data: SectionWithListI }) => {
               fontSize='xs'
               fontWeight={"semibold"}
               textTransform='uppercase'
-              width={{ base: "35%", md: "50%" }}
+              width={{ base: "35%", md: "50%", lg: "36%" }}
             >
               {item["start-date"]} - {item["end-date"]}
             </Heading>

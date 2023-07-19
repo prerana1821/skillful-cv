@@ -15,17 +15,42 @@ import ProfessionalExperience from "./ResumePreview/ProfessionalExperience";
 import ExtraCurricularActivities from "./ResumePreview/ExtraCurricularActivities";
 import CustomSection from "./ResumePreview/CustomSection";
 import { titleCaseToDashCase } from "../utils/caseManipulation";
-import { ValueI } from "../types/interfaces";
+import { DEFAULT_SECTIONS } from "../defaults";
+
+export const getMissingSections = (keys: string[], allSections: string[]) => {
+  return keys.filter((key) => !allSections.includes(key));
+};
 
 interface PreviewProps {
   sections: { default: string[]; extra: string[] };
   value: any;
-  customSectionTitle: string;
-  ref: MutableRefObject<any>;
+  customSectionTitle?: string;
+  ref?: MutableRefObject<any>;
+  showHeading?: boolean;
+  styles?: any;
 }
 
 const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
-  const { sections, value, customSectionTitle } = props;
+  const { sections, value, customSectionTitle, showHeading, styles } = props;
+
+  const keys = Object.keys(value);
+  const allSections = Object.values(DEFAULT_SECTIONS).flat();
+
+  // console.log(keys);
+  const missingSections = getMissingSections(keys, allSections);
+
+  // keys.map((key: string) => {
+  //   if (sections.default.includes(key) && customSectionTitle !== key) {
+  //     console.log("NICE1");
+  //   }
+  //   // if (!sections.default.includes(key) && customSectionTitle !== key) {
+  //   //   console.log("NICE");
+  //   // }
+  // });
+
+  // {keys.map((key: string) => {
+  //         if (!sections.default.includes(key) && customSectionTitle !== key) {
+  //           return
 
   return (
     <Box
@@ -33,9 +58,11 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
       height={{ base: "100vh", sm: "auto" }}
       overflowY={"auto"}
     >
-      <Heading as='h3' size='xs' mb='0.5rem'>
-        Preview
-      </Heading>
+      {showHeading && (
+        <Heading as='h3' size='xs' mb='0.5rem'>
+          Preview
+        </Heading>
+      )}
       <Box
         border={"1px solid black"}
         m='0.5rem'
@@ -43,6 +70,7 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
         p='1rem'
         className='resume-preview'
         ref={ref}
+        style={styles}
       >
         {sections.default.map((section: string) => {
           switch (section) {
@@ -111,16 +139,38 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
                 )
               );
             case titleCaseToDashCase(customSectionTitle):
-              return (
-                value?.[titleCaseToDashCase(customSectionTitle)] && (
-                  <CustomSection
-                    data={value?.[titleCaseToDashCase(customSectionTitle)]}
-                  />
-                )
-              );
+              if (customSectionTitle) {
+                return (
+                  value?.[
+                    titleCaseToDashCase(customSectionTitle) as string
+                  ] && (
+                    <CustomSection
+                      data={
+                        value?.[
+                          titleCaseToDashCase(customSectionTitle) as string
+                        ]
+                      }
+                    />
+                  )
+                );
+              }
+              return null;
             default:
               return null;
           }
+        })}
+        {/* Render CustomSection for keys not in DEFAULT_SECTIONS */}
+        {missingSections.map((key: string) => {
+          if (sections.default.includes(key) && customSectionTitle !== key) {
+            return (
+              value?.[titleCaseToDashCase(key) as string] && (
+                <CustomSection
+                  data={value?.[titleCaseToDashCase(key) as string]}
+                />
+              )
+            );
+          }
+          return null;
         })}
       </Box>
     </Box>

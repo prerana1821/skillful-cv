@@ -14,7 +14,7 @@ const ProfileSummary = ({ data }: { data: TitleDescI }) => {
         flexDir={{ md: "row" }}
         justifyContent={{ base: "flex-start", md: "space-between" }}
         alignItems={{ md: "flex-start" }}
-        gap={{ base: "6rem", md: "5rem" }}
+        gap={{ base: "6rem", md: "5rem", lg: "7rem" }}
       >
         <Heading as='h4' fontSize='md' textTransform='uppercase'>
           {data?.title}

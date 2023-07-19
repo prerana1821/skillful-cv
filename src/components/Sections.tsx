@@ -85,12 +85,16 @@ const Sections = ({
     setSections((sections) => ({
       default: [
         ...sections.default,
-        titleCaseToDashCase((event.target as HTMLDivElement).innerText),
+        titleCaseToDashCase(
+          (event.target as HTMLDivElement).innerText
+        ) as string,
       ],
       extra: sections.extra.filter(
         (section) =>
           section !==
-          titleCaseToDashCase((event.target as HTMLDivElement).innerText)
+          (titleCaseToDashCase(
+            (event.target as HTMLDivElement).innerText
+          ) as string)
       ),
     }));
 
@@ -135,33 +139,56 @@ const Sections = ({
   };
 
   const addCustomSection = () => {
-    setSections((sections) => ({
-      ...sections,
-      default: [...sections.default, titleCaseToDashCase(customSectionTitle)],
-    }));
+    if (customSectionTitle && customSectionTitle.length > 0) {
+      setSections((sections) => ({
+        ...sections,
+        default: [
+          ...sections.default,
+          titleCaseToDashCase(customSectionTitle) as string,
+        ],
+      }));
 
-    const customSection: CustomSectionI = custom_section;
+      const customSection: CustomSectionI = custom_section;
 
-    setValue((value) => {
-      const updatedCustomSection: CustomSectionI = Object.defineProperty(
-        customSection,
-        titleCaseToDashCase(customSectionTitle),
-        Object.getOwnPropertyDescriptor(customSection, "untitled")!
-      );
-      if (customSection.hasOwnProperty("untitled")) {
-        delete customSection["untitled"];
-      }
+      setValue((value) => {
+        // const updatedCustomSection: CustomSectionI = Object.defineProperty(
+        //   customSection,
+        //   titleCaseToDashCase(customSectionTitle),
+        //   Object.getOwnPropertyDescriptor(customSection, "untitled")!
+        // );
+        // if (customSection.hasOwnProperty("untitled")) {
+        //   delete customSection["untitled"];
+        // }
 
-      updatedCustomSection[titleCaseToDashCase(customSectionTitle)].title =
-        customSectionTitle;
+        const updatedCustomSection: CustomSectionI = {
+          ...customSection,
+          [titleCaseToDashCase(customSectionTitle) as string]: {
+            ...customSection["untitled"],
+            title: customSectionTitle,
+          },
+        };
 
-      const mergedData = { ...JSON.parse(value), ...updatedCustomSection };
+        delete updatedCustomSection["untitled"];
 
-      return JSON.stringify(mergedData, null, 2);
-    });
+        console.log({ customSection });
 
-    setCustomSectionTitle("");
-    onClose();
+        // console.log({ updatedCustomSection });
+
+        updatedCustomSection[
+          titleCaseToDashCase(customSectionTitle) as string
+        ].title = customSectionTitle;
+
+        const mergedData = { ...JSON.parse(value), ...updatedCustomSection };
+
+        console.log(mergedData);
+
+        // return value;
+        return JSON.stringify(mergedData, null, 2);
+      });
+
+      setCustomSectionTitle("");
+      onClose();
+    }
   };
 
   return (
@@ -203,7 +230,13 @@ const Sections = ({
 
           <ModalFooter display={"flex"} gap='1rem'>
             <Button onClick={onClose}>Cancel</Button>
-            <Button colorScheme='#F50057' mr={3} onClick={addCustomSection}>
+            {/* TODO: Add error is input value is empty.  */}
+            <Button
+              backgroundColor='#F50057'
+              color='#fff'
+              mr={3}
+              onClick={addCustomSection}
+            >
               Add Section
             </Button>
           </ModalFooter>
