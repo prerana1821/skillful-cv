@@ -88,7 +88,9 @@ const SectionCard = ({
         resetDefaultSection={resetDefaultSection}
       />
       <Flex alignItems={"center"} gap={"0.4rem"} width='71%'>
-        <RiDraggable fontSize={"1rem"} />
+        {section === "personal-details" || section === "profile-summary" ? (
+          <RiDraggable fontSize={"1rem"} />
+        ) : null}
         <Text fontSize={"sm"} isTruncated width={"80%"}>
           {dashCaseToTitleCase(section)}
         </Text>

@@ -1,4 +1,4 @@
-import { Box, Center, Heading } from "@chakra-ui/react";
+import { Box, Center, Heading, Image } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
@@ -13,15 +13,17 @@ export const Share = () => {
   const [resumeData, setResumeData] = useState<any>({
     data: "",
     sections: [],
+    loading: "",
+    error: "",
   });
 
   useEffect(() => {
     (async () => {
       try {
-        // dispatch({
-        //   type: "STATUS",
-        //   payload: { loading: "Loading data from server..." },
-        // });
+        setResumeData((prevData: any) => ({
+          ...prevData,
+          loading: "Loading data from server...",
+        }));
         const { status, data } = await axios.get(
           `${API_URL}resumes/${resumeId}`
         );
@@ -30,21 +32,15 @@ export const Share = () => {
           setResumeData({
             data: JSON.parse(data.data.resumeValue),
             sections: Object.keys(JSON.parse(data.data.resumeValue)),
+            loading: "",
           });
         }
-
-        // dispatch({ type: "PRODUCT_DETAIL", payload: data });
-        // dispatch({
-        //   type: "STATUS",
-        //   payload: { loading: "" },
-        // });
       } catch (error) {
         console.log(error);
-
-        // dispatch({
-        //   type: "STATUS",
-        //   payload: { error: "Sorry, try again later.." },
-        // });
+        setResumeData((prevData: any) => ({
+          ...prevData,
+          error: "Sorry, try again later...",
+        }));
       }
     })();
   }, [resumeId]);
@@ -54,7 +50,7 @@ export const Share = () => {
       <Center>
         <Heading
           as='h3'
-          size={"sm"}
+          size={"md"}
           color={"#f50057"}
           my='1rem'
           fontFamily={"cursive"}
@@ -62,6 +58,14 @@ export const Share = () => {
           Skillful CV
         </Heading>
       </Center>
+      {resumeData.loading && (
+        <Image src='/loading.gif' alt='Loading...' m='auto' width={"150px"} />
+      )}
+      {resumeData.error && (
+        <Heading as='h3' size={"sm"} my='1rem'>
+          {resumeData.error}
+        </Heading>
+      )}
       {resumeData.data && (
         <Center>
           <Preview

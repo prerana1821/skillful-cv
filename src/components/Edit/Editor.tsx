@@ -23,11 +23,12 @@ export const Editor = () => {
   const [sections, setSections] = useState(DEFAULT_SECTIONS);
   const [customSectionTitle, setCustomSectionTitle] = useState("");
   const [selectedText, setSelectedText] = useState<string>("");
-
   const [resumeId, setResumeId] = useState("");
+
   const [isResumeLinkCopied, setIsResumeLinkCopied] = useState(false);
 
   const componentRef = useRef(null);
+
   const {
     isOpen: shareLinkIsOpen,
     onOpen: shareLinkOnOpen,
