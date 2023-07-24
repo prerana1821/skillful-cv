@@ -42,6 +42,8 @@ type SectionsProps = {
   setCustomSectionTitle: Dispatch<SetStateAction<string>>;
 };
 
+// TODO: personal details & profile summary should not be drag & delete
+
 const Sections = ({
   sections,
   setSections,

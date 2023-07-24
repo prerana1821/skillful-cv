@@ -45,6 +45,7 @@ const AlertResetSectionValueModal = ({
 
           <Button
             variant='outline'
+            border={"1px solid #f50057"}
             onClick={() => {
               resetDefaultSection(section);
               onClose();

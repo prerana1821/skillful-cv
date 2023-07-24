@@ -14,7 +14,11 @@ import ace from "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/ext-language_tools";
-import { isTextInDescription } from "../../utils/hasValidCharacters";
+import {
+  findKeyAndObjectForSelectedText,
+  isTextInDescription,
+  isValidSelection,
+} from "../../utils/hasValidCharacters";
 import {
   Popover,
   PopoverTrigger,
@@ -27,6 +31,13 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { AI_SUGGESTIONS_OPTIONS } from "../../utils/defaults";
+import {
+  Education,
+  PersonalDetailsI,
+  ProfessionalExperience,
+  ValueI,
+} from "../../types/interfaces";
+import { dashCaseToTitleCase } from "../../utils/caseManipulation";
 
 ace.config.setModuleUrl(
   "ace/mode/json_worker",
@@ -57,15 +68,94 @@ const EditorJSON = ({
     }
   }
 
-  const handleClick = async (value: string) => {
-    console.log("Hello", { selectedText, value });
-    setSelectedOption(value);
+  const handleClick = async (selectedOption: string) => {
+    console.log("Hello", { selectedText, selectedOption });
+    setSelectedOption(selectedOption);
+
+    const selectedValue = findKeyAndObjectForSelectedText(
+      selectedText,
+      JSON.parse(value)
+    );
+
+    const valueFromPrompt = JSON.parse(value);
+    const personalDetails: PersonalDetailsI =
+      valueFromPrompt["personal-details"];
+
+    // TODO: if name, jobtitle & country is not present give an alert.
+    // TODO: show loading state
+
+    const { descriptionList, ...selectedObjectWithoutDescList } =
+      selectedValue?.object;
+
+    console.log({
+      name: personalDetails["first-name"],
+      jobTitle: personalDetails["job-title"],
+      country: personalDetails["country"],
+      key: selectedValue?.key,
+      selectedText:
+        selectedValue?.object.description || selectedValue?.selectedItem,
+      selectedObject: selectedObjectWithoutDescList,
+    });
+
     try {
       const response = await axios.post(
-        "http://localhost:4000/ai-suggestions/continue-writing"
+        "http://localhost:4000/ai-suggestions/keyword-suggestions",
+        {
+          name: personalDetails["first-name"],
+          jobTitle: personalDetails["job-title"],
+          country: personalDetails["country"],
+          key: selectedValue?.key,
+          selectedText:
+            selectedValue?.object.description || selectedValue?.selectedItem,
+          selectedObject: selectedObjectWithoutDescList,
+        }
       );
-      const generatedText = response.data;
-      console.log(generatedText);
+      if (response.status === 200) {
+        // const generatedText = { data: "Hello World" };
+        const generatedText = response.data;
+        console.log({ generatedText });
+        valueFromPrompt[selectedValue!.key].description = generatedText.data;
+
+        switch (selectedValue?.key) {
+          case "profile-summary":
+            valueFromPrompt["profile-summary"].description = generatedText.data;
+            break;
+          case "education":
+            valueFromPrompt["education"].list = valueFromPrompt[
+              "education"
+            ].list.map((item: Education) => {
+              return item.institution === selectedValue?.object?.institution
+                ? { ...item, description: generatedText.data }
+                : item;
+            });
+            break;
+          case "professional-experience":
+            valueFromPrompt["professional-experience"].list = valueFromPrompt[
+              "professional-experience"
+            ].list.map((item: ProfessionalExperience) => {
+              return item.employer === selectedValue?.object?.employer
+                ? {
+                    ...item,
+                    descriptionList: item?.descriptionList?.map(
+                      (description: string) => {
+                        return description === selectedValue?.selectedItem
+                          ? generatedText.data
+                          : description;
+                      }
+                    ),
+                  }
+                : item;
+            });
+            break;
+          default:
+            break;
+        }
+
+        setValue((prevState) => {
+          return JSON.stringify(valueFromPrompt, null, 2);
+        });
+        // TODO: add localstorage
+      }
     } catch (error) {
       console.error(error);
     }
@@ -85,7 +175,7 @@ const EditorJSON = ({
             <div>
               {selectedText &&
               selectedText.length > 0 &&
-              isTextInDescription(selectedText, JSON.parse(value)) ? (
+              isValidSelection(selectedText) ? (
                 <Image
                   src='/ai-suggest.gif'
                   alt='AI Suggestion'

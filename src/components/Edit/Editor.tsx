@@ -38,13 +38,16 @@ export const Editor = () => {
 
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     const draggedCard = sections.default[dragIndex];
-    const updatedComps = [...sections.default];
-    updatedComps.splice(dragIndex, 1);
-    updatedComps.splice(hoverIndex, 0, draggedCard);
+    const updatedSections = [...sections.default];
+    updatedSections.splice(dragIndex, 1);
+    updatedSections.splice(hoverIndex, 0, draggedCard);
+    // console.log({ updatedSections });
+    // console.log(JSON.parse(value));
+    // console.log(Object.keys(JSON.parse(value)).sort());
     setSections((sections) => {
-      const updatedSections = { ...sections, default: updatedComps };
-      localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
-      return updatedSections;
+      const updatedSects = { ...sections, default: updatedSections };
+      localStorage?.setItem("resumeSections", JSON.stringify(updatedSects));
+      return updatedSects;
     });
   };
 

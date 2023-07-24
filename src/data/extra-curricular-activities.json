@@ -4,25 +4,27 @@
     "list": [
       {
         "employer": "ABC COMPANY",
-        "title": "Party 1",
+        "title": "Social Responsibility Club",
         "start-date": "Jan, 2018",
         "end-date": "May, 2019",
         "city": "Mumbai",
         "descriptionList": [
-          "A 15% reduction in transportation costs, resulting in $1.2M annual savings",
-          "Improved demand forecasting that reduced backorders to retail partners by 17%."
+          "Led a sustainability initiative that promoted eco-friendly transportation methods, resulting in a 15% reduction in transportation costs, contributing to a greener and more cost-efficient operation.",
+          "Organized charity drives and fundraisers to support underprivileged communities, with a focus on providing essential resources and educational opportunities to those in need.",
+          "Collaborated with local schools to implement educational workshops on environmental awareness, impacting over 500 students and fostering a culture of sustainability from an early age."
         ]
       },
       {
         "employer": "ABC COMPANY 2",
-        "title": "Party 2",
+        "title": "Tech Enthusiast Club",
         "start-date": "Jan, 2020",
         "end-date": "May, 2021",
         "city": "Mumbai",
         "descriptionList": [
-          "Completed focus group and BI research that helped boost NW region sales by 15%.",
-          "Improved demand forecasting that reduced backorders to retail partners by 17%.",
-          "Completed focus group and BI research that helped boost NW region sales by 15%."
+          "Initiated and conducted focus group sessions to gather user feedback on the company's technology products, leading to valuable insights that contributed to a 15% increase in user satisfaction.",
+          "Developed interactive workshops on data analytics and business intelligence, empowering club members to enhance their skills and explore the potential of data-driven decision-making.",
+          "Organized hackathons and coding competitions, fostering a vibrant tech community and providing students with opportunities to showcase their talents and creativity.",
+          "Collaborated with local schools to organize coding clubs for students, promoting computer literacy and inspiring the next generation of tech enthusiasts."
         ]
       }
     ]
