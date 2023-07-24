@@ -18,14 +18,14 @@ type AddCustomSectionModalProps = {
   initialRef: MutableRefObject<null>;
   isOpen: boolean;
   onClose: () => void;
-  addCustomSection: () => void;
+  addCustomSectionOnClose: () => void;
 };
 
 export const AddCustomSectionModal = ({
   initialRef,
   isOpen,
   onClose,
-  addCustomSection,
+  addCustomSectionOnClose,
 }: AddCustomSectionModalProps) => {
   const { customSectionTitle, dispatch } = useData();
 
@@ -66,7 +66,16 @@ export const AddCustomSectionModal = ({
             backgroundColor='#F50057'
             color='#fff'
             mr={3}
-            onClick={addCustomSection}
+            onClick={() => {
+              if (customSectionTitle.length > 0) {
+                dispatch({
+                  type: "ADD_CUSTOM_SECTION",
+                  payload: customSectionTitle,
+                });
+
+                addCustomSectionOnClose();
+              }
+            }}
           >
             Add Section
           </Button>

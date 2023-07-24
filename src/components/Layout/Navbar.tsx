@@ -9,20 +9,50 @@ import {
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
+import ShortUniqueId from "short-unique-id";
+import axios from "axios";
+import { useData } from "../Edit/DataProvider";
+
+const API_URL = process.env.REACT_APP_API_BASE_URL;
 
 type NavbarProps = {
   styles?: CSSProperties;
   downloadComp?: any;
-  shareResume?: () => void;
+  shareLinkOnOpen?: () => void;
   showColorMode?: boolean;
 };
+
 export default function Navbar({
   styles,
   downloadComp,
-  shareResume,
+  shareLinkOnOpen,
   showColorMode,
 }: NavbarProps) {
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const { value, dispatch } = useData();
+
+  const shareResume = async () => {
+    const uid = new ShortUniqueId({ length: 10 });
+    const uniqueId = uid();
+    const resumeJSON = JSON.parse(value);
+
+    try {
+      const response = await axios.post(`${API_URL}resumes`, {
+        uniqueId,
+        email: resumeJSON["personal-details"].email,
+        resumeValue: value,
+      });
+      if (response.status === 200) {
+        const resumeId = response.data.resumeId;
+        dispatch({ type: "ADD_RESUME_ID", payload: resumeId });
+        shareLinkOnOpen && shareLinkOnOpen();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Box px={4} boxShadow={styles?.boxShadow}>

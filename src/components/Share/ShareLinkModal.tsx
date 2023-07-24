@@ -20,14 +20,9 @@ const CLIENT_BASE_URL = process.env.REACT_APP_CLIENT_BASE_URL;
 type ShareLinkModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  // resumeId: string;
 };
 
-export const ShareLinkModal = ({
-  isOpen,
-  onClose,
-}: // resumeId,
-ShareLinkModalProps) => {
+export const ShareLinkModal = ({ isOpen, onClose }: ShareLinkModalProps) => {
   const initialRef = useRef(null);
 
   const [isResumeLinkCopied, setIsResumeLinkCopied] = useState(false);

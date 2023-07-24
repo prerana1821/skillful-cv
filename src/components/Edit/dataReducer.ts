@@ -83,6 +83,7 @@ export const dataReducer = (
           ],
         },
         value: JSON.stringify(mergedResumeData, null, 2),
+        customSectionTitle: "",
       };
     case "ADD_SECTION":
       const addSectionData =

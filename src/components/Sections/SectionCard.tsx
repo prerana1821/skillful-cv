@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { GrPowerReset } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
 import { RiDraggable } from "react-icons/ri";
@@ -7,6 +7,7 @@ import { useRef, MouseEvent } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { dashCaseToTitleCase } from "../../utils/caseManipulation";
 import AlertResetSectionValueModal from "./AlertResetSectionValueModal";
+import { useData } from "../Edit/DataProvider";
 
 interface DragItem {
   section: string;
@@ -14,28 +15,18 @@ interface DragItem {
 }
 
 const SectionCard = ({
-  isOpen,
-  onClose,
   section,
-  resetDefaultSection,
-  onOpen,
-  removeAddedSection,
   index,
   moveCard,
 }: {
-  isOpen: boolean;
-  onClose: () => void;
   section: string;
-  resetDefaultSection: (section: string) => void;
-  onOpen: () => void;
-  removeAddedSection: (
-    event: MouseEvent<HTMLButtonElement>,
-    section: string
-  ) => void;
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
 }) => {
   const ref = useRef(null);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { dispatch } = useData();
 
   const [, drop] = useDrop({
     accept: "card",
@@ -85,7 +76,6 @@ const SectionCard = ({
         isOpen={isOpen}
         onClose={onClose}
         section={section}
-        resetDefaultSection={resetDefaultSection}
       />
       <Flex alignItems={"center"} gap={"0.4rem"} width='71%'>
         <RiDraggable fontSize={"1rem"} />
@@ -111,7 +101,14 @@ const SectionCard = ({
           variant={"unstyled"}
           minW={5}
           height={6}
-          onClick={(event) => removeAddedSection(event, section)}
+          onClick={(event) => {
+            event.stopPropagation();
+
+            dispatch({
+              type: "REMOVE_ADDED_SECTION",
+              payload: section,
+            });
+          }}
         >
           <MdDelete fontSize={"1rem"} />
         </Button>

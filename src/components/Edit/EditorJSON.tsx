@@ -60,13 +60,10 @@ const EditorJSON = () => {
 
   function onChange(newValue: string) {
     if (validJSON(newValue)) {
-      // setValue(newValue);
       dispatch({
         type: "ADD_RESUME_DATA",
         payload: newValue,
       });
-      // setValue(newValue);
-      // localStorage?.setItem("resumeData", newValue);
     }
   }
 

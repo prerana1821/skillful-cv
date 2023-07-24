@@ -8,16 +8,19 @@ import {
   ModalCloseButton,
   Button,
 } from "@chakra-ui/react";
+import { useData } from "../Edit/DataProvider";
 
 const AlertResetSectionsModal = ({
   isOpen,
   onClose,
-  resetSections,
-}: {
+}: // resetSections,
+{
   isOpen: boolean;
   onClose: () => void;
-  resetSections: () => void;
+  // resetSections: () => void;
 }) => {
+  const { dispatch } = useData();
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -43,7 +46,9 @@ const AlertResetSectionsModal = ({
             variant='outline'
             border={"1px solid #f50057"}
             onClick={() => {
-              resetSections();
+              dispatch({
+                type: "RESET_SECTIONS",
+              });
               onClose();
             }}
           >

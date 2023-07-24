@@ -8,7 +8,9 @@ import {
   Status,
 } from "./data.types";
 
-export const DataContext = createContext<any>({});
+export const DataContext = createContext<InitialResumeDataContext>(
+  {} as InitialResumeDataContext
+);
 
 const initialResumeDataState: InitialResumeDataState = {
   value: JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2),
