@@ -237,7 +237,7 @@ const Sections = ({
       </Flex>
       <Box>
         <Text fontSize={"0.7rem"}>
-          Click on a section below to edit the content.
+          Drag & drop the sections to change the content.
         </Text>
         {sections.default.map((section, index) => {
           return (

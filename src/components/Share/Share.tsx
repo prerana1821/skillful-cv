@@ -5,6 +5,8 @@ import axios from "axios";
 import { useState } from "react";
 import Preview from "../Edit/Preview";
 
+const API_URL = process.env.REACT_APP_API_BASE_URL;
+
 export const Share = () => {
   const { resumeId } = useParams();
 
@@ -21,7 +23,7 @@ export const Share = () => {
         //   payload: { loading: "Loading data from server..." },
         // });
         const { status, data } = await axios.get(
-          `http://localhost:4000/resumes/${resumeId}`
+          `${API_URL}resumes/${resumeId}`
         );
         if (status === 200) {
           console.log({ data });

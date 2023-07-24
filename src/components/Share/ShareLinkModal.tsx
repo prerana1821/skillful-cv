@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { SetStateAction, Dispatch, useRef } from "react";
 
+const CLIENT_BASE_URL = process.env.REACT_APP_CLIENT_BASE_URL;
+
 type ShareLinkModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -49,7 +51,7 @@ export const ShareLinkModal = ({
             <FormLabel>Copy this URL</FormLabel>
             <Input
               ref={initialRef}
-              value={`https:localhost:3000/share/${resumeId}`}
+              value={`${CLIENT_BASE_URL}${resumeId}`}
               border={
                 isResumeLinkCopied ? "2px solid #f50057" : "solid gray.300"
               }

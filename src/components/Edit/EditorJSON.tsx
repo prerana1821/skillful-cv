@@ -37,6 +37,8 @@ import {
   ProfessionalExperience,
 } from "../../types/interfaces";
 
+const API_URL = process.env.REACT_APP_API_BASE_URL;
+
 ace.config.setModuleUrl(
   "ace/mode/json_worker",
   "https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/worker-json.js"
@@ -98,19 +100,16 @@ const EditorJSON = ({
     });
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/ai-suggestions",
-        {
-          name: personalDetails["first-name"],
-          jobTitle: personalDetails["job-title"],
-          country: personalDetails["country"],
-          key: selectedValue?.key,
-          selectedOption,
-          selectedText:
-            selectedValue?.object.description || selectedValue?.selectedItem,
-          selectedObject: selectedObjectWithoutDescList,
-        }
-      );
+      const response = await axios.post(`${API_URL}ai-suggestions`, {
+        name: personalDetails["first-name"],
+        jobTitle: personalDetails["job-title"],
+        country: personalDetails["country"],
+        key: selectedValue?.key,
+        selectedOption,
+        selectedText:
+          selectedValue?.object.description || selectedValue?.selectedItem,
+        selectedObject: selectedObjectWithoutDescList,
+      });
       if (response.status === 200) {
         // const generatedText = { data: "Hello World" };
         const generatedText = response.data;

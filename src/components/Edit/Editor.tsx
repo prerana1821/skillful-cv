@@ -14,6 +14,8 @@ import ShortUniqueId from "short-unique-id";
 import axios from "axios";
 import { ShareLinkModal } from "../Share/ShareLinkModal";
 
+const API_URL = process.env.REACT_APP_API_BASE_URL;
+
 export const Editor = () => {
   const [value, setValue] = useState(
     JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2)
@@ -86,7 +88,7 @@ export const Editor = () => {
 
   const copyLink = () => {
     navigator.clipboard
-      .writeText(`https:localhost:3000/share/${resumeId}`)
+      .writeText(`/share/${resumeId}`)
       .then(() => {
         console.log("Link copied to clipboard:");
         setIsResumeLinkCopied(true);
@@ -102,7 +104,7 @@ export const Editor = () => {
     const resumeJSON = JSON.parse(value);
 
     try {
-      const response = await axios.post("http://localhost:4000/resumes", {
+      const response = await axios.post(`${API_URL}resumes`, {
         uniqueId,
         email: resumeJSON["personal-details"].email,
         resumeValue: value,
