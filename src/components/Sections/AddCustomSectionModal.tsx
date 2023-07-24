@@ -12,13 +12,14 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { SetStateAction, Dispatch, MutableRefObject } from "react";
+import { useData } from "../Edit/DataProvider";
 
 type AddCustomSectionModalProps = {
   initialRef: MutableRefObject<null>;
   isOpen: boolean;
   onClose: () => void;
-  customSectionTitle: string;
-  setCustomSectionTitle: Dispatch<SetStateAction<string>>;
+  // customSectionTitle: string;
+  // setCustomSectionTitle: Dispatch<SetStateAction<string>>;
   addCustomSection: () => void;
 };
 
@@ -26,10 +27,12 @@ export const AddCustomSectionModal = ({
   initialRef,
   isOpen,
   onClose,
-  customSectionTitle,
-  setCustomSectionTitle,
+  // customSectionTitle,
+  // setCustomSectionTitle,
   addCustomSection,
 }: AddCustomSectionModalProps) => {
+  const { customSectionTitle, dispatch } = useData();
+
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -49,7 +52,13 @@ export const AddCustomSectionModal = ({
             <Input
               ref={initialRef}
               value={customSectionTitle}
-              onChange={(e) => setCustomSectionTitle(e.target.value)}
+              onChange={(e) =>
+                dispatch({
+                  type: "ADD_CUSTOM_SECTION_TITLE",
+                  payload: e.target.value,
+                })
+              }
+              // onChange={(e) => setCustomSectionTitle(e.target.value)}
             />
           </FormControl>
         </ModalBody>

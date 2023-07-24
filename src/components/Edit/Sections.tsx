@@ -24,34 +24,37 @@ import { CustomSectionI } from "../../types/interfaces";
 import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "../../utils/defaults";
 import { AddCustomSectionModal } from "../Sections/AddCustomSectionModal";
 import AlertResetSectionsModal from "../Sections/AlertResetSectionsModal";
+import { useData } from "./DataProvider";
 
 type SectionsProps = {
-  sections: {
-    default: string[];
-    extra: string[];
-  };
-  setSections: Dispatch<
-    SetStateAction<{
-      default: string[];
-      extra: string[];
-    }>
-  >;
-  setValue: Dispatch<SetStateAction<string>>;
+  // sections: {
+  //   default: string[];
+  //   extra: string[];
+  // };
+  // setSections: Dispatch<
+  //   SetStateAction<{
+  //     default: string[];
+  //     extra: string[];
+  //   }>
+  // >;
+  // setValue: Dispatch<SetStateAction<string>>;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
-  customSectionTitle: string;
-  setCustomSectionTitle: Dispatch<SetStateAction<string>>;
+  // customSectionTitle: string;
+  // setCustomSectionTitle: Dispatch<SetStateAction<string>>;
 };
 
 // TODO: personal details & profile summary should not be drag & delete
 
 const Sections = ({
-  sections,
-  setSections,
-  setValue,
+  // sections,
+  // setSections,
+  // setValue,
   moveCard,
-  customSectionTitle,
-  setCustomSectionTitle,
-}: SectionsProps) => {
+}: // customSectionTitle,
+// setCustomSectionTitle,
+SectionsProps) => {
+  const { sections, customSectionTitle, dispatch } = useData();
+
   const {
     isOpen: resetSectionsIsOpen,
     onOpen: resetSectionsOnOpen,
@@ -78,31 +81,36 @@ const Sections = ({
     );
     const sectionData = DEFAULT_SECTIONS_JSON[sectionKey] || {};
 
-    setSections((sections) => {
-      const updatedSections = {
-        default: [
-          ...sections.default,
-          titleCaseToDashCase(
-            (event.target as HTMLDivElement).innerText
-          ) as string,
-        ],
-        extra: sections.extra.filter(
-          (section) =>
-            section !==
-            (titleCaseToDashCase(
-              (event.target as HTMLDivElement).innerText
-            ) as string)
-        ),
-      };
-      localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
-      return updatedSections;
+    dispatch({
+      type: "ADD_SECTION",
+      payload: (event.target as HTMLDivElement).innerText,
     });
 
-    setValue((value) => {
-      const mergedData = { ...JSON.parse(value), ...sectionData };
-      localStorage?.setItem("resumeData", JSON.stringify(mergedData, null, 2));
-      return JSON.stringify(mergedData, null, 2);
-    });
+    // setSections((sections) => {
+    //   const updatedSections = {
+    //     default: [
+    //       ...sections.default,
+    //       titleCaseToDashCase(
+    //         (event.target as HTMLDivElement).innerText
+    //       ) as string,
+    //     ],
+    //     extra: sections.extra.filter(
+    //       (section) =>
+    //         section !==
+    //         (titleCaseToDashCase(
+    //           (event.target as HTMLDivElement).innerText
+    //         ) as string)
+    //     ),
+    //   };
+    //   localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
+    //   return updatedSections;
+    // });
+
+    // setValue((value) => {
+    //   const mergedData = { ...JSON.parse(value), ...sectionData };
+    //   localStorage?.setItem("resumeData", JSON.stringify(mergedData, null, 2));
+    //   return JSON.stringify(mergedData, null, 2);
+    // });
   };
 
   const removeAddedSection = (
@@ -111,89 +119,109 @@ const Sections = ({
   ) => {
     event.stopPropagation();
 
-    setSections((sections) => {
-      const updatedSections = {
-        default: sections.default.filter((sec) => sec !== section),
-        extra: [section, ...sections.extra],
-      };
-      localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
-      return updatedSections;
+    dispatch({
+      type: "REMOVE_ADDED_SECTION",
+      payload: section,
     });
 
-    setValue((value) => {
-      const JSONValue = JSON.parse(value);
-      const { [section]: _, ...rest } = JSONValue;
-      localStorage?.setItem("resumeData", JSON.stringify(rest, null, 2));
-      return JSON.stringify(rest, null, 2);
-    });
+    // setSections((sections) => {
+    //   const updatedSections = {
+    //     default: sections.default.filter((sec) => sec !== section),
+    //     extra: [section, ...sections.extra],
+    //   };
+    //   localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
+    //   return updatedSections;
+    // });
+
+    // setValue((value) => {
+    //   const JSONValue = JSON.parse(value);
+    //   const { [section]: _, ...rest } = JSONValue;
+    //   localStorage?.setItem("resumeData", JSON.stringify(rest, null, 2));
+    //   return JSON.stringify(rest, null, 2);
+    // });
   };
 
   const resetDefaultSection = (section: string) => {
-    const sectionData = DEFAULT_SECTIONS_JSON[dashToSnakeCase(section)] || {};
-
-    setValue((value) => {
-      const JSONValue = JSON.parse(value);
-      const { [section]: _, ...rest } = JSONValue;
-      const mergedData = { ...rest, ...sectionData };
-      localStorage?.setItem("resumeData", JSON.stringify(mergedData, null, 2));
-      return JSON.stringify(mergedData, null, 2);
+    dispatch({
+      type: "RESET_DEFAULT_SECTION",
+      payload: section,
     });
+
+    // const sectionData = DEFAULT_SECTIONS_JSON[dashToSnakeCase(section)] || {};
+
+    // setValue((value) => {
+    //   const JSONValue = JSON.parse(value);
+    //   const { [section]: _, ...rest } = JSONValue;
+    //   const mergedData = { ...rest, ...sectionData };
+    //   localStorage?.setItem("resumeData", JSON.stringify(mergedData, null, 2));
+    //   return JSON.stringify(mergedData, null, 2);
+    // });
   };
 
   const resetSections = () => {
-    setSections(DEFAULT_SECTIONS);
-    localStorage?.setItem("resumeSections", JSON.stringify(DEFAULT_SECTIONS));
-    setValue(JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2));
-    localStorage?.setItem(
-      "resumeData",
-      JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2)
-    );
+    dispatch({
+      type: "RESET_SECTIONS",
+    });
+
+    // setSections(DEFAULT_SECTIONS);
+    // localStorage?.setItem("resumeSections", JSON.stringify(DEFAULT_SECTIONS));
+    // setValue(JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2));
+    // localStorage?.setItem(
+    //   "resumeData",
+    //   JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2)
+    // );
   };
 
   const addCustomSection = () => {
-    if (customSectionTitle && customSectionTitle.length > 0) {
-      setSections((sections) => {
-        const updatedSections = {
-          ...sections,
-          default: [
-            ...sections.default,
-            titleCaseToDashCase(customSectionTitle) as string,
-          ],
-        };
-
-        localStorage?.setItem(
-          "resumeSections",
-          JSON.stringify(updatedSections)
-        );
-        return updatedSections;
+    if (customSectionTitle.length > 0) {
+      dispatch({
+        type: "ADD_CUSTOM_SECTION",
+        payload: customSectionTitle,
       });
+      // setSections((sections) => {
+      //   const updatedSections = {
+      //     ...sections,
+      //     default: [
+      //       ...sections.default,
+      //       titleCaseToDashCase(customSectionTitle) as string,
+      //     ],
+      //   };
 
-      const customSection: CustomSectionI = custom_section;
+      //   localStorage?.setItem(
+      //     "resumeSections",
+      //     JSON.stringify(updatedSections)
+      //   );
+      //   return updatedSections;
+      // });
 
-      setValue((value) => {
-        const updatedCustomSection: CustomSectionI = {
-          ...customSection,
-          [titleCaseToDashCase(customSectionTitle) as string]: {
-            ...customSection["untitled"],
-            title: customSectionTitle,
-          },
-        };
+      // const customSection: CustomSectionI = custom_section;
 
-        delete updatedCustomSection["untitled"];
+      // setValue((value) => {
+      //   const updatedCustomSection: CustomSectionI = {
+      //     ...customSection,
+      //     [titleCaseToDashCase(customSectionTitle) as string]: {
+      //       ...customSection["untitled"],
+      //       title: customSectionTitle,
+      //     },
+      //   };
 
-        updatedCustomSection[
-          titleCaseToDashCase(customSectionTitle) as string
-        ].title = customSectionTitle;
+      //   delete updatedCustomSection["untitled"];
 
-        const mergedData = { ...JSON.parse(value), ...updatedCustomSection };
-        localStorage?.setItem(
-          "resumeData",
-          JSON.stringify(mergedData, null, 2)
-        );
-        return JSON.stringify(mergedData, null, 2);
+      //   updatedCustomSection[
+      //     titleCaseToDashCase(customSectionTitle) as string
+      //   ].title = customSectionTitle;
+
+      //   const mergedData = { ...JSON.parse(value), ...updatedCustomSection };
+      //   localStorage?.setItem(
+      //     "resumeData",
+      //     JSON.stringify(mergedData, null, 2)
+      //   );
+      //   return JSON.stringify(mergedData, null, 2);
+      // });
+
+      dispatch({
+        type: "CLEAR_CUSTOM_SECTION_TITLE",
       });
-
-      setCustomSectionTitle("");
       addCustomSectionOnClose();
     }
   };
@@ -215,8 +243,8 @@ const Sections = ({
         initialRef={initialAddCustomSectionModalRef}
         isOpen={addCustomSectionIsOpen}
         onClose={addCustomSectionOnClose}
-        customSectionTitle={customSectionTitle}
-        setCustomSectionTitle={setCustomSectionTitle}
+        // customSectionTitle={customSectionTitle}
+        // setCustomSectionTitle={setCustomSectionTitle}
         addCustomSection={addCustomSection}
       />
 

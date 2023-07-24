@@ -3,8 +3,51 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { PiShootingStarLight, PiRainbowCloud } from "react-icons/pi";
 import { LiaHandPeace } from "react-icons/lia";
 import { MdLaptopMac } from "react-icons/md";
+import { CSSProperties, useState } from "react";
+import { useData } from "../Edit/DataProvider";
+
+interface Template {
+  type: string;
+  styles: CSSProperties;
+}
 
 const Templates = () => {
+  const [template, setTemplate] = useState("");
+
+  const { value, sections } = useData();
+
+  console.log({ value, sections });
+
+  const TEMPLATES = {
+    london: {
+      type: "simple",
+      styles: {},
+    },
+    santiago: {
+      type: "simple",
+      styles: {},
+    },
+    sydney: { type: "creative", styles: {} },
+    tokyo: { type: "creative", styles: {} },
+    berlin: { type: "modern", styles: {} },
+    amsterdam: { type: "modern", styles: {} },
+    dublin: { type: "professional", styles: {} },
+    stockholm: { type: "professional", styles: {} },
+  };
+
+  console.log({ template });
+
+  const templatesByType: {
+    [key: string]: Array<{ templateName: string; template: Template }>;
+  } = Object.entries(TEMPLATES).reduce((acc, [templateName, template]) => {
+    const { type } = template;
+    if (!(acc as any)[type]) {
+      (acc as any)[type] = [];
+    }
+    (acc as any)[type].push({ templateName, template });
+    return acc;
+  }, {});
+
   return (
     <Box>
       <Center>
@@ -20,12 +63,12 @@ const Templates = () => {
       >
         <TabList>
           <Tab p='0.5rem 1rem' display={"flex"} gap='1rem' m='0.4rem'>
-            <PiShootingStarLight fontSize={"2rem"} />
-            <Text fontSize={"lg"}> Creative</Text>
-          </Tab>
-          <Tab p='0.5rem 1rem' display={"flex"} gap='1rem' m='0.4rem'>
             <PiRainbowCloud fontSize={"2rem"} />
             <Text fontSize={"lg"}>Simple</Text>
+          </Tab>
+          <Tab p='0.5rem 1rem' display={"flex"} gap='1rem' m='0.4rem'>
+            <PiShootingStarLight fontSize={"2rem"} />
+            <Text fontSize={"lg"}> Creative</Text>
           </Tab>
           <Tab p='0.5rem 1rem' display={"flex"} gap='1rem' m='0.4rem'>
             <LiaHandPeace fontSize={"2rem"} />
@@ -43,18 +86,22 @@ const Templates = () => {
           borderRadius='1px'
         />
         <TabPanels>
-          <TabPanel>
-            <p>one!</p>
-          </TabPanel>
-          <TabPanel>
-            <p>two!</p>
-          </TabPanel>
-          <TabPanel>
-            <p>three!</p>
-          </TabPanel>
-          <TabPanel>
-            <p>four!</p>
-          </TabPanel>
+          <TabPanels>
+            {Object.entries(templatesByType).map(([type, typeTemplates]) => (
+              <TabPanel key={type}>
+                {typeTemplates.map(({ templateName, template }) => (
+                  <Box
+                    key={templateName}
+                    onClick={() => setTemplate(templateName)}
+                  >
+                    <Heading as='h5' size='sm'>
+                      {templateName}
+                    </Heading>
+                  </Box>
+                ))}
+              </TabPanel>
+            ))}
+          </TabPanels>
         </TabPanels>
       </Tabs>
     </Box>

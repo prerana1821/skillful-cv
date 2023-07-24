@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/Layout/NotFound";
 import { Editor } from "./components/Edit/Editor";
 import { Share } from "./components/Share/Share";
+import { DataProvider } from "./components/Edit/DataProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -30,9 +31,11 @@ const router = createBrowserRouter([
 ]);
 
 root.render(
-  <React.StrictMode>
-    <ChakraProvider>
+  // <React.StrictMode>
+  <ChakraProvider>
+    <DataProvider>
       <RouterProvider router={router} />
-    </ChakraProvider>
-  </React.StrictMode>
+    </DataProvider>
+  </ChakraProvider>
+  // </React.StrictMode>
 );

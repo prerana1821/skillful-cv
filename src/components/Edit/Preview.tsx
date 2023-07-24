@@ -16,6 +16,7 @@ import ExtraCurricularActivities from "../ResumePreview/ExtraCurricularActivitie
 import CustomSection from "../ResumePreview/CustomSection";
 import { titleCaseToDashCase } from "../../utils/caseManipulation";
 import { DEFAULT_SECTIONS } from "../../utils/defaults";
+import { useData } from "./DataProvider";
 
 export const getMissingSections = (keys: string[], allSections: string[]) => {
   return keys.filter((key) => !allSections.includes(key));
@@ -24,14 +25,17 @@ export const getMissingSections = (keys: string[], allSections: string[]) => {
 interface PreviewProps {
   sections: { default: string[]; extra: string[] };
   value: any;
-  customSectionTitle?: string;
+  // customSectionTitle?: string;
   ref?: MutableRefObject<any>;
   showHeading?: boolean;
   styles?: any;
 }
 
 const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
-  const { sections, value, customSectionTitle, showHeading, styles } = props;
+  const { sections, showHeading, styles, value } = props;
+  // const { sections, value, customSectionTitle, showHeading, styles } = props;
+
+  const { customSectionTitle } = useData();
 
   const keys = Object.keys(value);
   const allSections = Object.values(DEFAULT_SECTIONS).flat();

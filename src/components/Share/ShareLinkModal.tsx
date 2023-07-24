@@ -12,28 +12,38 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
-import { SetStateAction, Dispatch, useRef } from "react";
+import { useRef, useState } from "react";
+import { useData } from "../Edit/DataProvider";
 
 const CLIENT_BASE_URL = process.env.REACT_APP_CLIENT_BASE_URL;
 
 type ShareLinkModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  isResumeLinkCopied: boolean;
-  setIsResumeLinkCopied: Dispatch<SetStateAction<boolean>>;
-  resumeId: string;
-  copyLink: () => void;
+  // resumeId: string;
 };
 
 export const ShareLinkModal = ({
   isOpen,
   onClose,
-  setIsResumeLinkCopied,
-  isResumeLinkCopied,
-  resumeId,
-  copyLink,
-}: ShareLinkModalProps) => {
+}: // resumeId,
+ShareLinkModalProps) => {
   const initialRef = useRef(null);
+
+  const [isResumeLinkCopied, setIsResumeLinkCopied] = useState(false);
+  const { resumeId } = useData();
+
+  const copyLink = () => {
+    navigator.clipboard
+      .writeText(`${CLIENT_BASE_URL}share/${resumeId}`)
+      .then(() => {
+        console.log("Link copied to clipboard:");
+        setIsResumeLinkCopied(true);
+      })
+      .catch((error) => {
+        console.error("Error copying link to clipboard:", error);
+      });
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

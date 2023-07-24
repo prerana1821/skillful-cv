@@ -1,5 +1,5 @@
 import { PersonalDetailsI } from "../../types/interfaces";
-import { Box, Center, Heading, Text } from "@chakra-ui/react";
+import { Box, Center, Heading, Stack, Text } from "@chakra-ui/react";
 
 const Header = ({ data }: { data: PersonalDetailsI }) => {
   const city = data?.city;
@@ -14,7 +14,29 @@ const Header = ({ data }: { data: PersonalDetailsI }) => {
 
   return (
     <Box my='2'>
-      <Center>
+      {/* ---------------FOR santiago----------------- */}
+      <Stack textAlign={"center"}>
+        <Heading as='h1' fontSize='3xl' textTransform={"uppercase"}>
+          {data?.["first-name"]} {data?.["last-name"]}
+        </Heading>
+        <Heading as='h2' fontSize='md' fontWeight='medium'>
+          {data?.["job-title"]}
+        </Heading>
+        <Heading as='h3' fontSize='sm' fontWeight='medium'>
+          {displayAddress}
+        </Heading>
+      </Stack>
+      <Center display={"flex"} justifyContent={"space-between"}>
+        <Text fontSize={"xs"} my='2'>
+          {phoneNumber}
+        </Text>
+        <Text fontSize={"xs"} my='2'>
+          {email}
+        </Text>
+      </Center>
+      {/* ---------------OR----------------- */}
+      {/* ---------------FOR london----------------- */}
+      {/* <Center>
         <Heading as='h1' fontSize='2xl'>
           {data?.["first-name"]} {data?.["last-name"]}
           {data?.["job-title"] &&
@@ -29,7 +51,7 @@ const Header = ({ data }: { data: PersonalDetailsI }) => {
           {phoneNumber && `, ${phoneNumber}`}
           {email && `, ${email}`}
         </Text>
-      </Center>
+      </Center> */}
     </Box>
   );
 };

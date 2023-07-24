@@ -36,6 +36,7 @@ import {
   PersonalDetailsI,
   ProfessionalExperience,
 } from "../../types/interfaces";
+import { useData } from "./DataProvider";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -44,27 +45,29 @@ ace.config.setModuleUrl(
   "https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/worker-json.js"
 );
 
-type EditorJSONProps = {
-  value: string;
-  selectedText: string;
-  setValue: Dispatch<SetStateAction<string>>;
-  setSelectedText: Dispatch<SetStateAction<string>>;
-};
+// type EditorJSONProps = {
+//   value: string;
+//   selectedText: string;
+//   setValue: Dispatch<SetStateAction<string>>;
+//   setSelectedText: Dispatch<SetStateAction<string>>;
+// };
 
-const EditorJSON = ({
-  value,
-  setValue,
-  selectedText,
-  setSelectedText,
-}: EditorJSONProps) => {
+const EditorJSON = () => {
   const aceEditor = useRef<AceEditor | null>(null);
+
+  const { value, selectedText, dispatch } = useData();
 
   const [selectedOption, setSelectedOption] = useState("");
 
   function onChange(newValue: string) {
     if (validJSON(newValue)) {
-      setValue(newValue);
-      localStorage?.setItem("resumeData", newValue);
+      // setValue(newValue);
+      dispatch({
+        type: "ADD_RESUME_DATA",
+        payload: newValue,
+      });
+      // setValue(newValue);
+      // localStorage?.setItem("resumeData", newValue);
     }
   }
 
@@ -151,11 +154,15 @@ const EditorJSON = ({
             break;
         }
 
-        setValue(JSON.stringify(valueFromPrompt, null, 2));
-        localStorage?.setItem(
-          "resumeData",
-          JSON.stringify(valueFromPrompt, null, 2)
-        );
+        dispatch({
+          type: "ADD_RESUME_DATA",
+          payload: JSON.stringify(valueFromPrompt, null, 2),
+        });
+        // setValue(JSON.stringify(valueFromPrompt, null, 2));
+        // localStorage?.setItem(
+        //   "resumeData",
+        //   JSON.stringify(valueFromPrompt, null, 2)
+        // );
       }
     } catch (error) {
       console.error(error);
@@ -174,8 +181,7 @@ const EditorJSON = ({
         <Popover>
           <PopoverTrigger>
             <div>
-              {selectedText &&
-              selectedText.length > 0 &&
+              {selectedText.length > 0 &&
               isTextInDescription(selectedText, JSON.parse(value)) ? (
                 <Image
                   src='/ai-suggest.gif'
@@ -228,7 +234,11 @@ const EditorJSON = ({
         showGutter={true}
         onSelectionChange={(v, e) => {
           if (aceEditor && aceEditor.current) {
-            setSelectedText(aceEditor?.current?.editor.getSelectedText());
+            dispatch({
+              type: "ADD_SELECTED_TEXT",
+              payload: aceEditor?.current?.editor.getSelectedText(),
+            });
+            // setSelectedText(aceEditor?.current?.editor.getSelectedText());
           }
         }}
         highlightActiveLine={true}

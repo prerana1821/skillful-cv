@@ -13,19 +13,22 @@ import Navbar from "../Layout/Navbar";
 import ShortUniqueId from "short-unique-id";
 import axios from "axios";
 import { ShareLinkModal } from "../Share/ShareLinkModal";
+import { useData } from "./DataProvider";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const Editor = () => {
-  const [value, setValue] = useState(
-    JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2)
-  );
-  const [sections, setSections] = useState(DEFAULT_SECTIONS);
-  const [customSectionTitle, setCustomSectionTitle] = useState("");
-  const [selectedText, setSelectedText] = useState<string>("");
-  const [resumeId, setResumeId] = useState("");
+  // const [value, setValue] = useState(
+  //   JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2)
+  // );
+  // const [sections, setSections] = useState(DEFAULT_SECTIONS);
+  // const [customSectionTitle, setCustomSectionTitle] = useState("");
+  // const [selectedText, setSelectedText] = useState<string>("");
+  // const [resumeId, setResumeId] = useState("");
 
-  const [isResumeLinkCopied, setIsResumeLinkCopied] = useState(false);
+  const { sections, dispatch, value } = useData();
+
+  console.log({ value, sections });
 
   const componentRef = useRef(null);
 
@@ -44,22 +47,40 @@ export const Editor = () => {
     const updatedSections = [...sections.default];
     updatedSections.splice(dragIndex, 1);
     updatedSections.splice(hoverIndex, 0, draggedCard);
-    setSections((sections) => {
-      const updatedSects = { ...sections, default: updatedSections };
-      localStorage?.setItem("resumeSections", JSON.stringify(updatedSects));
-      return updatedSects;
+    dispatch({
+      type: "UPDATE_SECTIONS",
+      payload: updatedSections,
     });
+    // localStorage?.setItem(
+    //   "resumeSections",
+    //   JSON.stringify({ ...sections, default: updatedSections })
+    // );
+    // setSections((sections) => {
+    //   const updatedSects = { ...sections, default: updatedSections };
+    //   return updatedSects;
+    // });
+    // setSections((sections) => {
+    //   const updatedSects = { ...sections, default: updatedSections };
+    //   localStorage?.setItem("resumeSections", JSON.stringify(updatedSects));
+    //   return updatedSects;
+    // });
   };
 
   useEffect(() => {
     try {
+      // TODO: add loading status
       const resumeData = localStorage?.getItem("resumeData");
       const resumeSections = localStorage?.getItem("resumeSections");
       if (resumeData) {
-        setValue(resumeData);
+        dispatch({ type: "ADD_RESUME_DATA", payload: resumeData });
+        //  setValue(resumeData);
       }
       if (resumeSections) {
-        setSections(JSON.parse(resumeSections));
+        dispatch({
+          type: "ADD_SECTIONS",
+          payload: JSON.parse(resumeSections),
+        });
+        //  setSections(JSON.parse(resumeSections));
       }
     } catch (error) {
       console.error(
@@ -87,18 +108,6 @@ export const Editor = () => {
     );
   }, []);
 
-  const copyLink = () => {
-    navigator.clipboard
-      .writeText(`/share/${resumeId}`)
-      .then(() => {
-        console.log("Link copied to clipboard:");
-        setIsResumeLinkCopied(true);
-      })
-      .catch((error) => {
-        console.error("Error copying link to clipboard:", error);
-      });
-  };
-
   const shareResume = async () => {
     const uid = new ShortUniqueId({ length: 10 });
     const uniqueId = uid();
@@ -112,13 +121,27 @@ export const Editor = () => {
       });
       if (response.status === 200) {
         const resumeId = response.data.resumeId;
-        setResumeId(resumeId);
+        // setResumeId(resumeId);
+        dispatch({ type: "ADD_RESUME_ID", payload: resumeId });
+        // setResumeId(resumeId);
         shareLinkOnOpen();
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const updatedSections = {
+      default: sections.default,
+      extra: sections.extra,
+    };
+    localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
+  }, [sections]);
+
+  useEffect(() => {
+    localStorage?.setItem("resumeData", value);
+  }, [value]);
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -137,10 +160,7 @@ export const Editor = () => {
       <ShareLinkModal
         isOpen={shareLinkIsOpen}
         onClose={shareLinkOnClose}
-        isResumeLinkCopied={isResumeLinkCopied}
-        setIsResumeLinkCopied={setIsResumeLinkCopied}
-        resumeId={resumeId}
-        copyLink={copyLink}
+        // resumeId={resumeId}
       />
 
       <Box overflowY='hidden' mt='1rem' mb='0.5rem'>
@@ -150,26 +170,26 @@ export const Editor = () => {
           height={{ sm: "88vh" }}
         >
           <Sections
-            sections={sections}
-            setSections={setSections}
-            customSectionTitle={customSectionTitle}
-            setCustomSectionTitle={setCustomSectionTitle}
-            setValue={setValue}
+            // sections={sections}
+            // setSections={setSections}
+            // customSectionTitle={customSectionTitle}
+            // setCustomSectionTitle={setCustomSectionTitle}
+            // setValue={setValue}
             moveCard={moveCard}
           />
 
           <EditorJSON
-            value={value}
-            setValue={setValue}
-            selectedText={selectedText}
-            setSelectedText={setSelectedText}
+          // value={value}
+          // setValue={setValue}
+          // selectedText={selectedText}
+          // setSelectedText={setSelectedText}
           />
 
           <Preview
             showHeading
             sections={sections}
             value={JSON.parse(value)}
-            customSectionTitle={customSectionTitle}
+            // customSectionTitle={customSectionTitle}
             ref={componentRef}
           />
         </Flex>
