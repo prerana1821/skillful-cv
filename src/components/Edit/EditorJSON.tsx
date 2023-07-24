@@ -153,7 +153,10 @@ const EditorJSON = ({
         }
 
         setValue(JSON.stringify(valueFromPrompt, null, 2));
-        // TODO: add localstorage
+        localStorage?.setItem(
+          "resumeData",
+          JSON.stringify(valueFromPrompt, null, 2)
+        );
       }
     } catch (error) {
       console.error(error);
