@@ -1,13 +1,11 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
 import Preview from "./Preview";
 import Sections from "./Sections";
-import INITIAL_DEFAULT_RESUME from "../../data/default-resume.json";
 import ReactToPrint from "react-to-print";
 import { PiDownloadSimple } from "react-icons/pi";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { DEFAULT_SECTIONS } from "../../utils/defaults";
 import EditorJSON from "./EditorJSON";
 import Navbar from "../Layout/Navbar";
 import ShortUniqueId from "short-unique-id";

@@ -3,8 +3,9 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { PiShootingStarLight, PiRainbowCloud } from "react-icons/pi";
 import { LiaHandPeace } from "react-icons/lia";
 import { MdLaptopMac } from "react-icons/md";
-import { CSSProperties, useState } from "react";
+import { CSSProperties } from "react";
 import { useData } from "../Edit/DataProvider";
+import { TEMPLATES } from "../../utils/defaults";
 
 interface Template {
   type: string;
@@ -12,30 +13,7 @@ interface Template {
 }
 
 const Templates = () => {
-  const [template, setTemplate] = useState("");
-
-  const { value, sections } = useData();
-
-  console.log({ value, sections });
-
-  const TEMPLATES = {
-    london: {
-      type: "simple",
-      styles: {},
-    },
-    santiago: {
-      type: "simple",
-      styles: {},
-    },
-    sydney: { type: "creative", styles: {} },
-    tokyo: { type: "creative", styles: {} },
-    berlin: { type: "modern", styles: {} },
-    amsterdam: { type: "modern", styles: {} },
-    dublin: { type: "professional", styles: {} },
-    stockholm: { type: "professional", styles: {} },
-  };
-
-  console.log({ template });
+  const { dispatch } = useData();
 
   const templatesByType: {
     [key: string]: Array<{ templateName: string; template: Template }>;
@@ -92,7 +70,12 @@ const Templates = () => {
                 {typeTemplates.map(({ templateName, template }) => (
                   <Box
                     key={templateName}
-                    onClick={() => setTemplate(templateName)}
+                    onClick={() =>
+                      dispatch({
+                        type: "SET_TEMPLATE",
+                        payload: templateName,
+                      })
+                    }
                   >
                     <Heading as='h5' size='sm'>
                       {templateName}

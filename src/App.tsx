@@ -5,8 +5,6 @@ import Templates from "./components/Templates/Templates";
 import Footer from "./components/Layout/Footer";
 
 function App() {
-  console.log("Hello");
-
   return (
     <Box m={"0 10%"}>
       <Navbar showColorMode />

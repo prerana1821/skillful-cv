@@ -72,3 +72,20 @@ export const DEFAULT_SECTIONS_JSON: { [key: string]: any } = {
   references,
   skills,
 };
+
+export const TEMPLATES = {
+  london: {
+    type: "simple",
+    styles: {},
+  },
+  santiago: {
+    type: "simple",
+    styles: {},
+  },
+  sydney: { type: "creative", styles: {} },
+  tokyo: { type: "creative", styles: {} },
+  berlin: { type: "modern", styles: {} },
+  amsterdam: { type: "modern", styles: {} },
+  dublin: { type: "professional", styles: {} },
+  stockholm: { type: "professional", styles: {} },
+};

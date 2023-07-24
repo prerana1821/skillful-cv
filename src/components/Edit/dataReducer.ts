@@ -7,8 +7,12 @@ import INITIAL_DEFAULT_RESUME from "../../data/default-resume.json";
 import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "../../utils/defaults";
 import { CustomSectionI } from "../../types/interfaces";
 import custom_section from "../../data/custom-section.json";
+import { DataReducerAction, InitialResumeDataState } from "./data.types";
 
-export const dataReducer = (state: any, action: any) => {
+export const dataReducer = (
+  state: InitialResumeDataState,
+  action: DataReducerAction
+): InitialResumeDataState => {
   const JSONValue = JSON.parse(state.value);
   const { [action.payload]: _, ...rest } = JSONValue;
 
@@ -40,8 +44,6 @@ export const dataReducer = (state: any, action: any) => {
     case "RESET_DEFAULT_SECTION":
       const sectionData =
         DEFAULT_SECTIONS_JSON[dashToSnakeCase(action.payload)] || {};
-      //   const JSONValue = JSON.parse(state.value);
-      //   const { [action.payload]: _, ...rest } = JSONValue;
       const mergedData = { ...rest, ...sectionData };
       return { ...state, value: JSON.stringify(mergedData, null, 2) };
     case "RESET_SECTIONS":
@@ -110,8 +112,10 @@ export const dataReducer = (state: any, action: any) => {
         ...state,
         status: action.payload,
       };
+    case "SET_TEMPLATE":
+      return { ...state, template: action.payload };
     default:
       console.log("Something went wrong");
-      break;
+      return state;
   }
 };

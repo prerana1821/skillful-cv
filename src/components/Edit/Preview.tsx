@@ -25,15 +25,13 @@ export const getMissingSections = (keys: string[], allSections: string[]) => {
 interface PreviewProps {
   sections: { default: string[]; extra: string[] };
   value: any;
-  // customSectionTitle?: string;
-  ref?: MutableRefObject<any>;
   showHeading?: boolean;
+  ref?: MutableRefObject<any>;
   styles?: any;
 }
 
 const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
   const { sections, showHeading, styles, value } = props;
-  // const { sections, value, customSectionTitle, showHeading, styles } = props;
 
   const { customSectionTitle } = useData();
 

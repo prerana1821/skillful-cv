@@ -6,22 +6,15 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { SetStateAction, Dispatch } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { GrPowerReset } from "react-icons/gr";
-import custom_section from "../../data/custom-section.json";
-import INITIAL_DEFAULT_RESUME from "../../data/default-resume.json";
 import SectionCard from "../Sections/SectionCard";
-
 import { useRef, MouseEvent } from "react";
 import {
   titleCaseToSnakeCase,
-  titleCaseToDashCase,
   dashCaseToTitleCase,
-  dashToSnakeCase,
 } from "../../utils/caseManipulation";
-import { CustomSectionI } from "../../types/interfaces";
-import { DEFAULT_SECTIONS, DEFAULT_SECTIONS_JSON } from "../../utils/defaults";
+import { DEFAULT_SECTIONS_JSON } from "../../utils/defaults";
 import { AddCustomSectionModal } from "../Sections/AddCustomSectionModal";
 import AlertResetSectionsModal from "../Sections/AlertResetSectionsModal";
 import { useData } from "./DataProvider";

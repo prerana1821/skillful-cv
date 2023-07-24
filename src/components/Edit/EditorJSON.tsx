@@ -7,7 +7,7 @@ import {
   ListIcon,
   ListItem,
 } from "@chakra-ui/react";
-import { SetStateAction, Dispatch, useRef } from "react";
+import { useRef } from "react";
 import { validJSON } from "../../utils/validJSON";
 import AceEditor from "react-ace";
 import ace from "ace-builds/src-noconflict/ace";
@@ -17,7 +17,6 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import {
   findKeyAndObjectForSelectedText,
   isTextInDescription,
-  isValidSelection,
 } from "../../utils/hasValidCharacters";
 import {
   Popover,
