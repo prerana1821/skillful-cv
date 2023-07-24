@@ -11,7 +11,6 @@ import links from "../data/links.json";
 import references from "../data/references.json";
 import skills from "../data/skills.json";
 
-import { HiLightBulb } from "react-icons/hi";
 import { RiQuillPenFill } from "react-icons/ri";
 import { PiSparkleFill } from "react-icons/pi";
 import { IoMdColorWand } from "react-icons/io";
@@ -52,11 +51,6 @@ export const AI_SUGGESTIONS_OPTIONS = [
     icon: BiSolidBriefcase,
   },
   { value: "rephrase", label: "Rephrase", icon: FaPencilAlt },
-  {
-    value: "content-generation",
-    label: "Content generation",
-    icon: HiLightBulb,
-  },
   {
     value: "language-enhancement",
     label: "Language enhancement",

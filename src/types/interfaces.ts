@@ -1,36 +1,3 @@
-// export type AllSectionsI =
-//   | {
-//       "personal-details"?: PersonalDetailsI;
-//     }
-//   | ProfileSummaryI
-//   | ProfessionalExperienceI
-//   | ProfessionalExperienceI
-//   | ExtraCurricularActivitiesI
-//   | EducationI
-//   | CoursesI
-//   | InternshipsI
-//   | LinksI
-//   | SectionWithListTextI
-//   | SkillsI
-//   | LanguagesI
-//   | ReferencesI
-//   | CustomSectionI;
-
-// // export interface AllSectionsI {
-// //   "personal-details"?: PersonalDetailsI;
-// //   "profile-summary"?: ProfileSummaryI;
-// //   "professional-experience"?: ProfessionalExperienceI;
-// //   "extra-curricular-activities"?: ExtraCurricularActivitiesI;
-// //   education?: EducationI;
-// //   courses?: CoursesI;
-// //   internships?: InternshipsI;
-// //   links?: LinksI;
-// //   hobbies?: SectionWithListTextI;
-// //   skills?: SkillsI;
-// //   languages?: LanguagesI;
-// //   references?: ReferencesI;
-// // }
-
 export interface PersonalDetailsI {
   "first-name"?: string;
   "last-name"?: string;
@@ -209,37 +176,6 @@ export interface CustomSectionItem {
 }
 
 // Value Object Interface
-
-// export interface ValueI {
-//   "personal-details"?: PersonalDetails;
-//   'profile-summary'?: ProfileSummary;
-//   education?: Education[];
-//   courses?: Course[];
-//   "professional-experience"?: ProfessionalExperience[];
-//   internships?: Internship[];
-//   links?: Link[];
-//   skills?: Skill[];
-//   hobbies?: string[];
-//   languages?: Language[];
-//   references?: Reference[];
-//   "extra-curricular-activities"?: ExtraCurricularActivity[];
-//   [key: string]:
-//     | CustomSectionItem
-//     | undefined
-//     | PersonalDetails
-//     | ProfileSummary
-//     | Education[]
-//     | Course[]
-//     | ProfessionalExperience[]
-//     | Internship[]
-//     | Link[]
-//     | Skill[]
-//     | string[]
-//     | Language[]
-//     | Reference[]
-//     | ExtraCurricularActivity[]
-//     | undefined;
-// }
 
 export interface ListItemI {
   title?: string;

@@ -41,9 +41,6 @@ export const Editor = () => {
     const updatedSections = [...sections.default];
     updatedSections.splice(dragIndex, 1);
     updatedSections.splice(hoverIndex, 0, draggedCard);
-    // console.log({ updatedSections });
-    // console.log(JSON.parse(value));
-    // console.log(Object.keys(JSON.parse(value)).sort());
     setSections((sections) => {
       const updatedSects = { ...sections, default: updatedSections };
       localStorage?.setItem("resumeSections", JSON.stringify(updatedSects));
@@ -114,7 +111,6 @@ export const Editor = () => {
         const resumeId = response.data.resumeId;
         setResumeId(resumeId);
         shareLinkOnOpen();
-        // window.open(`/share/${resumeId}`);
       }
     } catch (error) {
       console.log(error);

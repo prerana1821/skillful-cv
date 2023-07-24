@@ -35,9 +35,7 @@ import {
   Education,
   PersonalDetailsI,
   ProfessionalExperience,
-  ValueI,
 } from "../../types/interfaces";
-import { dashCaseToTitleCase } from "../../utils/caseManipulation";
 
 ace.config.setModuleUrl(
   "ace/mode/json_worker",
@@ -77,6 +75,8 @@ const EditorJSON = ({
       JSON.parse(value)
     );
 
+    console.log(selectedValue);
+
     const valueFromPrompt = JSON.parse(value);
     const personalDetails: PersonalDetailsI =
       valueFromPrompt["personal-details"];
@@ -99,12 +99,13 @@ const EditorJSON = ({
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/ai-suggestions/keyword-suggestions",
+        "http://localhost:4000/ai-suggestions",
         {
           name: personalDetails["first-name"],
           jobTitle: personalDetails["job-title"],
           country: personalDetails["country"],
           key: selectedValue?.key,
+          selectedOption,
           selectedText:
             selectedValue?.object.description || selectedValue?.selectedItem,
           selectedObject: selectedObjectWithoutDescList,
@@ -114,7 +115,7 @@ const EditorJSON = ({
         // const generatedText = { data: "Hello World" };
         const generatedText = response.data;
         console.log({ generatedText });
-        valueFromPrompt[selectedValue!.key].description = generatedText.data;
+        // valueFromPrompt[selectedValue!.key].description = generatedText.data;
 
         switch (selectedValue?.key) {
           case "profile-summary":
@@ -151,9 +152,7 @@ const EditorJSON = ({
             break;
         }
 
-        setValue((prevState) => {
-          return JSON.stringify(valueFromPrompt, null, 2);
-        });
+        setValue(JSON.stringify(valueFromPrompt, null, 2));
         // TODO: add localstorage
       }
     } catch (error) {
@@ -175,7 +174,7 @@ const EditorJSON = ({
             <div>
               {selectedText &&
               selectedText.length > 0 &&
-              isValidSelection(selectedText) ? (
+              isTextInDescription(selectedText, JSON.parse(value)) ? (
                 <Image
                   src='/ai-suggest.gif'
                   alt='AI Suggestion'
