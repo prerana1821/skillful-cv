@@ -17,6 +17,33 @@ import { IoMdColorWand } from "react-icons/io";
 import { FaPencilAlt } from "react-icons/fa";
 import { BiSolidBriefcase } from "react-icons/bi";
 
+import { Header } from "../components/ResumePreview/Header";
+import Links from "../components/ResumePreview/Links";
+import ProfileSummary from "../components/ResumePreview/ProfileSummary";
+import Education from "../components/ResumePreview/Education";
+import ProfessionalExperience from "../components/ResumePreview/ProfessionalExperience";
+import Hobbies from "../components/ResumePreview/Hobbies";
+import Courses from "../components/ResumePreview/Courses";
+import {
+  LondonCourses,
+  LondonEducation,
+  LondonHeader,
+  LondonLinks,
+  LondonHobbies,
+  LondonProfessionalExperience,
+  LondonProfileSummary,
+  LondonSkills,
+  LondonLanguages,
+  LondonInternships,
+  LondonExtraCurricularActivities,
+  LondonReferences,
+} from "../components/ResumePreview/London";
+import Skills from "../components/ResumePreview/Skills";
+import Languages from "../components/ResumePreview/Languages";
+import Internships from "../components/ResumePreview/Internships";
+import ExtraCurricularActivities from "../components/ResumePreview/ExtraCurricularActivities";
+import References from "../components/ResumePreview/References";
+
 export const DEFAULT_SECTIONS = {
   default: ["personal-details"],
   extra: [
@@ -73,19 +100,141 @@ export const DEFAULT_SECTIONS_JSON: { [key: string]: any } = {
   skills,
 };
 
-export const TEMPLATES = {
+export const TEMPLATE_TYPES = {
   london: {
     type: "simple",
-    styles: {},
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+    },
   },
   santiago: {
     type: "simple",
-    styles: {},
+    component: {
+      "personal-details": Header,
+      links: Links,
+      "profile-summary": ProfileSummary,
+      education: Education,
+      "professional-experience": ProfessionalExperience,
+      hobbies: Hobbies,
+      courses: Courses,
+      skills: Skills,
+      languages: Languages,
+      internships: Internships,
+      "extra-curricular-activities": ExtraCurricularActivities,
+      references: References,
+    },
   },
-  sydney: { type: "creative", styles: {} },
-  tokyo: { type: "creative", styles: {} },
-  berlin: { type: "modern", styles: {} },
-  amsterdam: { type: "modern", styles: {} },
-  dublin: { type: "professional", styles: {} },
-  stockholm: { type: "professional", styles: {} },
+  sydney: {
+    type: "creative",
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+    },
+  },
+  tokyo: {
+    type: "creative",
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+    },
+  },
+  berlin: {
+    type: "modern",
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+    },
+  },
+  amsterdam: {
+    type: "modern",
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+    },
+  },
+  dublin: {
+    type: "professional",
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+    },
+  },
+  stockholm: {
+    type: "professional",
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+    },
+  },
 };

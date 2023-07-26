@@ -15,7 +15,7 @@ export const DataContext = createContext<InitialResumeDataContext>(
 const initialResumeDataState: InitialResumeDataState = {
   value: JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2),
   sections: DEFAULT_SECTIONS,
-  template: "",
+  template: "santiago",
   customSectionTitle: "",
   selectedText: "",
   resumeId: "",

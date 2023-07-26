@@ -11,11 +11,11 @@ import Navbar from "../Layout/Navbar";
 
 import { ShareLinkModal } from "../Share/ShareLinkModal";
 import { useData } from "./DataProvider";
+import { ShareQRCodeModal } from "../Share/ShareQRCodeModal";
+import { SelectTemplateModal } from "../Templates/SelectTemplateModal";
 
 export const Editor = () => {
   const { sections, dispatch, value } = useData();
-
-  console.log({ value, sections });
 
   const componentRef = useRef(null);
 
@@ -23,6 +23,18 @@ export const Editor = () => {
     isOpen: shareLinkIsOpen,
     onOpen: shareLinkOnOpen,
     onClose: shareLinkOnClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: shareQRCodeIsOpen,
+    onOpen: shareQRCodeOnOpen,
+    onClose: shareQRCodeOnClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: selectTemplateIsOpen,
+    onOpen: selectTemplateOnOpen,
+    onClose: selectTemplateOnClose,
   } = useDisclosure();
 
   const reactToPrintContent = useCallback(() => {
@@ -56,10 +68,10 @@ export const Editor = () => {
       <Button
         variant='solid'
         display={"flex"}
+        alignItems={"center"}
         gap={"0.3rem"}
         backgroundColor='#f50057'
         color='#fff'
-        alignItems={"center"}
         fontSize={"sm"}
         _hover={{ backgroundColor: "none" }}
       >
@@ -86,6 +98,8 @@ export const Editor = () => {
       <Navbar
         styles={{ boxShadow: "md" }}
         shareLinkOnOpen={shareLinkOnOpen}
+        shareQRCodeOnOpen={shareQRCodeOnOpen}
+        selectTemplateOnOpen={selectTemplateOnOpen}
         downloadComp={
           <ReactToPrint
             content={reactToPrintContent}
@@ -96,6 +110,15 @@ export const Editor = () => {
       />
 
       <ShareLinkModal isOpen={shareLinkIsOpen} onClose={shareLinkOnClose} />
+      <ShareQRCodeModal
+        isOpen={shareQRCodeIsOpen}
+        onClose={shareQRCodeOnClose}
+      />
+
+      <SelectTemplateModal
+        isOpen={selectTemplateIsOpen}
+        onClose={selectTemplateOnClose}
+      />
 
       <Box overflowY='hidden' mt='1rem' mb='0.5rem'>
         <Flex

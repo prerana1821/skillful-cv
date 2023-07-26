@@ -56,7 +56,7 @@ export const ShareLinkModal = ({ isOpen, onClose }: ShareLinkModalProps) => {
             <FormLabel>Copy this URL</FormLabel>
             <Input
               ref={initialRef}
-              value={`${CLIENT_BASE_URL}${resumeId}`}
+              value={`${CLIENT_BASE_URL}share/${resumeId}`}
               border={
                 isResumeLinkCopied ? "2px solid #f50057" : "solid gray.300"
               }
