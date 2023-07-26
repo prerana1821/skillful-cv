@@ -35,6 +35,8 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
 
   const { customSectionTitle, template } = useData();
 
+  console.log(template);
+
   const keys = Object.keys(value);
   const allSections = Object.values(DEFAULT_SECTIONS).flat();
 
@@ -166,12 +168,16 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
                 )
               );
             case titleCaseToDashCase(customSectionTitle):
+              const CustomSectionComponent =
+                TemplateComponent["custom-section"] || CustomSection;
+              console.log(CustomSectionComponent);
+
               if (customSectionTitle) {
                 return (
                   value?.[
                     titleCaseToDashCase(customSectionTitle) as string
                   ] && (
-                    <CustomSection
+                    <CustomSectionComponent
                       data={
                         value?.[
                           titleCaseToDashCase(customSectionTitle) as string
@@ -188,10 +194,12 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
         })}
         {/* Render CustomSection for keys not in DEFAULT_SECTIONS */}
         {missingSections.map((key: string) => {
+          const CustomSectionComponent =
+            TemplateComponent["custom-section"] || CustomSection;
           if (sections.default.includes(key) && customSectionTitle !== key) {
             return (
               value?.[titleCaseToDashCase(key) as string] && (
-                <CustomSection
+                <CustomSectionComponent
                   data={value?.[titleCaseToDashCase(key) as string]}
                 />
               )

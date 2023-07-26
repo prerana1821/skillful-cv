@@ -1,26 +1,29 @@
 import {
   Box,
+  Button,
   Center,
   Flex,
-  Grid,
   Heading,
   Image,
   TabIndicator,
   Text,
 } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import { PiShootingStarLight, PiRainbowCloud } from "react-icons/pi";
+import { PiRainbowCloud, PiShootingStarLight } from "react-icons/pi";
 import { LiaHandPeace } from "react-icons/lia";
 import { MdLaptopMac } from "react-icons/md";
-import { CSSProperties } from "react";
+import { CSSProperties, useState } from "react";
 import { useData } from "../Edit/DataProvider";
 import { TEMPLATE_TYPES } from "../../utils/defaults";
 import { dashCaseToTitleCase } from "../../utils/caseManipulation";
 import { useNavigate } from "react-router-dom";
+import { IconType } from "react-icons/lib";
 
 interface Template {
   type: string;
   styles: CSSProperties;
+  avaliable: boolean;
+  component: any;
 }
 
 const Templates = ({
@@ -32,15 +35,37 @@ const Templates = ({
   const { dispatch } = useData();
 
   const templatesByType: {
-    [key: string]: Array<{ templateName: string; template: Template }>;
+    [key: string]: Array<{
+      templateName: string;
+      typeIcon: IconType;
+      template: Template;
+    }>;
   } = Object.entries(TEMPLATE_TYPES).reduce((acc, [templateName, template]) => {
-    const { type } = template;
+    const { type, typeIcon, avaliable } = template;
     if (!(acc as any)[type]) {
       (acc as any)[type] = [];
     }
-    (acc as any)[type].push({ templateName, template });
+    (acc as any)[type].push({ templateName, template, typeIcon, avaliable });
     return acc;
   }, {});
+
+  // const tabs = Object.entries(TEMPLATE_TYPES).map(([key, template]) => ({
+  //   label: key,
+  //   icon: template.typeIcon,
+  //   fontSize: orientation === "vertical" ? "1.2rem" : "2rem",
+  // }));
+
+  const [isHovering, setIsHovering] = useState<string | null>(null);
+
+  const handleMouseEnter = (templateName: string) => {
+    setIsHovering(templateName);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(null);
+  };
+
+  // TODO: save template info to local storage
 
   return (
     <Box>
@@ -62,6 +87,15 @@ const Templates = ({
           alignItems={orientation === "vertical" ? "flex-start" : "initial"}
           justifyContent={orientation === "vertical" ? "flex-start" : "center"}
         >
+          {/* {tabs.map((tab, index) => (
+            <TemplateTypeTab
+              key={index}
+              label={tab.label}
+              icon={tab.icon}
+              fontSize={tab.fontSize}
+              orientation={orientation}
+            />
+          ))} */}
           <Tab
             p={orientation === "vertical" ? "0.2rem" : "0.5rem 1rem"}
             display={"flex"}
@@ -130,28 +164,21 @@ const Templates = ({
                   my={orientation === "vertical" ? "0" : "1rem"}
                   justifyContent={"center"}
                   gap='3rem'
-                  // my={orientation === "vertical" ? "0" : "1rem"}
-                  // gap='2rem'
-                  // templateColumns={{
-                  //   base: "repeat(1, 1fr)",
-                  //   md: "repeat(2, 1fr)",
-                  // }}
                 >
-                  {/* <Box
-                    maxH={orientation === "vertical" ? "500px" : "auto"} // Set the maximum height for vertical scroll
-                    // width={"100%"}
-                    overflowY={orientation === "vertical" ? "auto" : "visible"} // Enable vertical scroll for vertical orientation
-                  > */}
                   {typeTemplates.map(({ templateName, template }) => (
                     <Box
                       key={templateName}
                       onClick={() => {
-                        dispatch({
-                          type: "SET_TEMPLATE",
-                          payload: templateName,
-                        });
-                        navigate("/editor");
+                        if (orientation === "vertical" && template.avaliable) {
+                          dispatch({
+                            type: "SET_TEMPLATE",
+                            payload: templateName,
+                          });
+                        }
                       }}
+                      position='relative'
+                      onMouseEnter={() => handleMouseEnter(templateName)}
+                      onMouseLeave={handleMouseLeave}
                       cursor={"pointer"}
                     >
                       <Image
@@ -168,9 +195,42 @@ const Templates = ({
                       <Heading as='h5' size='sm' my='1rem'>
                         {dashCaseToTitleCase(templateName)}
                       </Heading>
+                      {isHovering === templateName &&
+                        orientation !== "vertical" && (
+                          <Button
+                            position='absolute'
+                            bottom='1rem'
+                            left='50%'
+                            top='40%'
+                            transform='translateX(-50%)'
+                            variant='solid'
+                            backgroundColor={
+                              template.avaliable ? "#f50057" : "gray"
+                            }
+                            color='#fff'
+                            _hover={{
+                              backgroundColor: template.avaliable
+                                ? "none"
+                                : "gray",
+                            }}
+                            onClick={() => {
+                              if (template.avaliable) {
+                                dispatch({
+                                  type: "SET_TEMPLATE",
+                                  payload: templateName,
+                                });
+                                navigate("/editor");
+                              }
+                            }}
+                            disabled={!template.avaliable}
+                          >
+                            {template.avaliable
+                              ? "Use This Template"
+                              : "Coming Soon ..."}
+                          </Button>
+                        )}
                     </Box>
                   ))}
-                  {/* </Box> */}
                 </Flex>
               </TabPanel>
             ))}

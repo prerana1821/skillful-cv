@@ -72,8 +72,8 @@ export const Editor = () => {
         gap={"0.3rem"}
         backgroundColor='#f50057'
         color='#fff'
-        fontSize={"sm"}
         _hover={{ backgroundColor: "none" }}
+        fontSize={"sm"}
       >
         <PiDownloadSimple fontSize='md' />
         Download

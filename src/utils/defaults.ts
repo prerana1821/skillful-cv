@@ -12,7 +12,11 @@ import references from "../data/references.json";
 import skills from "../data/skills.json";
 
 import { RiQuillPenFill } from "react-icons/ri";
-import { PiSparkleFill } from "react-icons/pi";
+import {
+  PiRainbowCloud,
+  PiShootingStarLight,
+  PiSparkleFill,
+} from "react-icons/pi";
 import { IoMdColorWand } from "react-icons/io";
 import { FaPencilAlt } from "react-icons/fa";
 import { BiSolidBriefcase } from "react-icons/bi";
@@ -37,12 +41,16 @@ import {
   LondonInternships,
   LondonExtraCurricularActivities,
   LondonReferences,
+  LondonCustomSection,
 } from "../components/ResumePreview/London";
 import Skills from "../components/ResumePreview/Skills";
 import Languages from "../components/ResumePreview/Languages";
 import Internships from "../components/ResumePreview/Internships";
 import ExtraCurricularActivities from "../components/ResumePreview/ExtraCurricularActivities";
 import References from "../components/ResumePreview/References";
+import { LiaHandPeace } from "react-icons/lia";
+import { MdLaptopMac } from "react-icons/md";
+import CustomSection from "../components/ResumePreview/CustomSection";
 
 export const DEFAULT_SECTIONS = {
   default: ["personal-details"],
@@ -103,6 +111,8 @@ export const DEFAULT_SECTIONS_JSON: { [key: string]: any } = {
 export const TEMPLATE_TYPES = {
   london: {
     type: "simple",
+    typeIcon: PiRainbowCloud,
+    avaliable: true,
     component: {
       "personal-details": LondonHeader,
       links: LondonLinks,
@@ -116,10 +126,13 @@ export const TEMPLATE_TYPES = {
       internships: LondonInternships,
       "extra-curricular-activities": LondonExtraCurricularActivities,
       references: LondonReferences,
+      "custom-section": LondonCustomSection,
     },
   },
   santiago: {
     type: "simple",
+    typeIcon: PiRainbowCloud,
+    avaliable: true,
     component: {
       "personal-details": Header,
       links: Links,
@@ -133,10 +146,13 @@ export const TEMPLATE_TYPES = {
       internships: Internships,
       "extra-curricular-activities": ExtraCurricularActivities,
       references: References,
+      "custom-section": CustomSection,
     },
   },
   sydney: {
     type: "creative",
+    typeIcon: PiShootingStarLight,
+    avaliable: false,
     component: {
       "personal-details": LondonHeader,
       links: LondonLinks,
@@ -150,10 +166,13 @@ export const TEMPLATE_TYPES = {
       internships: LondonInternships,
       "extra-curricular-activities": LondonExtraCurricularActivities,
       references: LondonReferences,
+      "custom-section": LondonCustomSection,
     },
   },
   tokyo: {
     type: "creative",
+    typeIcon: PiShootingStarLight,
+    avaliable: false,
     component: {
       "personal-details": LondonHeader,
       links: LondonLinks,
@@ -167,10 +186,13 @@ export const TEMPLATE_TYPES = {
       internships: LondonInternships,
       "extra-curricular-activities": LondonExtraCurricularActivities,
       references: LondonReferences,
+      "custom-section": LondonCustomSection,
     },
   },
   berlin: {
     type: "modern",
+    typeIcon: LiaHandPeace,
+    avaliable: false,
     component: {
       "personal-details": LondonHeader,
       links: LondonLinks,
@@ -184,10 +206,13 @@ export const TEMPLATE_TYPES = {
       internships: LondonInternships,
       "extra-curricular-activities": LondonExtraCurricularActivities,
       references: LondonReferences,
+      "custom-section": LondonCustomSection,
     },
   },
   amsterdam: {
     type: "modern",
+    typeIcon: LiaHandPeace,
+    avaliable: false,
     component: {
       "personal-details": LondonHeader,
       links: LondonLinks,
@@ -201,10 +226,13 @@ export const TEMPLATE_TYPES = {
       internships: LondonInternships,
       "extra-curricular-activities": LondonExtraCurricularActivities,
       references: LondonReferences,
+      "custom-section": LondonCustomSection,
     },
   },
   dublin: {
     type: "professional",
+    typeIcon: MdLaptopMac,
+    avaliable: false,
     component: {
       "personal-details": LondonHeader,
       links: LondonLinks,
@@ -218,10 +246,13 @@ export const TEMPLATE_TYPES = {
       internships: LondonInternships,
       "extra-curricular-activities": LondonExtraCurricularActivities,
       references: LondonReferences,
+      "custom-section": LondonCustomSection,
     },
   },
   stockholm: {
     type: "professional",
+    typeIcon: MdLaptopMac,
+    avaliable: false,
     component: {
       "personal-details": LondonHeader,
       links: LondonLinks,
@@ -235,6 +266,7 @@ export const TEMPLATE_TYPES = {
       internships: LondonInternships,
       "extra-curricular-activities": LondonExtraCurricularActivities,
       references: LondonReferences,
+      "custom-section": LondonCustomSection,
     },
   },
 };
