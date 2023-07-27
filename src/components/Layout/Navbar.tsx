@@ -5,14 +5,25 @@ import {
   Stack,
   useColorMode,
   Image,
+  ButtonGroup,
+  IconButton,
+  Portal,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
 import ShortUniqueId from "short-unique-id";
 import axios from "axios";
-import { HiTemplate } from "react-icons/hi";
+import { HiOutlineLink, HiQrcode, HiTemplate } from "react-icons/hi";
 import { useData } from "../Edit/DataProvider";
+import { Menu, MenuItem } from "@chakra-ui/react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
+} from "@chakra-ui/react";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -103,16 +114,48 @@ export default function Navbar({
                   onClick={selectTemplateOnOpen}
                   display={"flex"}
                   alignItems={"center"}
+                  variant={"outline"}
                   gap={"0.3rem"}
+                  leftIcon={<HiTemplate fontSize='md' />}
                 >
-                  <HiTemplate fontSize='md' /> Change Template
+                  Change Template
                 </Button>
               )}
+
               {downloadComp && (
-                <Button onClick={shareQRCodeResume}>Generate QR Code</Button>
+                <Menu>
+                  <ButtonGroup isAttached variant='outline'>
+                    {downloadComp}
+                    <Popover>
+                      <PopoverTrigger>
+                        <IconButton
+                          aria-label='Add to friends'
+                          icon={<ChevronDownIcon />}
+                        />
+                      </PopoverTrigger>
+                      <Portal>
+                        <PopoverContent maxW='14rem' mx='1rem'>
+                          <PopoverArrow />
+                          <PopoverBody>
+                            <MenuItem
+                              icon={<HiOutlineLink />}
+                              onClick={shareLinkResume}
+                            >
+                              Share a link
+                            </MenuItem>
+                            <MenuItem
+                              icon={<HiQrcode />}
+                              onClick={shareQRCodeResume}
+                            >
+                              Generate QR Code
+                            </MenuItem>
+                          </PopoverBody>
+                        </PopoverContent>
+                      </Portal>
+                    </Popover>
+                  </ButtonGroup>
+                </Menu>
               )}
-              {downloadComp && <Button onClick={shareLinkResume}>Share</Button>}
-              {downloadComp}
               {showColorMode && (
                 <Button onClick={toggleColorMode}>
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}

@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import INITIAL_DEFAULT_RESUME from "../../data/default-resume.json";
 import { DEFAULT_SECTIONS } from "../../utils/defaults";
 import { dataReducer } from "./dataReducer";
@@ -35,6 +35,17 @@ export const DataProvider = ({ children }: { children: any }) => {
     },
     dispatch,
   ] = useReducer(dataReducer, initialResumeDataState);
+
+  useEffect(() => {
+    const updatedSections = {
+      default: sections.default,
+      extra: sections.extra,
+    };
+
+    localStorage?.setItem("resumeData", value);
+    localStorage?.setItem("resumeTemplate", template);
+    localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
+  }, [sections, value, template]);
 
   return (
     <DataContext.Provider

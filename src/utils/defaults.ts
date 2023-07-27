@@ -53,9 +53,8 @@ import { MdLaptopMac } from "react-icons/md";
 import CustomSection from "../components/ResumePreview/CustomSection";
 
 export const DEFAULT_SECTIONS = {
-  default: ["personal-details"],
+  default: ["personal-details", "profile-summary"],
   extra: [
-    "profile-summary",
     "education",
     "professional-experience",
     "courses",

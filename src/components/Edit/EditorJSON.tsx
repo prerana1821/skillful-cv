@@ -44,13 +44,6 @@ ace.config.setModuleUrl(
   "https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/worker-json.js"
 );
 
-// type EditorJSONProps = {
-//   value: string;
-//   selectedText: string;
-//   setValue: Dispatch<SetStateAction<string>>;
-//   setSelectedText: Dispatch<SetStateAction<string>>;
-// };
-
 const EditorJSON = () => {
   const aceEditor = useRef<AceEditor | null>(null);
 
@@ -67,16 +60,13 @@ const EditorJSON = () => {
     }
   }
 
-  const handleClick = async (selectedOption: string) => {
-    console.log("Hello", { selectedText, selectedOption });
+  const handleAISuggestions = async (selectedOption: string) => {
     setSelectedOption(selectedOption);
 
     const selectedValue = findKeyAndObjectForSelectedText(
       selectedText,
       JSON.parse(value)
     );
-
-    console.log(selectedValue);
 
     const valueFromPrompt = JSON.parse(value);
     const personalDetails: PersonalDetailsI =
@@ -87,16 +77,6 @@ const EditorJSON = () => {
 
     const { descriptionList, ...selectedObjectWithoutDescList } =
       selectedValue?.object;
-
-    console.log({
-      name: personalDetails["first-name"],
-      jobTitle: personalDetails["job-title"],
-      country: personalDetails["country"],
-      key: selectedValue?.key,
-      selectedText:
-        selectedValue?.object.description || selectedValue?.selectedItem,
-      selectedObject: selectedObjectWithoutDescList,
-    });
 
     try {
       const response = await axios.post(`${API_URL}ai-suggestions`, {
@@ -110,10 +90,7 @@ const EditorJSON = () => {
         selectedObject: selectedObjectWithoutDescList,
       });
       if (response.status === 200) {
-        // const generatedText = { data: "Hello World" };
         const generatedText = response.data;
-        console.log({ generatedText });
-        // valueFromPrompt[selectedValue!.key].description = generatedText.data;
 
         switch (selectedValue?.key) {
           case "profile-summary":
@@ -154,11 +131,6 @@ const EditorJSON = () => {
           type: "ADD_RESUME_DATA",
           payload: JSON.stringify(valueFromPrompt, null, 2),
         });
-        // setValue(JSON.stringify(valueFromPrompt, null, 2));
-        // localStorage?.setItem(
-        //   "resumeData",
-        //   JSON.stringify(valueFromPrompt, null, 2)
-        // );
       }
     } catch (error) {
       console.error(error);
@@ -198,7 +170,7 @@ const EditorJSON = () => {
                   return (
                     <ListItem
                       key={option.value}
-                      onClick={() => handleClick(option.value)}
+                      onClick={() => handleAISuggestions(option.value)}
                       p='0.5rem'
                       borderRadius={"md"}
                       _hover={{ backgroundColor: "#edeff7", cursor: "pointer" }}
@@ -234,7 +206,6 @@ const EditorJSON = () => {
               type: "ADD_SELECTED_TEXT",
               payload: aceEditor?.current?.editor.getSelectedText(),
             });
-            // setSelectedText(aceEditor?.current?.editor.getSelectedText());
           }
         }}
         highlightActiveLine={true}

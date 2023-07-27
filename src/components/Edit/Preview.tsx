@@ -35,8 +35,6 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
 
   const { customSectionTitle, template } = useData();
 
-  console.log(template);
-
   const keys = Object.keys(value);
   const allSections = Object.values(DEFAULT_SECTIONS).flat();
 
@@ -59,6 +57,8 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
       <Box
         border={"1px solid black"}
         m='0.5rem'
+        bgColor={"#fff"}
+        color={"#000"}
         borderRadius={"md"}
         p='1rem'
         className='resume-preview'

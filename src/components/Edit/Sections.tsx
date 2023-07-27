@@ -7,13 +7,14 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { IoMdAdd } from "react-icons/io";
-import { GrPowerReset } from "react-icons/gr";
 import SectionCard from "../Sections/SectionCard";
 import { useRef } from "react";
 import { dashCaseToTitleCase } from "../../utils/caseManipulation";
 import { AddCustomSectionModal } from "../Sections/AddCustomSectionModal";
 import AlertResetSectionsModal from "../Sections/AlertResetSectionsModal";
 import { useData } from "./DataProvider";
+import { RxReset } from "react-icons/rx";
+import { motion } from "framer-motion";
 
 // TODO: personal details & profile summary should not be drag & delete
 
@@ -50,6 +51,7 @@ const Sections = () => {
       flex={{ base: "none", sm: "20%" }}
       height={{ base: "100vh", sm: "auto" }}
       overflowY={"auto"}
+      overflowX={"hidden"}
       pl='0.8rem'
     >
       <AlertResetSectionsModal
@@ -70,13 +72,12 @@ const Sections = () => {
         </Heading>
         <Button
           variant={"ghost"}
-          display={"flex"}
           fontSize={"xs"}
-          gap='0.5rem'
+          leftIcon={<RxReset />}
           height={8}
           onClick={resetSectionsOnOpen}
         >
-          <GrPowerReset /> Reset
+          Reset
         </Button>
       </Flex>
       <Box>
@@ -117,25 +118,29 @@ const Sections = () => {
         </Box>
         {sections.extra.map((section, index) => {
           return (
-            <>
+            <motion.div
+              key={index}
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={(event) => {
+                dispatch({
+                  type: "ADD_SECTION",
+                  payload: (event.target as HTMLDivElement).innerText,
+                });
+              }}
+            >
               <Box
-                key={index}
                 boxShadow={"md"}
                 p={"0.5rem 0.8rem"}
                 m={"0.8rem"}
                 cursor={"pointer"}
                 fontSize={"sm"}
                 borderRadius={"0.3rem"}
-                onClick={(event) => {
-                  dispatch({
-                    type: "ADD_SECTION",
-                    payload: (event.target as HTMLDivElement).innerText,
-                  });
-                }}
               >
                 {dashCaseToTitleCase(section)}
               </Box>
-            </>
+            </motion.div>
           );
         })}
       </Box>
