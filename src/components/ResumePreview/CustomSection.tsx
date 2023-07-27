@@ -8,7 +8,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 
-const CustomSection = ({ data }: { data: SectionWithListI }) => {
+export const CustomSection = ({ data }: { data: SectionWithListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' fontSize='md' textTransform='uppercase'>

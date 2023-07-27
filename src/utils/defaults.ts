@@ -11,17 +11,54 @@ import links from "../data/links.json";
 import references from "../data/references.json";
 import skills from "../data/skills.json";
 
-import { HiLightBulb } from "react-icons/hi";
 import { RiQuillPenFill } from "react-icons/ri";
-import { PiSparkleFill } from "react-icons/pi";
+import {
+  PiRainbowCloud,
+  PiShootingStarLight,
+  PiSparkleFill,
+} from "react-icons/pi";
 import { IoMdColorWand } from "react-icons/io";
 import { FaPencilAlt } from "react-icons/fa";
 import { BiSolidBriefcase } from "react-icons/bi";
 
+import {
+  ProfessionalExperience,
+  ProfileSummary,
+  Header,
+  Education,
+  Internships,
+  Links,
+  Hobbies,
+  Courses,
+  ExtraCurricularActivities,
+  References,
+  Skills,
+  Languages,
+  CustomSection,
+} from "../components/ResumePreview";
+
+import {
+  LondonCourses,
+  LondonEducation,
+  LondonHeader,
+  LondonLinks,
+  LondonHobbies,
+  LondonProfessionalExperience,
+  LondonProfileSummary,
+  LondonSkills,
+  LondonLanguages,
+  LondonInternships,
+  LondonExtraCurricularActivities,
+  LondonReferences,
+  LondonCustomSection,
+} from "../components/ResumePreview/London";
+
+import { LiaHandPeace } from "react-icons/lia";
+import { MdLaptopMac } from "react-icons/md";
+
 export const DEFAULT_SECTIONS = {
-  default: ["personal-details"],
+  default: ["personal-details", "profile-summary"],
   extra: [
-    "profile-summary",
     "education",
     "professional-experience",
     "courses",
@@ -53,11 +90,6 @@ export const AI_SUGGESTIONS_OPTIONS = [
   },
   { value: "rephrase", label: "Rephrase", icon: FaPencilAlt },
   {
-    value: "content-generation",
-    label: "Content generation",
-    icon: HiLightBulb,
-  },
-  {
     value: "language-enhancement",
     label: "Language enhancement",
     icon: PiSparkleFill,
@@ -77,4 +109,167 @@ export const DEFAULT_SECTIONS_JSON: { [key: string]: any } = {
   links,
   references,
   skills,
+};
+
+export const TEMPLATE_TYPES = {
+  london: {
+    type: "simple",
+    typeIcon: PiRainbowCloud,
+    avaliable: true,
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+      "custom-section": LondonCustomSection,
+    },
+  },
+  santiago: {
+    type: "simple",
+    typeIcon: PiRainbowCloud,
+    avaliable: true,
+    component: {
+      "personal-details": Header,
+      links: Links,
+      "profile-summary": ProfileSummary,
+      education: Education,
+      "professional-experience": ProfessionalExperience,
+      hobbies: Hobbies,
+      courses: Courses,
+      skills: Skills,
+      languages: Languages,
+      internships: Internships,
+      "extra-curricular-activities": ExtraCurricularActivities,
+      references: References,
+      "custom-section": CustomSection,
+    },
+  },
+  sydney: {
+    type: "creative",
+    typeIcon: PiShootingStarLight,
+    avaliable: false,
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+      "custom-section": LondonCustomSection,
+    },
+  },
+  tokyo: {
+    type: "creative",
+    typeIcon: PiShootingStarLight,
+    avaliable: false,
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+      "custom-section": LondonCustomSection,
+    },
+  },
+  berlin: {
+    type: "modern",
+    typeIcon: LiaHandPeace,
+    avaliable: false,
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+      "custom-section": LondonCustomSection,
+    },
+  },
+  amsterdam: {
+    type: "modern",
+    typeIcon: LiaHandPeace,
+    avaliable: false,
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+      "custom-section": LondonCustomSection,
+    },
+  },
+  dublin: {
+    type: "professional",
+    typeIcon: MdLaptopMac,
+    avaliable: false,
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+      "custom-section": LondonCustomSection,
+    },
+  },
+  stockholm: {
+    type: "professional",
+    typeIcon: MdLaptopMac,
+    avaliable: false,
+    component: {
+      "personal-details": LondonHeader,
+      links: LondonLinks,
+      "profile-summary": LondonProfileSummary,
+      education: LondonEducation,
+      "professional-experience": LondonProfessionalExperience,
+      hobbies: LondonHobbies,
+      courses: LondonCourses,
+      skills: LondonSkills,
+      languages: LondonLanguages,
+      internships: LondonInternships,
+      "extra-curricular-activities": LondonExtraCurricularActivities,
+      references: LondonReferences,
+      "custom-section": LondonCustomSection,
+    },
+  },
 };

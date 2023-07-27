@@ -1,7 +1,7 @@
 import { PersonalDetailsI } from "../../types/interfaces";
 import { Box, Center, Heading, Text } from "@chakra-ui/react";
 
-const Header = ({ data }: { data: PersonalDetailsI }) => {
+export const Header = ({ data }: { data: PersonalDetailsI }) => {
   const city = data?.city;
   const country = data?.country;
   const phoneNumber = data?.["phone-number"];
@@ -33,5 +33,3 @@ const Header = ({ data }: { data: PersonalDetailsI }) => {
     </Box>
   );
 };
-
-export default Header;

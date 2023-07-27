@@ -1,50 +1,4 @@
-// export type AllSectionsI =
-//   | {
-//       "personal-details"?: PersonalDetailsI;
-//     }
-//   | ProfileSummaryI
-//   | ProfessionalExperienceI
-//   | ProfessionalExperienceI
-//   | ExtraCurricularActivitiesI
-//   | EducationI
-//   | CoursesI
-//   | InternshipsI
-//   | LinksI
-//   | SectionWithListTextI
-//   | SkillsI
-//   | LanguagesI
-//   | ReferencesI
-//   | CustomSectionI;
-
-// // export interface AllSectionsI {
-// //   "personal-details"?: PersonalDetailsI;
-// //   "profile-summary"?: ProfileSummaryI;
-// //   "professional-experience"?: ProfessionalExperienceI;
-// //   "extra-curricular-activities"?: ExtraCurricularActivitiesI;
-// //   education?: EducationI;
-// //   courses?: CoursesI;
-// //   internships?: InternshipsI;
-// //   links?: LinksI;
-// //   hobbies?: SectionWithListTextI;
-// //   skills?: SkillsI;
-// //   languages?: LanguagesI;
-// //   references?: ReferencesI;
-// // }
-
-export interface PersonalDetailsI {
-  "first-name"?: string;
-  "last-name"?: string;
-  "job-title"?: string;
-  "phone-number"?: string;
-  email?: string;
-  country?: string;
-  city?: string;
-}
-
-export interface ProfileSummaryI {
-  "profile-summary": TitleDescI;
-}
-
+// Common Interfaces
 export interface TitleDescI {
   title?: string;
   description?: string;
@@ -52,26 +6,6 @@ export interface TitleDescI {
 
 export interface CustomSectionI {
   [key: string]: SectionWithListI;
-}
-
-export interface CoursesI {
-  courses: SectionWithListI;
-}
-export interface ProfessionalExperienceI {
-  "professional-experience": SectionWithListI;
-}
-export interface InternshipsI {
-  internships: SectionWithListI;
-}
-
-export interface EducationI {
-  education: SectionWithListI;
-}
-export interface ReferencesI {
-  references: SectionWithListI;
-}
-export interface ExtraCurricularActivitiesI {
-  "extra-curricular-activities": SectionWithListI;
 }
 
 export interface SectionWithListI {
@@ -103,16 +37,6 @@ export interface ListI {
   descriptionList?: string[];
 }
 
-export interface LanguagesI {
-  languages: TitleListI;
-}
-export interface LinksI {
-  links: TitleListI;
-}
-export interface SkillsI {
-  skills: TitleListI;
-}
-
 export interface TitleListI {
   title: string;
   list?: TextListI[];
@@ -125,18 +49,10 @@ export interface TextListI {
   link?: string;
 }
 
-// *********************************
-// Common Interfaces
-
 export interface DateRange {
   "start-date"?: string;
   "end-date"?: string;
 }
-
-// export interface ListItemI {
-//   title?: string;
-//   descriptionList?: string[];
-// }
 
 export interface TextLink {
   label?: string;
@@ -144,8 +60,7 @@ export interface TextLink {
 }
 
 // Section Interfaces
-
-export interface PersonalDetails {
+export interface PersonalDetailsI {
   "first-name"?: string;
   "last-name"?: string;
   "job-title"?: string;
@@ -165,12 +80,6 @@ export interface Education extends ListItemI {
   degree?: string;
   city?: string;
 }
-
-// export interface Course extends ListItemI, DateRange {
-//   institution?: string;
-//   course?: string;
-//   "certificate-link"?: string;
-// }
 
 export interface ProfessionalExperience extends ListItemI, DateRange {
   employer?: string;
@@ -210,37 +119,6 @@ export interface CustomSectionItem {
 
 // Value Object Interface
 
-// export interface ValueI {
-//   "personal-details"?: PersonalDetails;
-//   'profile-summary'?: ProfileSummary;
-//   education?: Education[];
-//   courses?: Course[];
-//   "professional-experience"?: ProfessionalExperience[];
-//   internships?: Internship[];
-//   links?: Link[];
-//   skills?: Skill[];
-//   hobbies?: string[];
-//   languages?: Language[];
-//   references?: Reference[];
-//   "extra-curricular-activities"?: ExtraCurricularActivity[];
-//   [key: string]:
-//     | CustomSectionItem
-//     | undefined
-//     | PersonalDetails
-//     | ProfileSummary
-//     | Education[]
-//     | Course[]
-//     | ProfessionalExperience[]
-//     | Internship[]
-//     | Link[]
-//     | Skill[]
-//     | string[]
-//     | Language[]
-//     | Reference[]
-//     | ExtraCurricularActivity[]
-//     | undefined;
-// }
-
 export interface ListItemI {
   title?: string;
   description?: string;
@@ -254,7 +132,7 @@ export interface Course extends ListItemI, DateRange {
 }
 
 export interface ValueI {
-  "personal-details"?: PersonalDetails;
+  "personal-details"?: PersonalDetailsI;
   "profile-summary"?: ProfileSummary;
   education?: CustomSectionItem[];
   courses?: Course[];
@@ -269,7 +147,7 @@ export interface ValueI {
   [key: string]:
     | CustomSectionItem
     | undefined
-    | PersonalDetails
+    | PersonalDetailsI
     | ProfileSummary
     | Education[]
     | Course[]

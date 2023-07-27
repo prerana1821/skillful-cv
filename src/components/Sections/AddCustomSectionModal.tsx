@@ -10,26 +10,38 @@ import {
   FormLabel,
   Input,
   Button,
+  FormErrorMessage,
 } from "@chakra-ui/react";
-import { SetStateAction, Dispatch, MutableRefObject } from "react";
+import { MutableRefObject } from "react";
+import { useData } from "../Edit/DataProvider";
 
 type AddCustomSectionModalProps = {
   initialRef: MutableRefObject<null>;
   isOpen: boolean;
   onClose: () => void;
-  customSectionTitle: string;
-  setCustomSectionTitle: Dispatch<SetStateAction<string>>;
-  addCustomSection: () => void;
+  addCustomSectionOnClose: () => void;
 };
 
 export const AddCustomSectionModal = ({
   initialRef,
   isOpen,
   onClose,
-  customSectionTitle,
-  setCustomSectionTitle,
-  addCustomSection,
+  addCustomSectionOnClose,
 }: AddCustomSectionModalProps) => {
+  const { customSectionTitle, dispatch } = useData();
+
+  const isError = customSectionTitle === "";
+
+  const handleAddCustomSection = () => {
+    if (customSectionTitle.length > 0) {
+      dispatch({
+        type: "ADD_CUSTOM_SECTION",
+        payload: customSectionTitle,
+      });
+      addCustomSectionOnClose();
+    }
+  };
+
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -44,24 +56,32 @@ export const AddCustomSectionModal = ({
         <ModalHeader>New Custom Section</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          <FormControl>
+          <FormControl isInvalid={isError}>
             <FormLabel>Section name</FormLabel>
             <Input
               ref={initialRef}
               value={customSectionTitle}
-              onChange={(e) => setCustomSectionTitle(e.target.value)}
+              onChange={(e) =>
+                dispatch({
+                  type: "ADD_CUSTOM_SECTION_TITLE",
+                  payload: e.target.value,
+                })
+              }
             />
+            {isError && (
+              <FormErrorMessage>Section name is required.</FormErrorMessage>
+            )}
           </FormControl>
         </ModalBody>
 
         <ModalFooter display={"flex"} gap='1rem'>
           <Button onClick={onClose}>Cancel</Button>
-          {/* TODO: Add error is input value is empty.  */}
           <Button
             backgroundColor='#F50057'
+            _hover={{ backgroundColor: "#F50057" }}
             color='#fff'
             mr={3}
-            onClick={addCustomSection}
+            onClick={handleAddCustomSection}
           >
             Add Section
           </Button>

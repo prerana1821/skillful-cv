@@ -9,7 +9,7 @@ interface CoursesProps {
   };
 }
 
-const Courses = ({ data }: CoursesProps) => {
+export const Courses = ({ data }: CoursesProps) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' fontSize='md' textTransform={"uppercase"}>
@@ -53,5 +53,3 @@ const Courses = ({ data }: CoursesProps) => {
     </Box>
   );
 };
-
-export default Courses;
