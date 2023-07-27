@@ -38,12 +38,6 @@ export const updateResumeDetails = async ({
     if (response.status === 200) {
       const resumeId = response.data.resumeId;
       dispatch({ type: "ADD_RESUME_ID", payload: resumeId });
-      dispatch({
-        type: "CHANGE_STATUS",
-        payload: {
-          loading: "",
-        },
-      });
       onOpenModal && onOpenModal();
     }
   } catch (error) {
@@ -58,5 +52,12 @@ export const updateResumeDetails = async ({
       theme: "light",
     });
     console.error(error);
+  } finally {
+    dispatch({
+      type: "CHANGE_STATUS",
+      payload: {
+        loading: "",
+      },
+    });
   }
 };

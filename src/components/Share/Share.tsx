@@ -52,6 +52,7 @@ export const Share = () => {
         console.error(error);
         setResumeData((prevData: ResumeData) => ({
           ...prevData,
+          loading: "",
           error: "Sorry, try again later...",
         }));
       }

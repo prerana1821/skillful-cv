@@ -20,6 +20,8 @@ type GetAISuggestionsProps = {
   setIsPopoverOpen: (value: SetStateAction<boolean>) => void;
 };
 
+console.log({ API_URL });
+
 export const getAISuggestions = async ({
   dispatch,
   personalDetails,
@@ -83,12 +85,6 @@ export const getAISuggestions = async ({
           break;
       }
       dispatch({
-        type: "CHANGE_STATUS",
-        payload: {
-          loading: "",
-        },
-      });
-      dispatch({
         type: "ADD_RESUME_DATA",
         payload: JSON.stringify(valueFromPrompt, null, 2),
       });
@@ -106,5 +102,12 @@ export const getAISuggestions = async ({
       theme: "light",
     });
     console.error(error);
+  } finally {
+    dispatch({
+      type: "CHANGE_STATUS",
+      payload: {
+        loading: "",
+      },
+    });
   }
 };
