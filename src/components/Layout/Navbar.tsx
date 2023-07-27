@@ -43,7 +43,7 @@ export default function Navbar({
 }: NavbarProps) {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const { value, dispatch, template } = useData();
+  const { value, dispatch, template, status } = useData();
 
   const hoverBgColor = useColorModeValue("#edeff7", "#1a202c");
 
@@ -92,42 +92,53 @@ export default function Navbar({
                         <PopoverContent maxW='14rem' mx='1rem'>
                           <PopoverArrow />
                           <PopoverBody>
-                            <MenuItem
-                              icon={<HiOutlineLink />}
-                              borderRadius={"md"}
-                              _hover={{
-                                backgroundColor: hoverBgColor,
-                                cursor: "pointer",
-                              }}
-                              onClick={() =>
-                                updateResumeDetails({
-                                  value,
-                                  template,
-                                  onOpenModal: shareLinkOnOpen,
-                                  dispatch,
-                                })
-                              }
-                            >
-                              Share a link
-                            </MenuItem>
-                            <MenuItem
-                              borderRadius={"md"}
-                              _hover={{
-                                backgroundColor: hoverBgColor,
-                                cursor: "pointer",
-                              }}
-                              icon={<HiQrcode />}
-                              onClick={() =>
-                                updateResumeDetails({
-                                  value,
-                                  template,
-                                  onOpenModal: shareQRCodeOnOpen,
-                                  dispatch,
-                                })
-                              }
-                            >
-                              Generate QR Code
-                            </MenuItem>
+                            {status.loading ? (
+                              <Image
+                                src='/loading.gif'
+                                alt='Loading...'
+                                m='auto'
+                                width={"50px"}
+                              />
+                            ) : (
+                              <>
+                                <MenuItem
+                                  icon={<HiOutlineLink />}
+                                  borderRadius={"md"}
+                                  _hover={{
+                                    backgroundColor: hoverBgColor,
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() =>
+                                    updateResumeDetails({
+                                      value,
+                                      template,
+                                      onOpenModal: shareLinkOnOpen,
+                                      dispatch,
+                                    })
+                                  }
+                                >
+                                  Share a link
+                                </MenuItem>
+                                <MenuItem
+                                  borderRadius={"md"}
+                                  _hover={{
+                                    backgroundColor: hoverBgColor,
+                                    cursor: "pointer",
+                                  }}
+                                  icon={<HiQrcode />}
+                                  onClick={() =>
+                                    updateResumeDetails({
+                                      value,
+                                      template,
+                                      onOpenModal: shareQRCodeOnOpen,
+                                      dispatch,
+                                    })
+                                  }
+                                >
+                                  Generate QR Code
+                                </MenuItem>{" "}
+                              </>
+                            )}
                           </PopoverBody>
                         </PopoverContent>
                       </Portal>
