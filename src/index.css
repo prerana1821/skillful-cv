@@ -32,3 +32,12 @@ a {
     width: 100% !important;
   }
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000 !important;
+}
+
+.slider-product {
+  padding: 5rem;
+}
