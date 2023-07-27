@@ -1,6 +1,7 @@
 import { IconType } from "react-icons/lib";
 
 import { Tab, Text } from "@chakra-ui/react";
+import { dashCaseToTitleCase } from "../../utils/caseManipulation";
 
 type TemplateTabProps = {
   typeIcon: IconType;
@@ -22,7 +23,7 @@ export const TemplateTab = ({
     >
       {typeIcon({ fontSize: orientation === "vertical" ? "1.2rem" : "2rem" })}
       <Text fontSize={orientation === "vertical" ? "md" : "lg"}>
-        {labelText}
+        {dashCaseToTitleCase(labelText)}
       </Text>
     </Tab>
   );
