@@ -29,6 +29,8 @@ export const updateResumeDetails = async ({
         loading: "Loading resume data...",
       },
     });
+    console.log(`${API_URL}resumes`);
+
     const response = await axios.post(`${API_URL}resumes`, {
       uniqueId,
       email: resumeJSON["personal-details"].email,

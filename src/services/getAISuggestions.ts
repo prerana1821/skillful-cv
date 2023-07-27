@@ -36,6 +36,8 @@ export const getAISuggestions = async ({
         loading: "suggestion is loading...",
       },
     });
+    console.log(`${API_URL}ai-suggestions`);
+
     const response = await axios.post(`${API_URL}ai-suggestions`, {
       name: personalDetails["first-name"],
       jobTitle: personalDetails["job-title"],
