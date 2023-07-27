@@ -174,7 +174,7 @@ export const dataReducer = (
     case "SET_TEMPLATE":
       return { ...state, template: action.payload };
     default:
-      console.log("Something went wrong");
+      console.error("Something went wrong");
       return state;
   }
 };

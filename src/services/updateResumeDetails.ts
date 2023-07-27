@@ -32,6 +32,6 @@ export const updateResumeDetails = async ({
       onOpenModal && onOpenModal();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };

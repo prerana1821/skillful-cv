@@ -32,7 +32,6 @@ export const Share = () => {
           `${API_URL}resumes/${resumeId}`
         );
         if (status === 200) {
-          console.log({ data });
           setResumeData({
             data: JSON.parse(data.data.resumeValue),
             template: data.data.template,
@@ -41,7 +40,7 @@ export const Share = () => {
           });
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
         setResumeData((prevData: any) => ({
           ...prevData,
           error: "Sorry, try again later...",

@@ -32,7 +32,6 @@ export const ShareLinkModal = ({ isOpen, onClose }: ShareLinkModalProps) => {
     navigator.clipboard
       .writeText(`${CLIENT_BASE_URL}share/${resumeId}`)
       .then(() => {
-        console.log("Link copied to clipboard:");
         setIsResumeLinkCopied(true);
       })
       .catch((error) => {

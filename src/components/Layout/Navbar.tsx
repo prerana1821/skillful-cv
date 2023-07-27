@@ -12,8 +12,6 @@ import {
 import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
-import ShortUniqueId from "short-unique-id";
-import axios from "axios";
 import { HiOutlineLink, HiQrcode, HiTemplate } from "react-icons/hi";
 import { useData } from "../Edit/DataProvider";
 import { Menu, MenuItem } from "@chakra-ui/react";
@@ -25,8 +23,6 @@ import {
   PopoverArrow,
 } from "@chakra-ui/react";
 import { updateResumeDetails } from "../../services/updateResumeDetails";
-
-const API_URL = process.env.REACT_APP_API_BASE_URL;
 
 type NavbarProps = {
   styles?: CSSProperties;

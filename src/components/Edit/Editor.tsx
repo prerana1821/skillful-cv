@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect } from "react";
-import { Box, Button, Flex, Image, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
 import Preview from "./Preview";
 import Sections from "./Sections";
 import ReactToPrint from "react-to-print";

@@ -172,7 +172,6 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
             case titleCaseToDashCase(customSectionTitle):
               const CustomSectionComponent =
                 TemplateComponent["custom-section"] || CustomSection;
-              console.log(CustomSectionComponent);
 
               if (customSectionTitle) {
                 return (
