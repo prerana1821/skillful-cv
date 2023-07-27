@@ -18,10 +18,16 @@ export const dataReducer = (
 
   switch (action.type) {
     case "ADD_RESUME_DATA":
+      localStorage?.setItem("resumeData", action.payload);
       return { ...state, value: action.payload };
     case "ADD_SECTIONS":
+      localStorage?.setItem("resumeSections", JSON.stringify(action.payload));
       return { ...state, sections: action.payload };
     case "UPDATE_SECTIONS":
+      localStorage?.setItem(
+        "resumeSections",
+        JSON.stringify({ ...state.sections, default: action.payload })
+      );
       return {
         ...state,
         sections: { ...state.sections, default: action.payload },
@@ -31,6 +37,16 @@ export const dataReducer = (
     case "ADD_CUSTOM_SECTION_TITLE":
       return { ...state, customSectionTitle: action.payload };
     case "REMOVE_ADDED_SECTION":
+      localStorage?.setItem("resumeData", JSON.stringify(rest, null, 2));
+      localStorage?.setItem(
+        "resumeSections",
+        JSON.stringify({
+          default: state.sections.default.filter(
+            (sec: string) => sec !== action.payload
+          ),
+          extra: [action.payload, ...state.sections.extra],
+        })
+      );
       return {
         ...state,
         sections: {
@@ -45,8 +61,14 @@ export const dataReducer = (
       const sectionData =
         DEFAULT_SECTIONS_JSON[dashToSnakeCase(action.payload)] || {};
       const mergedData = { ...rest, ...sectionData };
+      localStorage?.setItem("resumeData", JSON.stringify(mergedData, null, 2));
       return { ...state, value: JSON.stringify(mergedData, null, 2) };
     case "RESET_SECTIONS":
+      localStorage?.setItem("resumeSections", JSON.stringify(DEFAULT_SECTIONS));
+      localStorage?.setItem(
+        "resumeData",
+        JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2)
+      );
       return {
         ...state,
         value: JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2),
@@ -73,6 +95,21 @@ export const dataReducer = (
         ...JSON.parse(state.value),
         ...updatedCustomSection,
       };
+      localStorage?.setItem(
+        "resumeData",
+        JSON.stringify(mergedResumeData, null, 2)
+      );
+      localStorage?.setItem(
+        "resumeSections",
+        JSON.stringify({
+          ...state.sections,
+          default: [
+            ...state.sections.default,
+            titleCaseToDashCase(action.payload) as string,
+          ],
+        })
+      );
+
       return {
         ...state,
         sections: {
@@ -88,6 +125,27 @@ export const dataReducer = (
     case "ADD_SECTION":
       const addSectionData =
         DEFAULT_SECTIONS_JSON[titleCaseToSnakeCase(action.payload)] || {};
+      localStorage?.setItem(
+        "resumeData",
+        JSON.stringify(
+          { ...JSON.parse(state.value), ...addSectionData },
+          null,
+          2
+        )
+      );
+      localStorage?.setItem(
+        "resumeSections",
+        JSON.stringify({
+          default: [
+            ...state.sections.default,
+            titleCaseToDashCase(action.payload) as string,
+          ],
+          extra: state.sections.extra.filter(
+            (section: string) =>
+              section !== (titleCaseToDashCase(action.payload) as string)
+          ),
+        })
+      );
       return {
         ...state,
         sections: {

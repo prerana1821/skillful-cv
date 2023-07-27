@@ -34,7 +34,14 @@ export const ShareQRCodeModal = ({
           <Text mb='1rem'>
             Scan the below QR Code to view & download your resume.
           </Text>
-          <Center>
+          <Center
+            p='1rem'
+            boxShadow={
+              "inset -11px 12px 20px #c9c9c9, 26px -26px 52px #ffffff;"
+            }
+            mx='3rem'
+            borderRadius={"1rem"}
+          >
             <QRCode
               value={`${CLIENT_BASE_URL}share/${resumeId}`}
               width='200px'

@@ -8,7 +8,6 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import EditorJSON from "./EditorJSON";
 import Navbar from "../Layout/Navbar";
-
 import { ShareLinkModal } from "../Share/ShareLinkModal";
 import { useData } from "./DataProvider";
 import { ShareQRCodeModal } from "../Share/ShareQRCodeModal";
@@ -45,11 +44,14 @@ export const Editor = () => {
     try {
       // TODO: add loading status
       const resumeData = localStorage?.getItem("resumeData");
-      const resumeSections = localStorage?.getItem("resumeSections");
+      const resumeSections = localStorage.getItem("resumeSections");
+
       if (resumeData) {
+        console.log(JSON.parse(resumeData));
         dispatch({ type: "ADD_RESUME_DATA", payload: resumeData });
       }
       if (resumeSections) {
+        console.log(JSON.parse(resumeSections));
         dispatch({
           type: "ADD_SECTIONS",
           payload: JSON.parse(resumeSections),
@@ -63,6 +65,21 @@ export const Editor = () => {
     }
   }, []);
 
+  // useEffect(() => {
+  //   const updatedSections = {
+  //     default: sections.default,
+  //     extra: sections.extra,
+  //   };
+  //   console.log("Hello from sections");
+
+  //   localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
+  // }, [sections]);
+
+  // useEffect(() => {
+  //   console.log("Hello from value", value);
+  //   localStorage?.setItem("resumeData", value);
+  // }, [value]);
+
   const reactToPrintTrigger = useCallback(() => {
     return (
       <Button
@@ -75,23 +92,11 @@ export const Editor = () => {
         _hover={{ backgroundColor: "none" }}
         fontSize={"sm"}
       >
-        <PiDownloadSimple fontSize='md' />
-        Download
+        {/* <PiDownloadSimple fontSize='md' /> */}
+        Export as PDF
       </Button>
     );
   }, []);
-
-  useEffect(() => {
-    const updatedSections = {
-      default: sections.default,
-      extra: sections.extra,
-    };
-    localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
-  }, [sections]);
-
-  useEffect(() => {
-    localStorage?.setItem("resumeData", value);
-  }, [value]);
 
   return (
     <DndProvider backend={HTML5Backend}>

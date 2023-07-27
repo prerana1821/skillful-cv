@@ -1,5 +1,5 @@
 import { Box, Button, Center, Flex, Heading, Image } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useCallback, useEffect, useRef } from "react";
 import axios from "axios";
 import { useState } from "react";
@@ -78,15 +78,17 @@ export const Share = () => {
         m='auto'
         alignItems={"center"}
       >
-        <Heading
-          as='h3'
-          size={"md"}
-          color={"#f50057"}
-          my='1rem'
-          fontFamily={"cursive"}
-        >
-          Skillful CV
-        </Heading>
+        <Link to='/'>
+          <Heading
+            as='h3'
+            size={"md"}
+            color={"#f50057"}
+            my='1rem'
+            fontFamily={"cursive"}
+          >
+            Skillful CV
+          </Heading>
+        </Link>
         <ReactToPrint
           content={reactToPrintContent}
           documentTitle='Skillful-CV'

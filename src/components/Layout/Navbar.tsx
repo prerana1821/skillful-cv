@@ -5,14 +5,40 @@ import {
   Stack,
   useColorMode,
   Image,
+  ButtonGroup,
+  IconButton,
+  Portal,
+  Text,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
 import ShortUniqueId from "short-unique-id";
 import axios from "axios";
-import { HiTemplate } from "react-icons/hi";
+import { HiOutlineLink, HiQrcode, HiTemplate } from "react-icons/hi";
 import { useData } from "../Edit/DataProvider";
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+} from "@chakra-ui/react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+} from "@chakra-ui/react";
+import { FaFilePdf } from "react-icons/fa";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -103,16 +129,73 @@ export default function Navbar({
                   onClick={selectTemplateOnOpen}
                   display={"flex"}
                   alignItems={"center"}
+                  variant={"outline"}
                   gap={"0.3rem"}
+                  leftIcon={<HiTemplate fontSize='md' />}
                 >
-                  <HiTemplate fontSize='md' /> Change Template
+                  Change Template
                 </Button>
               )}
-              {downloadComp && (
+              {/*    {downloadComp && (
                 <Button onClick={shareQRCodeResume}>Generate QR Code</Button>
               )}
               {downloadComp && <Button onClick={shareLinkResume}>Share</Button>}
-              {downloadComp}
+              {downloadComp} */}
+              {downloadComp && (
+                <Menu>
+                  <ButtonGroup isAttached variant='outline'>
+                    {downloadComp}
+                    <Popover>
+                      <PopoverTrigger>
+                        <IconButton
+                          aria-label='Add to friends'
+                          icon={<ChevronDownIcon />}
+                        />
+                      </PopoverTrigger>
+                      <Portal>
+                        <PopoverContent maxW='14rem' mx='1rem'>
+                          <PopoverArrow />
+                          <PopoverBody>
+                            <MenuItem
+                              icon={<HiOutlineLink />}
+                              onClick={shareLinkResume}
+                            >
+                              Share a link
+                            </MenuItem>
+                            <MenuItem
+                              icon={<HiQrcode />}
+                              onClick={shareQRCodeResume}
+                            >
+                              Generate QR Code
+                            </MenuItem>
+                          </PopoverBody>
+                        </PopoverContent>
+                      </Portal>
+                    </Popover>
+                  </ButtonGroup>
+                </Menu>
+              )}
+              {/* <Menu>
+                <MenuButton
+                  as={Button}
+                  rightIcon={<ChevronDownIcon />}
+                  backgroundColor='#f50057'
+                  color='#fff'
+                  _hover={{ backgroundColor: "none" }}
+                >
+                  Download
+                </MenuButton>
+                <MenuList>
+                  <MenuItem
+                    icon={<FaFilePdf />}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {downloadComp}
+                  </MenuItem>
+                  <MenuItem icon={<HiOutlineLink />}>Share a link</MenuItem>
+                  <MenuItem icon={<HiQrcode />}>Generate QR Code</MenuItem>
+                </MenuList>
+              </Menu> */}
               {showColorMode && (
                 <Button onClick={toggleColorMode}>
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
