@@ -20,8 +20,6 @@ type GetAISuggestionsProps = {
   setIsPopoverOpen: (value: SetStateAction<boolean>) => void;
 };
 
-console.log({ API_URL });
-
 export const getAISuggestions = async ({
   dispatch,
   personalDetails,
