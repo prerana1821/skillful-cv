@@ -23,6 +23,12 @@ export const updateResumeDetails = async ({
   const resumeJSON = JSON.parse(value);
 
   try {
+    dispatch({
+      type: "CHANGE_STATUS",
+      payload: {
+        loading: "Loading resume data...",
+      },
+    });
     const response = await axios.post(`${API_URL}resumes`, {
       uniqueId,
       email: resumeJSON["personal-details"].email,
@@ -32,6 +38,12 @@ export const updateResumeDetails = async ({
     if (response.status === 200) {
       const resumeId = response.data.resumeId;
       dispatch({ type: "ADD_RESUME_ID", payload: resumeId });
+      dispatch({
+        type: "CHANGE_STATUS",
+        payload: {
+          loading: "",
+        },
+      });
       onOpenModal && onOpenModal();
     }
   } catch (error) {
