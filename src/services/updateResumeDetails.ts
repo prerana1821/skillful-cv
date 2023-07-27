@@ -5,17 +5,19 @@ import { toast } from "react-toastify";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
+type UpdateResumeDetailsProps = {
+  value: string;
+  template: string;
+  dispatch: (action: DataReducerAction) => void;
+  onOpenModal?: () => void;
+};
+
 export const updateResumeDetails = async ({
   value,
   template,
   dispatch,
   onOpenModal,
-}: {
-  value: string;
-  template: string;
-  dispatch: (action: DataReducerAction) => void;
-  onOpenModal?: () => void;
-}) => {
+}: UpdateResumeDetailsProps) => {
   const uid = new ShortUniqueId({ length: 10 });
   const uniqueId = uid();
   const resumeJSON = JSON.parse(value);

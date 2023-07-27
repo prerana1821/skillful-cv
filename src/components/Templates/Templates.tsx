@@ -1,49 +1,19 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Image,
-  TabIndicator,
-  Text,
-} from "@chakra-ui/react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import { PiRainbowCloud, PiShootingStarLight } from "react-icons/pi";
-import { LiaHandPeace } from "react-icons/lia";
-import { MdLaptopMac } from "react-icons/md";
-import { CSSProperties, useState } from "react";
-import { useData } from "../Edit/DataProvider";
+import { Box, Center, Flex, Heading, TabIndicator } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
 import { TEMPLATE_TYPES } from "../../utils/defaults";
-import { dashCaseToTitleCase } from "../../utils/caseManipulation";
-import { useNavigate } from "react-router-dom";
-import { IconType } from "react-icons/lib";
-import { updateResumeDetails } from "../../services/updateResumeDetails";
 import { motion } from "framer-motion";
+import { TemplateTab } from "./TemplateTab";
+import { TemplateBox } from "./TemplateBox";
+import { TemplatesByType } from "./types";
 
-interface Template {
-  type: string;
-  styles: CSSProperties;
-  avaliable: boolean;
-  component: any;
-}
-
-const Templates = ({
-  orientation,
-  onModalClose,
-}: {
+type TemplatesProps = {
   orientation?: "vertical" | "horizontal";
   onModalClose?: () => void;
-}) => {
-  const navigate = useNavigate();
-  const { dispatch, value } = useData();
+};
 
+const Templates = ({ orientation, onModalClose }: TemplatesProps) => {
   const templatesByType: {
-    [key: string]: Array<{
-      templateName: string;
-      typeIcon: IconType;
-      template: Template;
-    }>;
+    [key: string]: TemplatesByType[];
   } = Object.entries(TEMPLATE_TYPES).reduce((acc, [templateName, template]) => {
     const { type, typeIcon, avaliable } = template;
     if (!(acc as any)[type]) {
@@ -52,16 +22,6 @@ const Templates = ({
     (acc as any)[type].push({ templateName, template, typeIcon, avaliable });
     return acc;
   }, {});
-
-  const [isHovering, setIsHovering] = useState<string | null>(null);
-
-  const handleMouseEnter = (templateName: string) => {
-    setIsHovering(templateName);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovering(null);
-  };
 
   return (
     <Box>
@@ -91,59 +51,14 @@ const Templates = ({
               orientation === "vertical" ? "flex-start" : "center"
             }
           >
-            <Tab
-              p={orientation === "vertical" ? "0.2rem" : "0.5rem 1rem"}
-              display={"flex"}
-              gap={orientation === "vertical" ? "0.3rem" : "1rem"}
-              m='0.4rem'
-            >
-              <PiRainbowCloud
-                fontSize={orientation === "vertical" ? "1.2rem" : "2rem"}
+            {Object.entries(templatesByType).map(([type, typeTemplates]) => (
+              <TemplateTab
+                key={type}
+                typeIcon={typeTemplates[0].typeIcon}
+                labelText={type}
+                orientation={orientation}
               />
-              <Text fontSize={orientation === "vertical" ? "md" : "lg"}>
-                Simple
-              </Text>
-            </Tab>
-            <Tab
-              p={orientation === "vertical" ? "0.2rem" : "0.5rem 1rem"}
-              display={"flex"}
-              gap={orientation === "vertical" ? "0.3rem" : "1rem"}
-              m='0.4rem'
-            >
-              <PiShootingStarLight
-                fontSize={orientation === "vertical" ? "1.2rem" : "2rem"}
-              />
-              <Text fontSize={orientation === "vertical" ? "md" : "lg"}>
-                {" "}
-                Creative
-              </Text>
-            </Tab>
-            <Tab
-              p={orientation === "vertical" ? "0.2rem" : "0.5rem 1rem"}
-              display={"flex"}
-              gap={orientation === "vertical" ? "0.3rem" : "1rem"}
-              m='0.4rem'
-            >
-              <LiaHandPeace
-                fontSize={orientation === "vertical" ? "1.2rem" : "2rem"}
-              />
-              <Text fontSize={orientation === "vertical" ? "md" : "lg"}>
-                Modern
-              </Text>
-            </Tab>
-            <Tab
-              p={orientation === "vertical" ? "0.2rem" : "0.5rem 1rem"}
-              display={"flex"}
-              gap={orientation === "vertical" ? "0.3rem" : "1rem"}
-              m='0.4rem'
-            >
-              <MdLaptopMac
-                fontSize={orientation === "vertical" ? "1.2rem" : "2rem"}
-              />
-              <Text fontSize={orientation === "vertical" ? "md" : "lg"}>
-                Professional
-              </Text>
-            </Tab>
+            ))}
           </TabList>
           <TabIndicator
             mt='-1.5px'
@@ -161,79 +76,12 @@ const Templates = ({
                     gap='3rem'
                   >
                     {typeTemplates.map(({ templateName, template }) => (
-                      <Box
-                        key={templateName}
-                        onClick={() => {
-                          if (
-                            orientation === "vertical" &&
-                            template.avaliable
-                          ) {
-                            dispatch({
-                              type: "SET_TEMPLATE",
-                              payload: templateName,
-                            });
-                            updateResumeDetails({
-                              value,
-                              template: templateName,
-                              dispatch,
-                            });
-                            onModalClose && onModalClose();
-                          }
-                        }}
-                        position='relative'
-                        onMouseEnter={() => handleMouseEnter(templateName)}
-                        onMouseLeave={handleMouseLeave}
-                        cursor={"pointer"}
-                      >
-                        <Image
-                          src={`/assets/${templateName}.png`}
-                          width={orientation === "vertical" ? "400px" : "350px"}
-                          style={{
-                            filter:
-                              orientation === "vertical"
-                                ? "blur(0px)"
-                                : "blur(0.5px)",
-                          }}
-                          borderRadius={"md"}
-                        />
-                        <Heading as='h5' size='sm' my='1rem'>
-                          {dashCaseToTitleCase(templateName)}
-                        </Heading>
-                        {isHovering === templateName &&
-                          orientation !== "vertical" && (
-                            <Button
-                              position='absolute'
-                              bottom='1rem'
-                              left='50%'
-                              top='40%'
-                              transform='translateX(-50%)'
-                              variant='solid'
-                              backgroundColor={
-                                template.avaliable ? "#f50057" : "gray"
-                              }
-                              color='#fff'
-                              _hover={{
-                                backgroundColor: template.avaliable
-                                  ? "none"
-                                  : "gray",
-                              }}
-                              onClick={() => {
-                                if (template.avaliable) {
-                                  dispatch({
-                                    type: "SET_TEMPLATE",
-                                    payload: templateName,
-                                  });
-                                  navigate("/editor");
-                                }
-                              }}
-                              disabled={!template.avaliable}
-                            >
-                              {template.avaliable
-                                ? "Use This Template"
-                                : "Coming Soon ..."}
-                            </Button>
-                          )}
-                      </Box>
+                      <TemplateBox
+                        templateName={templateName}
+                        orientation={orientation}
+                        template={template}
+                        onModalClose={onModalClose}
+                      />
                     ))}
                   </Flex>
                 </TabPanel>

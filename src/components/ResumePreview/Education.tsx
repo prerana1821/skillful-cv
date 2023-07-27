@@ -1,7 +1,7 @@
 import { ListI, SectionWithListI } from "../../types/interfaces";
 import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 
-const Education = ({ data }: { data: SectionWithListI }) => {
+export const Education = ({ data }: { data: SectionWithListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' fontSize='md' textTransform='uppercase'>
@@ -38,5 +38,3 @@ const Education = ({ data }: { data: SectionWithListI }) => {
     </Box>
   );
 };
-
-export default Education;

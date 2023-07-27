@@ -9,25 +9,24 @@ import {
   IconButton,
   Portal,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
-import { CSSProperties } from "react";
-import { HiOutlineLink, HiQrcode, HiTemplate } from "react-icons/hi";
-import { useData } from "../Edit/DataProvider";
-import { Menu, MenuItem } from "@chakra-ui/react";
-import {
+  Menu,
+  MenuItem,
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverBody,
   PopoverArrow,
 } from "@chakra-ui/react";
+import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
+import { CSSProperties, ReactNode } from "react";
+import { HiOutlineLink, HiQrcode, HiTemplate } from "react-icons/hi";
+import { useData } from "../Edit/DataProvider";
 import { updateResumeDetails } from "../../services/updateResumeDetails";
 
 type NavbarProps = {
   styles?: CSSProperties;
-  downloadComp?: any;
+  downloadComp?: ReactNode;
   shareQRCodeOnOpen?: () => void;
   shareLinkOnOpen?: () => void;
   selectTemplateOnOpen?: () => void;

@@ -1,7 +1,7 @@
 import { ListI, SectionWithListI } from "../../types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
-const References = ({ data }: { data: SectionWithListI }) => {
+export const References = ({ data }: { data: SectionWithListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Flex flexDir={"row"} justifyContent={"flex-start"}>
@@ -41,5 +41,3 @@ const References = ({ data }: { data: SectionWithListI }) => {
     </Box>
   );
 };
-
-export default References;

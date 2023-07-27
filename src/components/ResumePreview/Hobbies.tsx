@@ -1,7 +1,7 @@
 import { SectionWithListTextI } from "../../types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
-const Hobbies = ({ data }: { data: SectionWithListTextI }) => {
+export const Hobbies = ({ data }: { data: SectionWithListTextI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Flex flexDir={"row"} justifyContent={"flex-start"} gap={"0.9rem"}>
@@ -26,5 +26,3 @@ const Hobbies = ({ data }: { data: SectionWithListTextI }) => {
     </Box>
   );
 };
-
-export default Hobbies;

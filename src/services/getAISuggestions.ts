@@ -7,7 +7,18 @@ import {
 } from "../types/interfaces";
 import { DataReducerAction } from "../components/Edit/data.types";
 import { toast } from "react-toastify";
+import { KeyObjectFromSelectedText } from "../utils/hasValidCharacters";
 const API_URL = process.env.REACT_APP_API_BASE_URL;
+
+type GetAISuggestionsProps = {
+  dispatch: (action: DataReducerAction) => void;
+  personalDetails: PersonalDetailsI;
+  selectedOption: string;
+  selectedValue: KeyObjectFromSelectedText | null;
+  selectedObjectWithoutDescList: any;
+  valueFromPrompt: any;
+  setIsPopoverOpen: (value: SetStateAction<boolean>) => void;
+};
 
 export const getAISuggestions = async ({
   dispatch,
@@ -17,26 +28,7 @@ export const getAISuggestions = async ({
   selectedObjectWithoutDescList,
   valueFromPrompt,
   setIsPopoverOpen,
-}: {
-  dispatch: (action: DataReducerAction) => void;
-  personalDetails: PersonalDetailsI;
-  selectedOption: string;
-  selectedValue:
-    | {
-        key: string;
-        object: any;
-        selectedItem?: undefined;
-      }
-    | {
-        key: string;
-        object: any;
-        selectedItem: any;
-      }
-    | null;
-  selectedObjectWithoutDescList: any;
-  valueFromPrompt: any;
-  setIsPopoverOpen: (value: SetStateAction<boolean>) => void;
-}) => {
+}: GetAISuggestionsProps) => {
   try {
     dispatch({
       type: "CHANGE_STATUS",

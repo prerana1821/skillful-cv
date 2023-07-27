@@ -1,7 +1,7 @@
 import { TextListI, TitleListI } from "../../types/interfaces";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
-const Skills = ({ data }: { data: TitleListI }) => {
+export const Skills = ({ data }: { data: TitleListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Flex flexDir={"row"} justifyContent={"flex-start"} gap={"0.9rem"}>
@@ -26,5 +26,3 @@ const Skills = ({ data }: { data: TitleListI }) => {
     </Box>
   );
 };
-
-export default Skills;

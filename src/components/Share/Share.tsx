@@ -9,11 +9,19 @@ import { PiDownloadSimple } from "react-icons/pi";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
+interface ResumeData {
+  data: any;
+  template: string;
+  sections: string[];
+  loading: string;
+  error: string;
+}
+
 export const Share = () => {
   const { resumeId } = useParams();
   const componentRef = useRef(null);
 
-  const [resumeData, setResumeData] = useState<any>({
+  const [resumeData, setResumeData] = useState<ResumeData>({
     data: "",
     template: "",
     sections: [],
@@ -24,7 +32,7 @@ export const Share = () => {
   useEffect(() => {
     (async () => {
       try {
-        setResumeData((prevData: any) => ({
+        setResumeData((prevData: ResumeData) => ({
           ...prevData,
           loading: "Loading data from server...",
         }));
@@ -37,11 +45,12 @@ export const Share = () => {
             template: data.data.template,
             sections: Object.keys(JSON.parse(data.data.resumeValue)),
             loading: "",
+            error: "",
           });
         }
       } catch (error) {
         console.error(error);
-        setResumeData((prevData: any) => ({
+        setResumeData((prevData: ResumeData) => ({
           ...prevData,
           error: "Sorry, try again later...",
         }));

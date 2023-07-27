@@ -10,15 +10,17 @@ import {
 } from "@chakra-ui/react";
 import { useData } from "../Edit/DataProvider";
 
-const AlertResetSectionValueModal = ({
-  isOpen,
-  section,
-  onClose,
-}: {
+type AlertResetSectionValueModalProps = {
   isOpen: boolean;
   section: string;
   onClose: () => void;
-}) => {
+};
+
+export const AlertResetSectionValueModal = ({
+  isOpen,
+  section,
+  onClose,
+}: AlertResetSectionValueModalProps) => {
   const { dispatch } = useData();
 
   return (
@@ -62,5 +64,3 @@ const AlertResetSectionValueModal = ({
     </Modal>
   );
 };
-
-export default AlertResetSectionValueModal;

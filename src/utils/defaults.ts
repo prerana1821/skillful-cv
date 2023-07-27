@@ -21,13 +21,22 @@ import { IoMdColorWand } from "react-icons/io";
 import { FaPencilAlt } from "react-icons/fa";
 import { BiSolidBriefcase } from "react-icons/bi";
 
-import { Header } from "../components/ResumePreview/Header";
-import Links from "../components/ResumePreview/Links";
-import ProfileSummary from "../components/ResumePreview/ProfileSummary";
-import Education from "../components/ResumePreview/Education";
-import ProfessionalExperience from "../components/ResumePreview/ProfessionalExperience";
-import Hobbies from "../components/ResumePreview/Hobbies";
-import Courses from "../components/ResumePreview/Courses";
+import {
+  ProfessionalExperience,
+  ProfileSummary,
+  Header,
+  Education,
+  Internships,
+  Links,
+  Hobbies,
+  Courses,
+  ExtraCurricularActivities,
+  References,
+  Skills,
+  Languages,
+  CustomSection,
+} from "../components/ResumePreview";
+
 import {
   LondonCourses,
   LondonEducation,
@@ -43,14 +52,9 @@ import {
   LondonReferences,
   LondonCustomSection,
 } from "../components/ResumePreview/London";
-import Skills from "../components/ResumePreview/Skills";
-import Languages from "../components/ResumePreview/Languages";
-import Internships from "../components/ResumePreview/Internships";
-import ExtraCurricularActivities from "../components/ResumePreview/ExtraCurricularActivities";
-import References from "../components/ResumePreview/References";
+
 import { LiaHandPeace } from "react-icons/lia";
 import { MdLaptopMac } from "react-icons/md";
-import CustomSection from "../components/ResumePreview/CustomSection";
 
 export const DEFAULT_SECTIONS = {
   default: ["personal-details", "profile-summary"],

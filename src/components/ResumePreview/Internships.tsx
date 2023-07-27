@@ -8,7 +8,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-const Internships = ({ data }: { data: SectionWithListI }) => {
+export const Internships = ({ data }: { data: SectionWithListI }) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' fontSize='md' textTransform='uppercase'>
@@ -50,5 +50,3 @@ const Internships = ({ data }: { data: SectionWithListI }) => {
     </Box>
   );
 };
-
-export default Internships;

@@ -1,21 +1,5 @@
 import { ListItemI, ValueI } from "../types/interfaces";
 
-export const isValidSelection = (selectedText: string) => {
-  const validCharacters = ["{", "}", '"', ","];
-
-  for (let i = 0; i < selectedText.length; i++) {
-    if (
-      selectedText &&
-      selectedText.length > 0 &&
-      !validCharacters.includes(selectedText[i])
-    ) {
-      return true;
-    }
-  }
-
-  return false;
-};
-
 interface DescriptionItem {
   description?: string;
   list?: ListItemI[];
@@ -58,10 +42,16 @@ export const isTextInDescription = (selectedText: string, data: ValueI) => {
   return false;
 };
 
+export interface KeyObjectFromSelectedText {
+  key: string;
+  object: any;
+  selectedItem?: string;
+}
+
 export const findKeyAndObjectForSelectedText = (
   selectedText: string,
   data: any
-) => {
+): KeyObjectFromSelectedText | null => {
   const lowerSelectedText = selectedText.toLowerCase();
 
   for (const key in data) {

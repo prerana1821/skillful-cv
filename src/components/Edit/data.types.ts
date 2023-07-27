@@ -1,3 +1,5 @@
+import { ValueI } from "../../types/interfaces";
+
 export type Status = {
   loading?: string;
   success?: string;
@@ -24,7 +26,7 @@ export type InitialResumeDataState = {
 
 export type InitialResumeDataContext = {
   dispatch: (action: DataReducerAction) => void;
-  value: any;
+  value: string;
   status: Status;
   sections: {
     default: string[];

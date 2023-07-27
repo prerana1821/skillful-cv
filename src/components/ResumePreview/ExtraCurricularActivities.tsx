@@ -8,7 +8,11 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-const ExtraCurricularActivities = ({ data }: { data: SectionWithListI }) => {
+export const ExtraCurricularActivities = ({
+  data,
+}: {
+  data: SectionWithListI;
+}) => {
   return (
     <Box py='4' borderTop={"2px solid #ccc"}>
       <Heading as='h4' fontSize='md' textTransform='uppercase'>
@@ -50,5 +54,3 @@ const ExtraCurricularActivities = ({ data }: { data: SectionWithListI }) => {
     </Box>
   );
 };
-
-export default ExtraCurricularActivities;

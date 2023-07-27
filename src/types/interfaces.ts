@@ -1,17 +1,4 @@
-export interface PersonalDetailsI {
-  "first-name"?: string;
-  "last-name"?: string;
-  "job-title"?: string;
-  "phone-number"?: string;
-  email?: string;
-  country?: string;
-  city?: string;
-}
-
-export interface ProfileSummaryI {
-  "profile-summary": TitleDescI;
-}
-
+// Common Interfaces
 export interface TitleDescI {
   title?: string;
   description?: string;
@@ -19,26 +6,6 @@ export interface TitleDescI {
 
 export interface CustomSectionI {
   [key: string]: SectionWithListI;
-}
-
-export interface CoursesI {
-  courses: SectionWithListI;
-}
-export interface ProfessionalExperienceI {
-  "professional-experience": SectionWithListI;
-}
-export interface InternshipsI {
-  internships: SectionWithListI;
-}
-
-export interface EducationI {
-  education: SectionWithListI;
-}
-export interface ReferencesI {
-  references: SectionWithListI;
-}
-export interface ExtraCurricularActivitiesI {
-  "extra-curricular-activities": SectionWithListI;
 }
 
 export interface SectionWithListI {
@@ -70,16 +37,6 @@ export interface ListI {
   descriptionList?: string[];
 }
 
-export interface LanguagesI {
-  languages: TitleListI;
-}
-export interface LinksI {
-  links: TitleListI;
-}
-export interface SkillsI {
-  skills: TitleListI;
-}
-
 export interface TitleListI {
   title: string;
   list?: TextListI[];
@@ -92,18 +49,10 @@ export interface TextListI {
   link?: string;
 }
 
-// *********************************
-// Common Interfaces
-
 export interface DateRange {
   "start-date"?: string;
   "end-date"?: string;
 }
-
-// export interface ListItemI {
-//   title?: string;
-//   descriptionList?: string[];
-// }
 
 export interface TextLink {
   label?: string;
@@ -111,8 +60,7 @@ export interface TextLink {
 }
 
 // Section Interfaces
-
-export interface PersonalDetails {
+export interface PersonalDetailsI {
   "first-name"?: string;
   "last-name"?: string;
   "job-title"?: string;
@@ -132,12 +80,6 @@ export interface Education extends ListItemI {
   degree?: string;
   city?: string;
 }
-
-// export interface Course extends ListItemI, DateRange {
-//   institution?: string;
-//   course?: string;
-//   "certificate-link"?: string;
-// }
 
 export interface ProfessionalExperience extends ListItemI, DateRange {
   employer?: string;
@@ -190,7 +132,7 @@ export interface Course extends ListItemI, DateRange {
 }
 
 export interface ValueI {
-  "personal-details"?: PersonalDetails;
+  "personal-details"?: PersonalDetailsI;
   "profile-summary"?: ProfileSummary;
   education?: CustomSectionItem[];
   courses?: Course[];
@@ -205,7 +147,7 @@ export interface ValueI {
   [key: string]:
     | CustomSectionItem
     | undefined
-    | PersonalDetails
+    | PersonalDetailsI
     | ProfileSummary
     | Education[]
     | Course[]

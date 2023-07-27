@@ -11,24 +11,22 @@ import { RiDraggable } from "react-icons/ri";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { dashCaseToTitleCase } from "../../utils/caseManipulation";
-import AlertResetSectionValueModal from "./AlertResetSectionValueModal";
 import { useData } from "../Edit/DataProvider";
 import { useMotionValue, motion } from "framer-motion";
+import { DragItem } from "./types";
+import { AlertResetSectionValueModal } from "./AlertResetSectionValueModal";
 
-interface DragItem {
-  section: string;
-  index: number;
-}
-
-const SectionCard = ({
-  section,
-  index,
-  moveCard,
-}: {
+type SectionCardDefaultProps = {
   section: string;
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
-}) => {
+};
+
+export const SectionCardDefault = ({
+  section,
+  index,
+  moveCard,
+}: SectionCardDefaultProps) => {
   const ref = useRef(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -62,6 +60,7 @@ const SectionCard = ({
   });
 
   drag(drop(ref));
+
   const y = useMotionValue(0);
 
   return (
@@ -105,20 +104,22 @@ const SectionCard = ({
           </Text>
         </Flex>
         <ButtonGroup variant='unstyled' colorScheme='blackAlpha' spacing='2'>
-          <IconButton
-            minW={"auto"}
-            height={"fit-content"}
-            aria-label='Reset section value'
-            icon={
-              <RxReset
-                fontSize={"1rem"}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  onOpen();
-                }}
-              />
-            }
-          />
+          {section !== "personal-details" ? (
+            <IconButton
+              minW={"auto"}
+              height={"fit-content"}
+              aria-label='Reset section value'
+              icon={
+                <RxReset
+                  fontSize={"1rem"}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    onOpen();
+                  }}
+                />
+              }
+            />
+          ) : null}
           {section !== "personal-details" ? (
             <IconButton
               minW={"auto"}
@@ -139,5 +140,3 @@ const SectionCard = ({
     </motion.div>
   );
 };
-
-export default SectionCard;

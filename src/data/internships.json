@@ -4,20 +4,6 @@
     "list": [
       {
         "employer": "ABC COMPANY",
-        "title": "Data Analyst Intern",
-        "start-date": "Jan, 2018",
-        "end-date": "May, 2019",
-        "city": "Mumbai",
-        "descriptionList": [
-          "Conducted data analysis on transportation expenses, leading to a data-driven recommendation that resulted in a 15% reduction in transportation costs, saving the company $1.2M annually.",
-          "Implemented demand forecasting models and performed thorough data validation, leading to a 17% reduction in backorders to retail partners, improving product availability and customer satisfaction.",
-          "Led focus group sessions and performed business intelligence research to gain insights into customer preferences, enabling targeted marketing strategies that boosted sales by 15% in the NW region.",
-          "Collaborated with a team of developers to create interactive data visualizations, enhancing the decision-making process and promoting a data-driven culture within the organization.",
-          "Developed and presented a comprehensive internship project report, summarizing key findings and providing data-driven recommendations for future business optimization."
-        ]
-      },
-      {
-        "employer": "ABC COMPANY 2",
         "title": "Software Engineering Intern",
         "start-date": "Jan, 2020",
         "end-date": "May, 2021",

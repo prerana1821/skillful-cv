@@ -1,35 +1,34 @@
 /* eslint-disable react/display-name */
 import { Box, Heading } from "@chakra-ui/react";
-import { forwardRef, MutableRefObject } from "react";
-import ProfileSummary from "../ResumePreview/ProfileSummary";
-import Hobbies from "../ResumePreview/Hobbies";
-import Courses from "../ResumePreview/Courses";
-import References from "../ResumePreview/References";
-import Skills from "../ResumePreview/Skills";
-import Languages from "../ResumePreview/Languages";
-import Links from "../ResumePreview/Links";
-import Internships from "../ResumePreview/Internships";
-import ProfessionalExperience from "../ResumePreview/ProfessionalExperience";
-import ExtraCurricularActivities from "../ResumePreview/ExtraCurricularActivities";
-import CustomSection from "../ResumePreview/CustomSection";
+import { forwardRef, MutableRefObject, CSSProperties } from "react";
 import { titleCaseToDashCase } from "../../utils/caseManipulation";
 import { DEFAULT_SECTIONS, TEMPLATE_TYPES } from "../../utils/defaults";
 import { useData } from "./DataProvider";
-import { Header } from "../ResumePreview/Header";
-import Education from "../ResumePreview/Education";
+import {
+  ProfessionalExperience,
+  ProfileSummary,
+  Header,
+  Education,
+  Internships,
+  Links,
+  Hobbies,
+  Courses,
+  ExtraCurricularActivities,
+  References,
+  Skills,
+  Languages,
+  CustomSection,
+} from "../ResumePreview";
+import { getMissingSections } from "../../utils/getMissingSections";
 
-export const getMissingSections = (keys: string[], allSections: string[]) => {
-  return keys.filter((key) => !allSections.includes(key));
-};
-
-interface PreviewProps {
+type PreviewProps = {
   sections: { default: string[]; extra: string[] };
   value: any;
   showHeading?: boolean;
   ref?: MutableRefObject<any>;
-  styles?: any;
+  styles?: CSSProperties;
   templateFromDB?: string;
-}
+};
 
 const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
   const { sections, showHeading, styles, value, templateFromDB } = props;

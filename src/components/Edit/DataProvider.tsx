@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  ReactNode,
+} from "react";
 import INITIAL_DEFAULT_RESUME from "../../data/default-resume.json";
 import { DEFAULT_SECTIONS } from "../../utils/defaults";
 import { dataReducer } from "./dataReducer";
@@ -22,7 +28,7 @@ const initialResumeDataState: InitialResumeDataState = {
   status: {} as Status,
 };
 
-export const DataProvider = ({ children }: { children: any }) => {
+export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [
     {
       value,
