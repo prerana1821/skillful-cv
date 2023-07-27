@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ErrorBoundary from "../ErrorBoundary";
 
 export const Editor = () => {
-  const { sections, dispatch, value } = useData();
+  const { sections, dispatch, value, template } = useData();
 
   const componentRef = useRef(null);
 
@@ -60,7 +60,7 @@ export const Editor = () => {
       if (resumeTemplate) {
         dispatch({
           type: "SET_TEMPLATE",
-          payload: resumeTemplate,
+          payload: template ? template : resumeTemplate,
         });
       }
     } catch (error) {
