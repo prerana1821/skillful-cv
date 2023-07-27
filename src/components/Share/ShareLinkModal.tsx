@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { useData } from "../Edit/DataProvider";
+import { toast } from "react-toastify";
 
 const CLIENT_BASE_URL = process.env.REACT_APP_CLIENT_BASE_URL;
 
@@ -35,6 +36,16 @@ export const ShareLinkModal = ({ isOpen, onClose }: ShareLinkModalProps) => {
         setIsResumeLinkCopied(true);
       })
       .catch((error) => {
+        toast.error("Error copying link to clipboard.", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         console.error("Error copying link to clipboard:", error);
       });
   };

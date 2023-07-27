@@ -11,6 +11,9 @@ import { ShareLinkModal } from "../Share/ShareLinkModal";
 import { useData } from "./DataProvider";
 import { ShareQRCodeModal } from "../Share/ShareQRCodeModal";
 import { SelectTemplateModal } from "../Templates/SelectTemplateModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ErrorBoundary from "../ErrorBoundary";
 
 export const Editor = () => {
   const { sections, dispatch, value } = useData();
@@ -61,8 +64,18 @@ export const Editor = () => {
         });
       }
     } catch (error) {
+      toast.error("Error while retrieving resume data from localStorage.", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       console.error(
-        "Error while retrieving resume data from localStorage:",
+        "Error while retrieving resume data from localStorage.",
         error
       );
     }
@@ -101,6 +114,19 @@ export const Editor = () => {
         }
       />
 
+      <ToastContainer
+        position='bottom-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='dark'
+      />
+
       <ShareLinkModal isOpen={shareLinkIsOpen} onClose={shareLinkOnClose} />
       <ShareQRCodeModal
         isOpen={shareQRCodeIsOpen}
@@ -120,7 +146,9 @@ export const Editor = () => {
         >
           <Sections />
 
-          <EditorJSON />
+          <ErrorBoundary>
+            <EditorJSON />
+          </ErrorBoundary>
 
           <Preview
             showHeading

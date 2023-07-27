@@ -6,7 +6,7 @@ export type Status = {
 
 export type ServerError = {
   errorMessage: string;
-  errorCode: number;
+  errorCode?: number;
 };
 
 export type InitialResumeDataState = {

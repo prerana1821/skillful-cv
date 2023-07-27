@@ -31,8 +31,7 @@ import { useState } from "react";
 import { AI_SUGGESTIONS_OPTIONS } from "../../utils/defaults";
 import { PersonalDetailsI } from "../../types/interfaces";
 import { useData } from "./DataProvider";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { getAISuggestions } from "../../services/getAISuggestions";
 
@@ -106,18 +105,6 @@ const EditorJSON = () => {
       flex={{ base: "none", sm: "35%" }}
       height={{ base: "100vh", sm: "auto" }}
     >
-      <ToastContainer
-        position='bottom-right'
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme='dark'
-      />
       <Flex justifyContent={"space-between"} alignItems={"center"}>
         <Heading as='h3' size='xs' mb='0.5rem'>
           Editor
