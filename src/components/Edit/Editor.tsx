@@ -47,9 +47,11 @@ export const Editor = () => {
       const resumeTemplate = localStorage.getItem("resumeTemplate");
 
       if (resumeData) {
+        console.log(JSON.parse(resumeData));
         dispatch({ type: "ADD_RESUME_DATA", payload: resumeData });
       }
       if (resumeSections) {
+        console.log(JSON.parse(resumeSections));
         dispatch({
           type: "ADD_SECTIONS",
           payload: JSON.parse(resumeSections),
