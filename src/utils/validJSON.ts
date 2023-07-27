@@ -16,7 +16,7 @@ export const validJSON = (text: string) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "dark",
+      theme: "light",
     });
     return false;
   }

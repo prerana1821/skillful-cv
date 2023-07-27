@@ -41,7 +41,7 @@ export const updateResumeDetails = async ({
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "dark",
+      theme: "light",
     });
     console.error(error);
   }

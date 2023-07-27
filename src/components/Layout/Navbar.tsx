@@ -8,6 +8,7 @@ import {
   ButtonGroup,
   IconButton,
   Portal,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
@@ -44,6 +45,8 @@ export default function Navbar({
   const { colorMode, toggleColorMode } = useColorMode();
 
   const { value, dispatch, template } = useData();
+
+  const hoverBgColor = useColorModeValue("#edeff7", "#1a202c");
 
   return (
     <>
@@ -94,7 +97,7 @@ export default function Navbar({
                               icon={<HiOutlineLink />}
                               borderRadius={"md"}
                               _hover={{
-                                backgroundColor: "#edeff7",
+                                backgroundColor: hoverBgColor,
                                 cursor: "pointer",
                               }}
                               onClick={() =>
@@ -111,7 +114,7 @@ export default function Navbar({
                             <MenuItem
                               borderRadius={"md"}
                               _hover={{
-                                backgroundColor: "#edeff7",
+                                backgroundColor: hoverBgColor,
                                 cursor: "pointer",
                               }}
                               icon={<HiQrcode />}

@@ -1,5 +1,6 @@
 :root {
   --primary-color: #f50057;
+  --toastify-text-color-light: #000;
 }
 
 * {

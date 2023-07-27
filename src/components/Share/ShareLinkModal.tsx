@@ -44,7 +44,7 @@ export const ShareLinkModal = ({ isOpen, onClose }: ShareLinkModalProps) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: "light",
         });
         console.error("Error copying link to clipboard:", error);
       });

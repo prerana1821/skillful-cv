@@ -6,6 +6,7 @@ import {
   List,
   ListIcon,
   ListItem,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { validJSON } from "../../utils/validJSON";
@@ -48,6 +49,8 @@ const EditorJSON = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
+  const hoverBgColor = useColorModeValue("#edeff7", "#1a202c");
+
   function onChange(newValue: string) {
     if (validJSON(newValue)) {
       dispatch({
@@ -77,7 +80,7 @@ const EditorJSON = () => {
       !personalDetails["job-title"] ||
       !personalDetails["country"]
     ) {
-      toast.error("Please enter personal details to use AI suggestions", {
+      toast.error("Please enter personal details to use AI suggestions.", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -85,7 +88,7 @@ const EditorJSON = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "light",
       });
     } else {
       getAISuggestions({
@@ -155,7 +158,7 @@ const EditorJSON = () => {
                           p='0.5rem'
                           borderRadius={"md"}
                           _hover={{
-                            backgroundColor: "#edeff7",
+                            backgroundColor: hoverBgColor,
                             cursor: "pointer",
                           }}
                         >

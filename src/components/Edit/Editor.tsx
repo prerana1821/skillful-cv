@@ -72,7 +72,7 @@ export const Editor = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "light",
       });
       console.error(
         "Error while retrieving resume data from localStorage.",
@@ -124,7 +124,7 @@ export const Editor = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme='dark'
+        theme='light'
       />
 
       <ShareLinkModal isOpen={shareLinkIsOpen} onClose={shareLinkOnClose} />
