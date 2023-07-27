@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect } from "react";
-import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, useDisclosure } from "@chakra-ui/react";
 import Preview from "./Preview";
 import Sections from "./Sections";
 import ReactToPrint from "react-to-print";
@@ -41,17 +41,14 @@ export const Editor = () => {
 
   useEffect(() => {
     try {
-      // TODO: add loading status
       const resumeData = localStorage?.getItem("resumeData");
       const resumeSections = localStorage.getItem("resumeSections");
       const resumeTemplate = localStorage.getItem("resumeTemplate");
 
       if (resumeData) {
-        console.log(JSON.parse(resumeData));
         dispatch({ type: "ADD_RESUME_DATA", payload: resumeData });
       }
       if (resumeSections) {
-        console.log(JSON.parse(resumeSections));
         dispatch({
           type: "ADD_SECTIONS",
           payload: JSON.parse(resumeSections),

@@ -24,6 +24,7 @@ import {
   PopoverBody,
   PopoverArrow,
 } from "@chakra-ui/react";
+import { updateResumeDetails } from "../../services/updateResumeDetails";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -46,51 +47,7 @@ export default function Navbar({
 }: NavbarProps) {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const { value, dispatch } = useData();
-
-  const shareLinkResume = async () => {
-    const uid = new ShortUniqueId({ length: 10 });
-    const uniqueId = uid();
-    const resumeJSON = JSON.parse(value);
-
-    // add a services file for all the api calls
-    try {
-      const response = await axios.post(`${API_URL}resumes`, {
-        uniqueId,
-        email: resumeJSON["personal-details"].email,
-        resumeValue: value,
-      });
-      if (response.status === 200) {
-        const resumeId = response.data.resumeId;
-        dispatch({ type: "ADD_RESUME_ID", payload: resumeId });
-        shareLinkOnOpen && shareLinkOnOpen();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const shareQRCodeResume = async () => {
-    const uid = new ShortUniqueId({ length: 10 });
-    const uniqueId = uid();
-    const resumeJSON = JSON.parse(value);
-
-    // add a services file for all the api calls
-    try {
-      const response = await axios.post(`${API_URL}resumes`, {
-        uniqueId,
-        email: resumeJSON["personal-details"].email,
-        resumeValue: value,
-      });
-      if (response.status === 200) {
-        const resumeId = response.data.resumeId;
-        dispatch({ type: "ADD_RESUME_ID", payload: resumeId });
-        shareQRCodeOnOpen && shareQRCodeOnOpen();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { value, dispatch, template } = useData();
 
   return (
     <>
@@ -139,13 +96,37 @@ export default function Navbar({
                           <PopoverBody>
                             <MenuItem
                               icon={<HiOutlineLink />}
-                              onClick={shareLinkResume}
+                              borderRadius={"md"}
+                              _hover={{
+                                backgroundColor: "#edeff7",
+                                cursor: "pointer",
+                              }}
+                              onClick={() =>
+                                updateResumeDetails({
+                                  value,
+                                  template,
+                                  onOpenModal: shareLinkOnOpen,
+                                  dispatch,
+                                })
+                              }
                             >
                               Share a link
                             </MenuItem>
                             <MenuItem
+                              borderRadius={"md"}
+                              _hover={{
+                                backgroundColor: "#edeff7",
+                                cursor: "pointer",
+                              }}
                               icon={<HiQrcode />}
-                              onClick={shareQRCodeResume}
+                              onClick={() =>
+                                updateResumeDetails({
+                                  value,
+                                  template,
+                                  onOpenModal: shareQRCodeOnOpen,
+                                  dispatch,
+                                })
+                              }
                             >
                               Generate QR Code
                             </MenuItem>

@@ -31,11 +31,11 @@ const router = createBrowserRouter([
 ]);
 
 root.render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <DataProvider>
-        <RouterProvider router={router} />
-      </DataProvider>
-    </ChakraProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ChakraProvider>
+    <DataProvider>
+      <RouterProvider router={router} />
+    </DataProvider>
+  </ChakraProvider>
+  // </React.StrictMode>
 );

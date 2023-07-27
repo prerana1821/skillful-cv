@@ -15,6 +15,7 @@ export const Share = () => {
 
   const [resumeData, setResumeData] = useState<any>({
     data: "",
+    template: "",
     sections: [],
     loading: "",
     error: "",
@@ -34,6 +35,7 @@ export const Share = () => {
           console.log({ data });
           setResumeData({
             data: JSON.parse(data.data.resumeValue),
+            template: data.data.template,
             sections: Object.keys(JSON.parse(data.data.resumeValue)),
             loading: "",
           });
@@ -114,6 +116,7 @@ export const Share = () => {
               margin: "1rem auto 2rem",
             }}
             sections={{ default: resumeData.sections, extra: [] }}
+            templateFromDB={resumeData.template}
             value={resumeData.data}
             ref={componentRef}
           />

@@ -10,6 +10,7 @@ import {
   FormLabel,
   Input,
   Button,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { useData } from "../Edit/DataProvider";
@@ -29,6 +30,18 @@ export const AddCustomSectionModal = ({
 }: AddCustomSectionModalProps) => {
   const { customSectionTitle, dispatch } = useData();
 
+  const isError = customSectionTitle === "";
+
+  const handleAddCustomSection = () => {
+    if (customSectionTitle.length > 0) {
+      dispatch({
+        type: "ADD_CUSTOM_SECTION",
+        payload: customSectionTitle,
+      });
+      addCustomSectionOnClose();
+    }
+  };
+
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -43,7 +56,7 @@ export const AddCustomSectionModal = ({
         <ModalHeader>New Custom Section</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          <FormControl>
+          <FormControl isInvalid={isError}>
             <FormLabel>Section name</FormLabel>
             <Input
               ref={initialRef}
@@ -54,28 +67,21 @@ export const AddCustomSectionModal = ({
                   payload: e.target.value,
                 })
               }
-              // onChange={(e) => setCustomSectionTitle(e.target.value)}
             />
+            {isError && (
+              <FormErrorMessage>Section name is required.</FormErrorMessage>
+            )}
           </FormControl>
         </ModalBody>
 
         <ModalFooter display={"flex"} gap='1rem'>
           <Button onClick={onClose}>Cancel</Button>
-          {/* TODO: Add error is input value is empty.  */}
           <Button
             backgroundColor='#F50057'
+            _hover={{ backgroundColor: "#F50057" }}
             color='#fff'
             mr={3}
-            onClick={() => {
-              if (customSectionTitle.length > 0) {
-                dispatch({
-                  type: "ADD_CUSTOM_SECTION",
-                  payload: customSectionTitle,
-                });
-
-                addCustomSectionOnClose();
-              }
-            }}
+            onClick={handleAddCustomSection}
           >
             Add Section
           </Button>

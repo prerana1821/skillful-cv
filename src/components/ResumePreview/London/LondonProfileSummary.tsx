@@ -16,7 +16,7 @@ export const LondonProfileSummary = ({ data }: { data: TitleDescI }) => {
       >
         {data?.title}
       </Heading>
-      <Text fontSize='xs' textAlign='center' fontFamily={"math"}>
+      <Text fontSize='xs' textAlign='center' fontFamily={"math"} mt='1rem'>
         {data?.description}
       </Text>
     </Box>

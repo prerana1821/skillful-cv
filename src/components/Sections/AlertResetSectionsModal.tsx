@@ -13,11 +13,9 @@ import { useData } from "../Edit/DataProvider";
 const AlertResetSectionsModal = ({
   isOpen,
   onClose,
-}: // resetSections,
-{
+}: {
   isOpen: boolean;
   onClose: () => void;
-  // resetSections: () => void;
 }) => {
   const { dispatch } = useData();
 

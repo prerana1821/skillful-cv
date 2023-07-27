@@ -16,8 +16,6 @@ import { useData } from "./DataProvider";
 import { RxReset } from "react-icons/rx";
 import { motion } from "framer-motion";
 
-// TODO: personal details & profile summary should not be drag & delete
-
 const Sections = () => {
   const { sections, dispatch } = useData();
 

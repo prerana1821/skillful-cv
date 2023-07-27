@@ -14,12 +14,10 @@ const AlertResetSectionValueModal = ({
   isOpen,
   section,
   onClose,
-}: // resetDefaultSection,
-{
+}: {
   isOpen: boolean;
   section: string;
   onClose: () => void;
-  // resetDefaultSection: (section: string) => void;
 }) => {
   const { dispatch } = useData();
 

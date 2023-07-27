@@ -28,10 +28,11 @@ interface PreviewProps {
   showHeading?: boolean;
   ref?: MutableRefObject<any>;
   styles?: any;
+  templateFromDB?: string;
 }
 
 const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
-  const { sections, showHeading, styles, value } = props;
+  const { sections, showHeading, styles, value, templateFromDB } = props;
 
   const { customSectionTitle, template } = useData();
 
@@ -40,8 +41,9 @@ const Preview = forwardRef<HTMLDivElement, PreviewProps>((props, ref) => {
 
   const missingSections = getMissingSections(keys, allSections);
 
+  const chosenTemplate = templateFromDB ? templateFromDB : template;
   const TemplateComponent =
-    TEMPLATE_TYPES[template as keyof typeof TEMPLATE_TYPES]?.component;
+    TEMPLATE_TYPES[chosenTemplate as keyof typeof TEMPLATE_TYPES]?.component;
 
   return (
     <Box

@@ -28,7 +28,7 @@ export const SelectTemplateModal = ({
           <Text mb='1rem'>
             You can click on any of the following resume templates to use it.
           </Text>
-          <Templates orientation='vertical' />
+          <Templates orientation='vertical' onModalClose={onClose} />
         </ModalBody>
       </ModalContent>
     </Modal>
