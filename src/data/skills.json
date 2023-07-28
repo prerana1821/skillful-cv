@@ -1,0 +1,27 @@
+{
+  "skills": {
+    "title": "Skills",
+    "list": [
+      {
+        "name": "Python",
+        "level": "Noice"
+      },
+      {
+        "name": "Java",
+        "level": "Beginner"
+      },
+      {
+        "name": ".NET Core/C#",
+        "level": "Skillful"
+      },
+      {
+        "name": "Github",
+        "level": "Expert"
+      },
+      {
+        "name": "Docker",
+        "level": "Experienced"
+      }
+    ]
+  }
+}

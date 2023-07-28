@@ -1,0 +1,19 @@
+{
+  "extra-curricular-activities": {
+    "title": "Extra-curricular Activities",
+    "list": [
+      {
+        "employer": "ABC COMPANY",
+        "title": "Social Responsibility Club",
+        "start-date": "Jan, 2018",
+        "end-date": "May, 2019",
+        "city": "Mumbai",
+        "descriptionList": [
+          "Led a sustainability initiative that promoted eco-friendly transportation methods, resulting in a 15% reduction in transportation costs, contributing to a greener and more cost-efficient operation.",
+          "Organized charity drives and fundraisers to support underprivileged communities, with a focus on providing essential resources and educational opportunities to those in need.",
+          "Collaborated with local schools to implement educational workshops on environmental awareness, impacting over 500 students and fostering a culture of sustainability from an early age."
+        ]
+      }
+    ]
+  }
+}

@@ -3,9 +3,13 @@
     "first-name": "Prerana",
     "last-name": "Nawar",
     "job-title": "Software Engineer",
-    "phone-number": "+91 9152635928",
+    "phone-number": "+91 9876576543",
     "email": "prerananw1@gmail.com",
     "country": "India",
     "city": "Mumbai"
+  },
+  "profile-summary": {
+    "title": "Profile",
+    "description": "Experienced Software Developer adept in bringing forth expertise in design, installation, testing and maintenance of software systems. Proficient in various platforms, languages, and embedded systems."
   }
 }

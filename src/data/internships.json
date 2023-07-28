@@ -1,0 +1,21 @@
+{
+  "internships": {
+    "title": "Internships",
+    "list": [
+      {
+        "employer": "ABC COMPANY",
+        "title": "Software Engineering Intern",
+        "start-date": "Jan, 2020",
+        "end-date": "May, 2021",
+        "city": "Mumbai",
+        "descriptionList": [
+          "Identified opportunities for process automation within the transportation system, leading to a 15% reduction in transportation costs, resulting in $1.2M annual savings.",
+          "Contributed to the development and deployment of an improved demand forecasting algorithm, resulting in a 17% reduction in backorders to retail partners, streamlining inventory management.",
+          "Conducted extensive user research and gathered valuable insights through focus groups, which played a key role in boosting sales by 15% in the NW region.",
+          "Implemented new features and performed bug fixes for the company's flagship product, contributing to enhanced product stability and a more seamless user experience.",
+          "Collaborated with cross-functional teams to propose innovative solutions, resulting in improved efficiency and communication between departments."
+        ]
+      }
+    ]
+  }
+}
