@@ -30,6 +30,7 @@ type NavbarProps = {
   shareQRCodeOnOpen?: () => void;
   shareLinkOnOpen?: () => void;
   selectTemplateOnOpen?: () => void;
+  showGithubBtns?: boolean;
 };
 
 export default function Navbar({
@@ -38,6 +39,7 @@ export default function Navbar({
   shareLinkOnOpen,
   shareQRCodeOnOpen,
   selectTemplateOnOpen,
+  showGithubBtns,
 }: NavbarProps) {
   const { value, dispatch, template, status } = useData();
 
@@ -45,7 +47,12 @@ export default function Navbar({
 
   return (
     <>
-      <Box px={4} maxW={"8xl"} boxShadow={styles?.boxShadow} m='auto'>
+      <Box
+        px={4}
+        maxW={showGithubBtns ? "8xl " : "full"}
+        boxShadow={styles?.boxShadow}
+        m='auto'
+      >
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Box p={"0.8rem"}>
             <Link to='/'>
@@ -141,28 +148,30 @@ export default function Navbar({
                   </ButtonGroup>
                 </Menu>
               )}
-              <ButtonGroup>
-                <GitHubButton
-                  href='https://github.com/prerana1821/skillful-cv'
-                  data-color-scheme='no-preference: light; light: light; dark: dark;'
-                  data-icon='octicon-star'
-                  data-size='large'
-                  data-show-count='true'
-                  aria-label='Star prerana1821/skillful-cv on GitHub'
-                >
-                  Star
-                </GitHubButton>
-                &nbsp;&nbsp;&nbsp;
-                <GitHubButton
-                  href='https://github.com/prerana1821'
-                  data-color-scheme='no-preference: light; light: light; dark: dark;'
-                  data-size='large'
-                  data-show-count='true'
-                  aria-label='Follow @prerana1821 on GitHub'
-                >
-                  Follow
-                </GitHubButton>
-              </ButtonGroup>
+              {showGithubBtns && (
+                <ButtonGroup>
+                  <GitHubButton
+                    href='https://github.com/prerana1821/skillful-cv'
+                    data-color-scheme='no-preference: light; light: light; dark: dark;'
+                    data-icon='octicon-star'
+                    data-size='large'
+                    data-show-count='true'
+                    aria-label='Star prerana1821/skillful-cv on GitHub'
+                  >
+                    Star
+                  </GitHubButton>
+                  &nbsp;&nbsp;&nbsp;
+                  <GitHubButton
+                    href='https://github.com/prerana1821'
+                    data-color-scheme='no-preference: light; light: light; dark: dark;'
+                    data-size='large'
+                    data-show-count='true'
+                    aria-label='Follow @prerana1821 on GitHub'
+                  >
+                    Follow
+                  </GitHubButton>
+                </ButtonGroup>
+              )}
             </Stack>
           </Flex>
         </Flex>
