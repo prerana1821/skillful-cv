@@ -25,9 +25,7 @@ Skillful CV is an innovative resume building website that allows users to effort
 
 # Demo
 
-<video width="320" height="240" controls>
-  <source src="/demo.mp4" type="video/mp4">
-</video>
+[View Demo](https://drive.google.com/file/d/1Pe_zr2gR4ZJ06MNxqXSKAwzGM7AOM8h1/view?usp=sharing)
 
 ## Key Features
 
