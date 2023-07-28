@@ -30,7 +30,6 @@ type NavbarProps = {
   shareQRCodeOnOpen?: () => void;
   shareLinkOnOpen?: () => void;
   selectTemplateOnOpen?: () => void;
-  showColorMode?: boolean;
 };
 
 export default function Navbar({
@@ -39,10 +38,7 @@ export default function Navbar({
   shareLinkOnOpen,
   shareQRCodeOnOpen,
   selectTemplateOnOpen,
-  showColorMode,
 }: NavbarProps) {
-  const { colorMode, toggleColorMode } = useColorMode();
-
   const { value, dispatch, template, status } = useData();
 
   const hoverBgColor = useColorModeValue("#edeff7", "#1a202c");
@@ -145,11 +141,6 @@ export default function Navbar({
                     </Popover>
                   </ButtonGroup>
                 </Menu>
-              )}
-              {showColorMode && (
-                <Button onClick={toggleColorMode}>
-                  {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-                </Button>
               )}
             </Stack>
           </Flex>

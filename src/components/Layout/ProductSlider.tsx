@@ -26,19 +26,17 @@ const ProductSlider = () => {
       >
         <SwiperSlide className='slider-product'>
           <Image
-            src='/skillful-cv2.png'
+            src='/assets/features/skillful-cv2.png'
             width={1200}
             rounded={"xl"}
-            // height={710}
             alt='skillful-cv'
           />
         </SwiperSlide>
         <SwiperSlide className='slider-product'>
           <Image
             rounded={"xl"}
-            src='/skillful-cv1.png'
+            src='/assets/features/skillful-cv1.png'
             width={1152}
-            // height={710}
             alt='skillful-cv'
           />
         </SwiperSlide>

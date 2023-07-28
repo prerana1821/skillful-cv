@@ -14,6 +14,7 @@ export default function Hero() {
           as='h1'
           fontSize={{ base: "2xl", sm: "4xl", md: "5xl" }}
           lineHeight={"110%"}
+          color="#fff"
         >
           The easiest way to create <br />
           <Text as={"span"} color={"#F50057"} textTransform={"uppercase"}>

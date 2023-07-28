@@ -7,10 +7,7 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import {
-  FaLinkedinIn,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { ReactNode } from "react";
 import { IoIosGlobe } from "react-icons/io";
 
@@ -57,6 +54,7 @@ export default function Footer() {
         spacing={4}
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
+        color='#fff'
       >
         <Text fontSize={"sm"}>© 2023 | precodes. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
