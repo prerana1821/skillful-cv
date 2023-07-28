@@ -24,7 +24,7 @@ const Templates = ({ orientation, onModalClose }: TemplatesProps) => {
   }, {});
 
   return (
-    <Box color='#fff'>
+    <Box color={orientation !== "vertical" ? "#fff" : "#000"}>
       {orientation !== "vertical" && (
         <Center>
           <Heading as='h3' size='xl' my='2rem'>
