@@ -14,11 +14,11 @@ export default function Hero() {
           as='h1'
           fontSize={{ base: "2xl", sm: "4xl", md: "5xl" }}
           lineHeight={"110%"}
-          color="#fff"
+          color='#fff'
         >
-          The easiest way to create <br />
+          Reimagine Your Resume With <br />
           <Text as={"span"} color={"#F50057"} textTransform={"uppercase"}>
-            Resume
+            Skillful CV
           </Text>
         </Heading>
         <Text
@@ -27,8 +27,9 @@ export default function Hero() {
           margin={"auto"}
           textAlign={"center"}
         >
-          Our simple editor allows you to quickly add and customize all the
-          sections you need for your career.
+          Our user-friendly editor empowers you to effortlessly create,
+          customize, and fine-tune every aspect of your resume for a flawless
+          professional presentation.
         </Text>
         <Stack
           direction={"column"}

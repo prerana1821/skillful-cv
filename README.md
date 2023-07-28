@@ -8,7 +8,7 @@
   <p align="center">
       Resume Building Reimagined - Create, Customize, Conquer
     <br />
-    <a href="https://github.com/prerana1821/skillful-cv"><strong>Go to App »</strong></a>
+    <a href="https://skillful-cv.vercel.app/"><strong>Go to App »</strong></a>
     <br />
     <br />
     <a href="https://github.com/prerana1821/skillful-cv/pulls">Raise a PR</a>

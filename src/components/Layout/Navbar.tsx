@@ -3,7 +3,6 @@ import {
   Flex,
   Button,
   Stack,
-  useColorMode,
   Image,
   ButtonGroup,
   IconButton,
@@ -17,12 +16,13 @@ import {
   PopoverBody,
   PopoverArrow,
 } from "@chakra-ui/react";
-import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { CSSProperties, ReactNode } from "react";
 import { HiOutlineLink, HiQrcode, HiTemplate } from "react-icons/hi";
 import { useData } from "../Edit/DataProvider";
 import { updateResumeDetails } from "../../services/updateResumeDetails";
+import GitHubButton from "react-github-btn";
 
 type NavbarProps = {
   styles?: CSSProperties;
@@ -45,7 +45,7 @@ export default function Navbar({
 
   return (
     <>
-      <Box px={4} boxShadow={styles?.boxShadow}>
+      <Box px={4} maxW={"8xl"} boxShadow={styles?.boxShadow} m='auto'>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Box p={"0.8rem"}>
             <Link to='/'>
@@ -72,7 +72,6 @@ export default function Navbar({
                   Change Template
                 </Button>
               )}
-
               {downloadComp && (
                 <Menu>
                   <ButtonGroup isAttached variant='outline'>
@@ -142,6 +141,28 @@ export default function Navbar({
                   </ButtonGroup>
                 </Menu>
               )}
+              <ButtonGroup>
+                <GitHubButton
+                  href='https://github.com/prerana1821/skillful-cv'
+                  data-color-scheme='no-preference: light; light: light; dark: dark;'
+                  data-icon='octicon-star'
+                  data-size='large'
+                  data-show-count='true'
+                  aria-label='Star prerana1821/skillful-cv on GitHub'
+                >
+                  Star
+                </GitHubButton>
+                &nbsp;&nbsp;&nbsp;
+                <GitHubButton
+                  href='https://github.com/prerana1821'
+                  data-color-scheme='no-preference: light; light: light; dark: dark;'
+                  data-size='large'
+                  data-show-count='true'
+                  aria-label='Follow @prerana1821 on GitHub'
+                >
+                  Follow
+                </GitHubButton>
+              </ButtonGroup>
             </Stack>
           </Flex>
         </Flex>

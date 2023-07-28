@@ -1,17 +1,16 @@
-import {
-  Container,
-  Stack,
-  Flex,
-  Heading,
-  Text,
-  Image,
-} from "@chakra-ui/react";
+import { Container, Stack, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import { useSpring, animated } from "react-spring";
 
 export const FeaturedSection = ({
+  titleHeading,
+  titleSubHeading,
+  description,
   image,
   align,
 }: {
+  titleHeading: string;
+  titleSubHeading: string;
+  description: string;
   image: string;
   align: string;
 }) => {
@@ -45,25 +44,21 @@ export const FeaturedSection = ({
           md: align === "left" ? "row" : "row-reverse",
         }}
       >
-        <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+        <Stack flex={1} spacing={{ base: 5, md: 8 }}>
           <Heading
             lineHeight={1.1}
             fontWeight={600}
-            fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
+            fontSize={{ base: "3xl", sm: "4xl", lg: "5xl" }}
           >
             <Text as={"span"} color='#fff'>
-              Write once,
+              {titleHeading}
             </Text>
             <br />
-            <Text as={"span"} color={"red.400"}>
-              use everywhere!
+            <Text as={"span"} color={"red.400"} fontSize='4xl'>
+              {titleSubHeading}
             </Text>
           </Heading>
-          <Text color={"gray.500"}>
-            Snippy is a rich coding snippets app that lets you create your own
-            code snippets, categorize them, and even sync them in the cloud so
-            you can use them anywhere. All that is free!
-          </Text>
+          <Text color={"gray.500"}>{description}</Text>
         </Stack>
         <Flex
           flex={1}
