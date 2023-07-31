@@ -1,5 +1,3 @@
-import { toast } from "react-toastify";
-
 export const validJSON = (text: string) => {
   if (typeof text !== "string") {
     return false;
