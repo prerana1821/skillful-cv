@@ -58,6 +58,15 @@ To run this project, you will need to add the following environment variables to
 
 `REACT_APP_CLIENT_BASE_URL`
 
+## TODO Features
+
+- [x] QR code generation
+- [ ] Multimedia support
+- [ ] Responsive design
+- [ ] LinkedIn integration
+- [ ] Resume scoring
+- [ ] Download in docx
+
 ## Contributing
 
 I welcome contributions from the community to improve Skillful CV. If you find a bug or have an idea for a new feature, feel free to create an issue or submit a pull request.
