@@ -25,9 +25,7 @@ Skillful CV is an innovative resume building website that allows users to effort
 
 # Demo
 
-<video width="320" height="240" controls>
-  <source src="/demo.mp4" type="video/mp4">
-</video>
+[View Demo](https://drive.google.com/file/d/1Pe_zr2gR4ZJ06MNxqXSKAwzGM7AOM8h1/view?usp=sharing)
 
 ## Key Features
 
@@ -59,6 +57,15 @@ To run this project, you will need to add the following environment variables to
 `REACT_APP_API_BASE_URL`
 
 `REACT_APP_CLIENT_BASE_URL`
+
+## TODO Features
+
+- [x] QR code generation
+- [ ] Multimedia support
+- [ ] Responsive design
+- [ ] LinkedIn integration
+- [ ] Resume scoring
+- [ ] Download in docx
 
 ## Contributing
 
