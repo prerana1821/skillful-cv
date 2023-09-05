@@ -18,7 +18,7 @@ export const DataContext = createContext<InitialResumeDataContext>(
   {} as InitialResumeDataContext
 );
 
-const initialResumeDataState: InitialResumeDataState = {
+export const initialResumeDataState: InitialResumeDataState = {
   value: JSON.stringify(INITIAL_DEFAULT_RESUME, null, 2),
   sections: DEFAULT_SECTIONS,
   template: "santiago",

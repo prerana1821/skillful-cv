@@ -1,5 +1,3 @@
-import { ValueI } from "../../types/interfaces";
-
 export type Status = {
   loading?: string;
   success?: string;

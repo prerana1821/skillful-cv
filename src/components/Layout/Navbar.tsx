@@ -86,7 +86,7 @@ export default function Navbar({
                     <Popover>
                       <PopoverTrigger>
                         <IconButton
-                          aria-label='Add to friends'
+                          aria-label='Multiple Share Options'
                           icon={<ChevronDownIcon />}
                         />
                       </PopoverTrigger>
@@ -138,7 +138,7 @@ export default function Navbar({
                                   }
                                 >
                                   Generate QR Code
-                                </MenuItem>{" "}
+                                </MenuItem>
                               </>
                             )}
                           </PopoverBody>

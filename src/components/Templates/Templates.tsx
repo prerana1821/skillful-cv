@@ -16,6 +16,7 @@ const Templates = ({ orientation, onModalClose }: TemplatesProps) => {
     [key: string]: TemplatesByType[];
   } = Object.entries(TEMPLATE_TYPES).reduce((acc, [templateName, template]) => {
     const { type, typeIcon, avaliable } = template;
+    // checks if an array with the name type already exists in the acc
     if (!(acc as any)[type]) {
       (acc as any)[type] = [];
     }

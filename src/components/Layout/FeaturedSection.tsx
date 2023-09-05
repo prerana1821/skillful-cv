@@ -14,10 +14,10 @@ export const FeaturedSection = ({
   image: string;
   align: string;
 }) => {
-  const trans = (x: any, y: any, s: any) =>
+  const trans = (x: number, y: number, s: number) =>
     `perspective(400px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
-  const calc = (x: any, y: any) => {
+  const calc = (x: number, y: number) => {
     const newX = x - window.innerWidth / 2;
     const newY = y - window.innerHeight / 2;
     const scaleX = 1.1;
@@ -69,13 +69,13 @@ export const FeaturedSection = ({
         >
           <animated.div
             className='card'
-            onMouseMove={(e) => {
-              const { clientX: x, clientY: y } = e;
+            onMouseMove={(event) => {
+              const { clientX: x, clientY: y } = event;
 
               return set({ xys: calc(x, y) });
             }}
             onMouseLeave={() => set({ xys: [0, 0, 1] })}
-            style={{ transform: props.xys.interpolate(trans) }}
+            style={{ transform: props.xys.to(trans) }}
           >
             <Image
               rounded={"xl"}
