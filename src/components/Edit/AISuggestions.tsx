@@ -30,8 +30,6 @@ export const AISuggestions = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-  const hoverBgColor = useColorModeValue("#edeff7", "#1a202c");
-
   const handleAISuggestions = async (selectedOption: string) => {
     setSelectedOption(selectedOption);
 
@@ -125,7 +123,7 @@ export const AISuggestions = () => {
                       p='0.5rem'
                       borderRadius={"md"}
                       _hover={{
-                        backgroundColor: hoverBgColor,
+                        backgroundColor: "#edeff7",
                         cursor: "pointer",
                       }}
                     >

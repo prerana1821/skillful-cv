@@ -9,14 +9,14 @@ const mockLocalStorage = {
   getItem: jest.fn(),
 };
 
-beforeEach(() => {
-  // Clear localStorage mock before each test
-  mockLocalStorage.setItem.mockClear();
-  mockLocalStorage.getItem.mockClear();
-  Object.defineProperty(window, "localStorage", { value: mockLocalStorage });
-});
-
 describe("should test data reducer", () => {
+  beforeEach(() => {
+    // Clear localStorage mock before each test
+    mockLocalStorage.setItem.mockClear();
+    mockLocalStorage.getItem.mockClear();
+    Object.defineProperty(window, "localStorage", { value: mockLocalStorage });
+  });
+
   it("should handle ADD_RESUME_DATA action", () => {
     const action: DataReducerAction = {
       type: "ADD_RESUME_DATA",
