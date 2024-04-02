@@ -75,7 +75,7 @@ export interface ProfileSummary {
   description?: string;
 }
 
-export interface Education extends ListItemI {
+export interface EducationI extends ListItemI, DateRange {
   institution?: string;
   degree?: string;
   city?: string;
@@ -134,7 +134,7 @@ export interface Course extends ListItemI, DateRange {
 export interface ValueI {
   "personal-details"?: PersonalDetailsI;
   "profile-summary"?: ProfileSummary;
-  education?: CustomSectionItem[];
+  educationI?: CustomSectionItem[];
   courses?: Course[];
   "professional-experience"?: ProfessionalExperience[];
   internships?: Internship[];
@@ -149,7 +149,7 @@ export interface ValueI {
     | undefined
     | PersonalDetailsI
     | ProfileSummary
-    | Education[]
+    | EducationI[]
     | Course[]
     | ProfessionalExperience[]
     | Internship[]

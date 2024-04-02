@@ -11,6 +11,7 @@ import { ShareLinkModal } from "../Share/ShareLinkModal";
 import { useData } from "./DataProvider";
 import { ShareQRCodeModal } from "../Share/ShareQRCodeModal";
 import { SelectTemplateModal } from "../Templates/SelectTemplateModal";
+import { CreatePortfolioModal } from "../Portfolio/CreatePortfolioModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorBoundary from "../ErrorBoundary";
@@ -30,6 +31,12 @@ export const Editor = () => {
     isOpen: shareQRCodeIsOpen,
     onOpen: shareQRCodeOnOpen,
     onClose: shareQRCodeOnClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: createPortfolioIsOpen,
+    onOpen: createPortfolioOnOpen,
+    onClose: createPortfolioOnClose,
   } = useDisclosure();
 
   const {
@@ -104,6 +111,7 @@ export const Editor = () => {
         styles={{ boxShadow: "md" }}
         shareLinkOnOpen={shareLinkOnOpen}
         shareQRCodeOnOpen={shareQRCodeOnOpen}
+        createPortfolioOnOpen={createPortfolioOnOpen}
         selectTemplateOnOpen={selectTemplateOnOpen}
         downloadComp={
           <ReactToPrint
@@ -131,6 +139,11 @@ export const Editor = () => {
       <ShareQRCodeModal
         isOpen={shareQRCodeIsOpen}
         onClose={shareQRCodeOnClose}
+      />
+
+      <CreatePortfolioModal
+        isOpen={createPortfolioIsOpen}
+        onClose={createPortfolioOnClose}
       />
 
       <SelectTemplateModal

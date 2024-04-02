@@ -6,6 +6,7 @@ import { useState } from "react";
 import Preview from "../Edit/Preview";
 import ReactToPrint from "react-to-print";
 import { PiDownloadSimple } from "react-icons/pi";
+import { useData } from "../Edit/DataProvider";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -20,6 +21,10 @@ interface ResumeData {
 export const Share = () => {
   const { resumeId } = useParams();
   const componentRef = useRef(null);
+
+  const { value } = useData();
+
+  console.log(value);
 
   const [resumeData, setResumeData] = useState<ResumeData>({
     data: "",

@@ -42,16 +42,18 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     dispatch,
   ] = useReducer(dataReducer, initialResumeDataState);
 
-  useEffect(() => {
-    const updatedSections = {
-      default: sections.default,
-      extra: sections.extra,
-    };
+  console.log({ value });
 
-    localStorage?.setItem("resumeData", value);
-    localStorage?.setItem("resumeTemplate", template);
-    localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
-  }, [sections, value, template]);
+  // useEffect(() => {
+  //   const updatedSections = {
+  //     default: sections.default,
+  //     extra: sections.extra,
+  //   };
+
+  //   // localStorage?.setItem("resumeData", value);
+  //   // localStorage?.setItem("resumeTemplate", template);
+  //   // localStorage?.setItem("resumeSections", JSON.stringify(updatedSections));
+  // }, [sections, value, template]);
 
   return (
     <DataContext.Provider

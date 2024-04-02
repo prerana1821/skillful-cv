@@ -1,7 +1,7 @@
 import { SetStateAction } from "react";
 import axios from "axios";
 import {
-  Education,
+  EducationI,
   PersonalDetailsI,
   ProfessionalExperience,
 } from "../types/interfaces";
@@ -55,7 +55,7 @@ export const getAISuggestions = async ({
         case "education":
           valueFromPrompt["education"].list = valueFromPrompt[
             "education"
-          ].list.map((item: Education) => {
+          ].list.map((item: EducationI) => {
             return item.institution === selectedValue?.object?.institution
               ? { ...item, description: generatedText.data }
               : item;

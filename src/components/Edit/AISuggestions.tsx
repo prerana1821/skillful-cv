@@ -27,6 +27,8 @@ import { PersonalDetailsI } from "../../types/interfaces";
 export const AISuggestions = () => {
   const { value, selectedText, dispatch, status } = useData();
 
+  console.log(1, { value });
+
   const [selectedOption, setSelectedOption] = useState("");
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 

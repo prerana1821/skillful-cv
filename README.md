@@ -63,9 +63,10 @@ To run this project, you will need to add the following environment variables to
 - [x] QR code generation
 - [ ] Multimedia support
 - [ ] Responsive design
-- [ ] LinkedIn integration
+- [ ] LinkedIn integration(PDF File Extraction)
 - [ ] Resume scoring
 - [ ] Download in docx
+- [ ] Generate Portfolio - Integrate with Github, Hashnode, Dev.to
 
 ## Contributing
 

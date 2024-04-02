@@ -20,6 +20,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { CSSProperties, ReactNode } from "react";
 import { HiOutlineLink, HiQrcode, HiTemplate } from "react-icons/hi";
+import { CgWebsite } from "react-icons/cg";
 import { useData } from "../Edit/DataProvider";
 import { updateResumeDetails } from "../../services/updateResumeDetails";
 import GitHubButton from "react-github-btn";
@@ -29,6 +30,7 @@ type NavbarProps = {
   downloadComp?: ReactNode;
   shareQRCodeOnOpen?: () => void;
   shareLinkOnOpen?: () => void;
+  createPortfolioOnOpen?: () => void;
   selectTemplateOnOpen?: () => void;
   showGithubBtns?: boolean;
 };
@@ -38,6 +40,7 @@ export default function Navbar({
   downloadComp,
   shareLinkOnOpen,
   shareQRCodeOnOpen,
+  createPortfolioOnOpen,
   selectTemplateOnOpen,
   showGithubBtns,
 }: NavbarProps) {
@@ -77,6 +80,18 @@ export default function Navbar({
                   leftIcon={<HiTemplate fontSize='md' />}
                 >
                   Change Template
+                </Button>
+              )}
+              {downloadComp && (
+                <Button
+                  display={"flex"}
+                  onClick={createPortfolioOnOpen}
+                  alignItems={"center"}
+                  variant={"solid"}
+                  gap={"0.3rem"}
+                  leftIcon={<CgWebsite fontSize='lg' />}
+                >
+                  Create Portfolio
                 </Button>
               )}
               {downloadComp && (
