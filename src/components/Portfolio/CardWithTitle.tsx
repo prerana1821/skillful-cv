@@ -15,9 +15,11 @@ const IMAGE =
 export default function CardWithTitle({
   experience,
   education,
-}: {
+}: // handleClick,
+{
   experience?: ProfessionalExperience;
   education?: EducationI;
+  // handleClick: () => void;
 }) {
   return (
     <Center py={12}>

@@ -1,12 +1,15 @@
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, useDisclosure } from "@chakra-ui/react";
 import CardWithTitle from "./CardWithTitle";
 import { MdAdd } from "react-icons/md";
 import { useData } from "../Edit/DataProvider";
 import { EducationI } from "../../types/interfaces";
+import { EditEducationModal } from "./EditEducationModal";
 
 export default function Education() {
   const { value } = useData();
   const data = JSON.parse(value);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box>
@@ -25,11 +28,13 @@ export default function Education() {
             backgroundColor: "#fff",
             cursor: "pointer",
           }}
+          onClick={() => onOpen()}
           rightIcon={<MdAdd fontSize={"1rem"} />}
         >
           Add New Education
         </Button>
       </Flex>
+      <EditEducationModal isOpen={isOpen} onClose={onClose} />
       <Flex
         flexWrap={"wrap"}
         gap='4rem'
@@ -42,7 +47,11 @@ export default function Education() {
         {data["education"] &&
           data["education"]["list"].map((education: EducationI) => {
             return (
-              <CardWithTitle education={education} key={Math.random() * 10} />
+              <CardWithTitle
+                education={education}
+                key={Math.random() * 10}
+                // handleClick={onOpen}
+              />
             );
           })}
       </Flex>

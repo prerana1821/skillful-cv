@@ -21,8 +21,7 @@ import { FaUser } from "react-icons/fa";
 import { useData } from "../Edit/DataProvider";
 import { FormEvent, useReducer, useEffect } from "react";
 import InputTag from "./InputTag";
-import { toast } from "react-toastify";
-import { TextLink } from "../../types/interfaces";
+import { Language, Skill, TextLink } from "../../types/interfaces";
 
 type AboutForm = {
   firstName: string;
@@ -40,6 +39,8 @@ type AboutForm = {
   medium: string;
   youtube: string;
   hobbies: string[];
+  skills: Skill[];
+  languages: Language[];
 };
 
 type AboutFormAction = {
@@ -101,6 +102,8 @@ export default function About() {
       "",
     youtube: "",
     hobbies: (data["hobbies"] && data["hobbies"]["list"]) || [],
+    skills: (data["skills"] && data["skills"]["list"]) || [],
+    languages: (data["languages"] && data["languages"]["list"]) || [],
   };
 
   const [state, aboutFormDispatch] = useReducer(reducer, initialState);
@@ -159,6 +162,8 @@ export default function About() {
           )?.link) ||
         "",
       hobbies: data["hobbies"] ? data["hobbies"]["list"] : [],
+      skills: data["skills"] ? data["skills"]["list"] : [],
+      languages: data["languages"] ? data["languages"]["list"] : [],
     };
 
     const action = {
@@ -270,10 +275,7 @@ export default function About() {
                   <Input
                     type='text'
                     name='firstName'
-                    id='firstName'
-                    autoComplete='given-name'
                     mt={1}
-                    focusBorderColor='brand.400'
                     shadow='sm'
                     size='sm'
                     w='full'
@@ -722,6 +724,156 @@ export default function About() {
                     onChange={(hobbies) => handleChange("hobbies", hobbies)}
                   />
                 </FormControl>
+
+                <FormControl as={GridItem} colSpan={[3, 6]}>
+                  <Heading as='h3' size='md' py='4'>
+                    Skills
+                  </Heading>
+                </FormControl>
+
+                {state.skills.map((skill) => {
+                  return (
+                    <>
+                      <FormControl as={GridItem} colSpan={[6, 3]}>
+                        <FormLabel
+                          htmlFor='skill-name'
+                          fontSize='sm'
+                          fontWeight='md'
+                          color='gray.700'
+                          _dark={{
+                            color: "gray.50",
+                          }}
+                        >
+                          Name
+                        </FormLabel>
+                        <Input
+                          type='text'
+                          name='skill-name'
+                          id='skill-name'
+                          autoComplete='skill-name'
+                          mt={1}
+                          focusBorderColor='brand.400'
+                          shadow='sm'
+                          size='sm'
+                          w='full'
+                          rounded='md'
+                          value={skill.name}
+                          // onChange={(e) => handleChange("city", e.target.value)}
+                        />
+                      </FormControl>
+
+                      <FormControl as={GridItem} colSpan={[6, 3]}>
+                        <FormLabel
+                          htmlFor='country'
+                          fontSize='sm'
+                          fontWeight='md'
+                          color='gray.700'
+                          _dark={{
+                            color: "gray.50",
+                          }}
+                        >
+                          Level
+                        </FormLabel>
+                        <Select
+                          id='skill-level'
+                          name='skill-level'
+                          autoComplete='skill-level'
+                          placeholder='Select option'
+                          mt={1}
+                          focusBorderColor='brand.400'
+                          shadow='sm'
+                          size='sm'
+                          w='full'
+                          rounded='md'
+                          value={skill.level}
+                          // onChange={(e) => handleChange("country", e.target.value)}
+                        >
+                          <option value='Noice'>Noice</option>
+                          <option value='Beginner'>Beginner</option>
+                          <option value='Skillful'>Skillful</option>
+                          <option value='Expert'>Expert</option>
+                          <option value='Experienced'>Experienced</option>
+                        </Select>
+                      </FormControl>
+                    </>
+                  );
+                })}
+
+                <FormControl as={GridItem} colSpan={[3, 6]}>
+                  <Heading as='h3' size='md' py='4'>
+                    Languages
+                  </Heading>
+                </FormControl>
+
+                {state.languages.map((language) => {
+                  return (
+                    <>
+                      <FormControl as={GridItem} colSpan={[6, 3]}>
+                        <FormLabel
+                          htmlFor='language-name'
+                          fontSize='sm'
+                          fontWeight='md'
+                          color='gray.700'
+                          _dark={{
+                            color: "gray.50",
+                          }}
+                        >
+                          Name
+                        </FormLabel>
+                        <Input
+                          type='text'
+                          name='language-name'
+                          id='language-name'
+                          autoComplete='language-name'
+                          mt={1}
+                          focusBorderColor='brand.400'
+                          shadow='sm'
+                          size='sm'
+                          w='full'
+                          rounded='md'
+                          value={language.name}
+                          // onChange={(e) => handleChange("city", e.target.value)}
+                        />
+                      </FormControl>
+
+                      <FormControl as={GridItem} colSpan={[6, 3]}>
+                        <FormLabel
+                          htmlFor='country'
+                          fontSize='sm'
+                          fontWeight='md'
+                          color='gray.700'
+                          _dark={{
+                            color: "gray.50",
+                          }}
+                        >
+                          Level
+                        </FormLabel>
+                        <Select
+                          id='language-level'
+                          name='skill-level'
+                          autoComplete='skill-level'
+                          placeholder='Select option'
+                          mt={1}
+                          focusBorderColor='brand.400'
+                          shadow='sm'
+                          size='sm'
+                          w='full'
+                          rounded='md'
+                          value={language.level}
+                          // onChange={(e) => handleChange("country", e.target.value)}
+                        >
+                          <option value='Native speaker'>Native speaker</option>
+                          <option value='Highly proficient'>
+                            Highly proficient
+                          </option>
+                          <option value='Very good command'>
+                            Very good command
+                          </option>
+                        </Select>
+                      </FormControl>
+                    </>
+                  );
+                })}
               </SimpleGrid>
             </Stack>
             <Box

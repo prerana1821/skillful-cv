@@ -1,14 +1,15 @@
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, useDisclosure } from "@chakra-ui/react";
 import CardWithTitle from "./CardWithTitle";
 import { MdAdd } from "react-icons/md";
 import { useData } from "../Edit/DataProvider";
 import { ProfessionalExperience } from "../../types/interfaces";
+import { EditExperienceModal } from "./EditExperienceModal";
 
 export default function Experience() {
   const { value } = useData();
   const data = JSON.parse(value);
 
-  console.log(data["professional-experience"]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box>
@@ -27,11 +28,13 @@ export default function Experience() {
             backgroundColor: "#fff",
             cursor: "pointer",
           }}
+          onClick={() => onOpen()}
           rightIcon={<MdAdd fontSize={"1rem"} />}
         >
           Add New Experience
         </Button>
       </Flex>
+      <EditExperienceModal isOpen={isOpen} onClose={onClose} />
       <Flex
         flexWrap={"wrap"}
         gap='4rem'
@@ -47,6 +50,7 @@ export default function Experience() {
               return (
                 <CardWithTitle
                   experience={experience}
+                  // handleClick={onOpen}
                   key={Math.random() * 10}
                 />
               );
