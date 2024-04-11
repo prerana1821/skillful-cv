@@ -117,53 +117,66 @@ export default function About() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(state);
+
+    // console.log(data);
+
+    // dispatch({
+    //   type: "ADD_RESUME_DATA",
+    //   payload: JSON.stringify({}, null, 2),
+    // });
   };
 
   console.log(data);
 
   useEffect(() => {
+    const resumeData = localStorage?.getItem("resumeData");
+
+    console.log({ resumeData });
+
+    const parsedData = resumeData ? JSON.parse(resumeData) : null;
+
     const updatedData = {
-      firstName: data["personal-details"]["first-name"],
-      lastName: data["personal-details"]["last-name"],
-      emailAddress: data["personal-details"]["email"],
-      phoneNumber: data["personal-details"]["phone-number"],
-      jobTitle: data["personal-details"]["job-title"],
-      city: data["personal-details"]["city"],
-      country: data["personal-details"]["country"],
-      profileSummary: data["profile-summary"]["description"],
+      firstName: parsedData["personal-details"]["first-name"],
+      lastName: parsedData["personal-details"]["last-name"],
+      emailAddress: parsedData["personal-details"]["email"],
+      phoneNumber: parsedData["personal-details"]["phone-number"],
+      jobTitle: parsedData["personal-details"]["job-title"],
+      city: parsedData["personal-details"]["city"],
+      country: parsedData["personal-details"]["country"],
+      profileSummary: parsedData["profile-summary"]["description"],
       website:
-        (data["links"] &&
-          data["links"]["list"].find(
+        (parsedData["links"] &&
+          parsedData["links"]["list"].find(
             (link: TextLink) => link.label === "Website"
           )?.link) ||
         "",
       instagram:
-        (data["links"] &&
-          data["links"]["list"].find(
+        (parsedData["links"] &&
+          parsedData["links"]["list"].find(
             (link: TextLink) => link.label === "Instagram"
           )?.link) ||
         "",
       linkedIn:
-        (data["links"] &&
-          data["links"]["list"].find(
+        (parsedData["links"] &&
+          parsedData["links"]["list"].find(
             (link: TextLink) => link.label === "Linkedin"
           )?.link) ||
         "",
       twitter:
-        (data["links"] &&
-          data["links"]["list"].find(
+        (parsedData["links"] &&
+          parsedData["links"]["list"].find(
             (link: TextLink) => link.label === "Twitter"
           )?.link) ||
         "",
       medium:
-        (data["links"] &&
-          data["links"]["list"].find(
+        (parsedData["links"] &&
+          parsedData["links"]["list"].find(
             (link: TextLink) => link.label === "Medium"
           )?.link) ||
         "",
-      hobbies: data["hobbies"] ? data["hobbies"]["list"] : [],
-      skills: data["skills"] ? data["skills"]["list"] : [],
-      languages: data["languages"] ? data["languages"]["list"] : [],
+      hobbies: parsedData["hobbies"] ? parsedData["hobbies"]["list"] : [],
+      skills: parsedData["skills"] ? parsedData["skills"]["list"] : [],
+      languages: parsedData["languages"] ? parsedData["languages"]["list"] : [],
     };
 
     const action = {
@@ -172,7 +185,7 @@ export default function About() {
     };
 
     aboutFormDispatch(action);
-  }, [data]);
+  }, []);
 
   return (
     <Box>
@@ -274,11 +287,11 @@ export default function About() {
                   </FormLabel>
                   <Input
                     type='text'
+                    isDisabled={true}
                     name='firstName'
                     mt={1}
                     shadow='sm'
                     size='sm'
-                    w='full'
                     rounded='md'
                     value={state.firstName}
                     onChange={(e) => handleChange("firstName", e.target.value)}
@@ -298,6 +311,7 @@ export default function About() {
                     Last name
                   </FormLabel>
                   <Input
+                    isDisabled={true}
                     type='text'
                     name='lastName'
                     id='lastName'
@@ -329,6 +343,7 @@ export default function About() {
                     type='text'
                     name='emailAddress'
                     id='emailAddress'
+                    isDisabled={true}
                     autoComplete='email'
                     mt={1}
                     focusBorderColor='brand.400'
@@ -777,7 +792,6 @@ export default function About() {
                         <Select
                           id='skill-level'
                           name='skill-level'
-                          autoComplete='skill-level'
                           placeholder='Select option'
                           mt={1}
                           focusBorderColor='brand.400'
